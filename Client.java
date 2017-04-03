@@ -6,8 +6,13 @@ import javax.swing.JOptionPane;
 
 public class Client
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
-		System.out.println("hello world");
+		String serverAddress = JOptionPane.showInputDialog("Enter IP Address of a machine that is \n" + "running the date service on port 49152:");
+		Socket s = new Socket(serverAddress, 49152);
+		BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+		String answer = input.readLine();
+		JOptionPane.showMessageDialog(null, answer);
+		System.exit(0);
 	}
 }
