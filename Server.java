@@ -17,7 +17,7 @@ public class Server
 				try
 				{
 					PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-					out.println(new Date().toString());
+					out.println("test it yo");
 				}
 				finally
 				{
