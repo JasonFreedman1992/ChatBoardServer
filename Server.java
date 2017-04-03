@@ -21,6 +21,7 @@ public class Server
 				{
 					PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 					out.println(socket.getRemoteSocketAddress().toString());
+					System.out.println(socket.getRemoteSocketAddress());
 				}
 				finally
 				{
