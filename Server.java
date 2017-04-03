@@ -6,8 +6,29 @@ import java.util.Date;
 
 public class Server
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
-		System.out.println("Hello World");
+		ServerSocket listener = new ServerSocket(49152);
+		try
+		{
+			while(true)
+			{
+				Socket socket = listener.accept();
+				try
+				{
+					PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+					out.println(new Date().toString());
+				}
+				finally
+				{
+					socket.close();
+				}
+			}
+		}
+		finally
+		{
+			listener.close();
+		}
+		//System.out.println("Hello World");
 	}
 }
