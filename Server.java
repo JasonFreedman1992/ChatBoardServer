@@ -24,20 +24,12 @@ public class Server
 				Socket socket = listener.accept();
 				socketList.add(socket);
 
-					PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-					BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+				BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-					out.println(socket.getRemoteSocketAddress().toString());
-					System.out.println(input);
-					System.out.println(socket.getRemoteSocketAddress());
-				try
-				{
-
-				}
-				finally
-				{
-
-				}
+				out.println(socket.getRemoteSocketAddress().toString());
+				System.out.println(out);
+				System.out.println(socket.getRemoteSocketAddress());
 				System.out.println("festival");
 			}
 		}
