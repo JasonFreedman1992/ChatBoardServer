@@ -28,7 +28,7 @@ public class Server
 				{
                     PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                     String password = console.next();
-                    out.println("Jin is cute");
+                    out.println(password);
                 } 
                	finally 
                 {
