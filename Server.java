@@ -15,6 +15,7 @@ public class Server
 		ServerSocket listener = new ServerSocket(49152);
 		DataInputStream streamIn = null;
 		DataOutputStream streamOut = null;
+		Scanner console = new Scanner(System.in);
 
 		ArrayList<Socket> socketList = new ArrayList<Socket>();
 		String testUser = "jason";
@@ -28,6 +29,7 @@ public class Server
 			System.out.println(socket.getRemoteSocketAddress());
 			System.out.println("festival");
 			streamIn = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+			streamOut = new DataOutputStream(socket.getOutputStream());
 			boolean hold = true;
 			while(hold)
 			{
@@ -39,6 +41,9 @@ public class Server
 					{
 						hold = false;
 					}
+					String output = console.nextLine();
+					streamOut.writeUTF(output);
+					streamOut.flush();
 				}
 				catch(IOException e)
 				{
@@ -58,7 +63,7 @@ public class Server
         } 
         catch(IOException e)
         {
-        	
+
         }
 	}
 }
