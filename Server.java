@@ -11,11 +11,15 @@ public class Server
 	{
 		ServerSocket listener = new ServerSocket(49152);
 		ArrayList<Socket> socketList = new ArrayList<Socket>();
+		String testUser = "jason";
+		String testPass = "231";
+
 		try
 		{
 			while(true)
 			{
 				Socket socket = listener.accept();
+
 				try
 				{
 					PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
@@ -26,6 +30,7 @@ public class Server
 				{
 					//socket.close();
 				}
+				System.out.println("festival");
 			}
 		}
 		finally
