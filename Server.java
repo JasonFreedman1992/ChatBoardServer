@@ -12,12 +12,10 @@ public class Server
 {
 	public static void main(String[] args) throws IOException
 	{
-
-		Scanner console = new Scanner(System.in);
 		ServerSocket listener = new ServerSocket(49152);
 		DataInputStream streamIn = null;
 		DataOutputStream streamOut = null;
-		
+
 		ArrayList<Socket> socketList = new ArrayList<Socket>();
 		String testUser = "jason";
 		String testPass = "231";
@@ -41,14 +39,14 @@ public class Server
 					hold = false;
 				}
 			}
-			if(socket != null)
-			{
-				socket.close();
-			}
-			if(streamIn != null)
-			{
-				streamIn.close();
-			}
+			// if(socket != null)
+			// {
+			// 	socket.close();
+			// }
+			// if(streamIn != null)
+			// {
+			// 	streamIn.close();
+			// }
             //PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             //out.println("Jin is cute");
         } 
