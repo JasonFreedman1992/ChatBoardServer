@@ -21,9 +21,12 @@ public class Server
 		String testPass = "231";
 
 
-		Socket socket = listener.accept();
+		//Socket socket = listener.accept();
 		try 
 		{
+			Socket socket = listener.accept();
+			System.out.println(socket.getRemoteSocketAddress());
+			System.out.println("festival");
 			streamIn = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
 			boolean hold = true;
 			while(hold)
@@ -53,11 +56,9 @@ public class Server
             //PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             //out.println("Jin is cute");
         } 
-       	finally 
+        catch(IOException e)
         {
-           socket.close();
+        	
         }
-		System.out.println(socket.getRemoteSocketAddress());
-		System.out.println("festival");
 	}
 }
