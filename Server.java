@@ -15,13 +15,15 @@ public class Server
 		{
 			while(true)
 			{
-				Socket socket = listener.accept();
-				
-				try
+				Socket socket = new Socket();
+				if(socket == listener.accept())
 				{
 					PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 					out.println(socket.getRemoteSocketAddress().toString());
 					System.out.println(socket.getRemoteSocketAddress());
+				}
+				try
+				{
 				}
 				finally
 				{
