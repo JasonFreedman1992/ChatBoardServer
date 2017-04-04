@@ -23,37 +23,40 @@ public class Server
 
 
 		//Socket socket = listener.accept();
-		try 
+		while(true)
 		{
-			Socket socket = listener.accept();
-			System.out.println(socket.getRemoteSocketAddress());
-			System.out.println("festival");
-			streamIn = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-			streamOut = new DataOutputStream(socket.getOutputStream());
-			boolean hold = true;
-			while(hold)
+			try 
 			{
-				try
+				Socket socket = listener.accept();
+				System.out.println(socket.getRemoteSocketAddress());
+				System.out.println("festival");
+				streamIn = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+				streamOut = new DataOutputStream(socket.getOutputStream());
+				boolean hold = true;
+				while(hold)
 				{
-					String line = streamIn.readUTF();
-					System.out.println(line);
-					if(line == ".bye")
+					try
+					{
+						String line = streamIn.readUTF();
+						System.out.println(line);
+						if(line == ".bye")
+						{
+							hold = false;
+						}
+						String output = console.nextLine();
+						streamOut.writeUTF(output);
+						streamOut.flush();
+					}
+					catch(IOException e)
 					{
 						hold = false;
 					}
-					String output = console.nextLine();
-					streamOut.writeUTF(output);
-					streamOut.flush();
 				}
-				catch(IOException e)
-				{
-					hold = false;
-				}
-			}
-        } 
-        catch(IOException e)
-        {
+	        } 
+	        catch(IOException e)
+	        {
 
-        }
+	        }
+    	}
 	}
 }
