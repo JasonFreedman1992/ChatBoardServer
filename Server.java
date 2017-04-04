@@ -41,25 +41,15 @@ public class Server
 					{
 						hold = false;
 					}
-					//String output = console.nextLine();
-					//streamOut.writeUTF(output);
-					//streamOut.flush();
+					String output = console.nextLine();
+					streamOut.writeUTF(output);
+					streamOut.flush();
 				}
 				catch(IOException e)
 				{
 					
 				}
 			}
-			// if(socket != null)
-			// {
-			// 	socket.close();
-			// }
-			// if(streamIn != null)
-			// {
-			// 	streamIn.close();
-			// }
-            //PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            //out.println("Jin is cute");
         } 
         catch(IOException e)
         {
