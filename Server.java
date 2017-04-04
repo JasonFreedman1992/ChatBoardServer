@@ -28,7 +28,9 @@ public class Server
 				PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 				BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-				//out.println(socket.getRemoteSocketAddress().toString());
+				// send to client
+				out.println(socket.getRemoteSocketAddress().toString());
+
 				System.out.println(input);
 				System.out.println(socket.getRemoteSocketAddress());
 				System.out.println("festival");
