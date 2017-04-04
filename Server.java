@@ -41,9 +41,9 @@ public class Server
 					{
 						hold = false;
 					}
-					String output = console.nextLine();
-					streamOut.writeUTF(output);
-					streamOut.flush();
+					//String output = console.nextLine();
+					//streamOut.writeUTF(output);
+					//streamOut.flush();
 				}
 				catch(IOException e)
 				{
