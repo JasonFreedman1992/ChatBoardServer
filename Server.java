@@ -36,6 +36,7 @@ public class Server
 		finally
 		{
 			listener.close();
+			System.out.println("listener closed");
 		}
 		//System.out.println("Hello World");
 	}
