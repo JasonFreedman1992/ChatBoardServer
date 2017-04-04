@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
+import java.io.*;
 
 
 public class Server
@@ -13,33 +14,23 @@ public class Server
 	{
 		Scanner console = new Scanner(System.in);
 		ServerSocket listener = new ServerSocket(49152);
+		DataInputStream stream = null;
 		ArrayList<Socket> socketList = new ArrayList<Socket>();
 		String testUser = "jason";
 		String testPass = "231";
 
-		try
+		Socket socket = listener.accept();
+		//socketList.add(socket);
+		try 
 		{
-			boolean hold = true;
-			while(hold)
-			{
-				Socket socket = listener.accept();
-				//socketList.add(socket);
-				try 
-				{
-                    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                    out.println("Jin is cute");
-                } 
-               	finally 
-                {
-                   socket.close();
-                }
-				System.out.println(socket.getRemoteSocketAddress());
-				System.out.println("festival");
-			}
-		}
-		finally
-		{
-			listener.close();
-		}
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            out.println("Jin is cute");
+        } 
+       	finally 
+        {
+           socket.close();
+        }
+		System.out.println(socket.getRemoteSocketAddress());
+		System.out.println("festival");
 	}
 }
