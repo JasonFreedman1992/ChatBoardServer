@@ -24,14 +24,15 @@ public class Server
 				Socket socket = listener.accept();
 				socketList.add(socket);
 
-				try
-				{
 					PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 					BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
 					out.println(socket.getRemoteSocketAddress().toString());
 					System.out.println(input);
 					System.out.println(socket.getRemoteSocketAddress());
+				try
+				{
+
 				}
 				finally
 				{
