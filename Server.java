@@ -12,19 +12,45 @@ public class Server
 {
 	public static void main(String[] args) throws IOException
 	{
+
 		Scanner console = new Scanner(System.in);
 		ServerSocket listener = new ServerSocket(49152);
-		DataInputStream stream = null;
+		DataInputStream streamIn = null;
+		DataOutputStream streamOut = null;
+		
 		ArrayList<Socket> socketList = new ArrayList<Socket>();
 		String testUser = "jason";
 		String testPass = "231";
 
+
 		Socket socket = listener.accept();
-		//socketList.add(socket);
 		try 
 		{
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            out.println("Jin is cute");
+			streamIn = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+			boolean hold = true;
+			while(hold)
+			{
+				try
+				{
+					String line = streamIn.readUTF();
+					System.out.println(line);
+					hold = line.equals(".bye");
+				}
+				catch(IOException e)
+				{
+					hold = false;
+				}
+			}
+			if(socket != null)
+			{
+				socket.close();
+			}
+			if(streamIn != null)
+			{
+				streamIn.close();
+			}
+            //PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            //out.println("Jin is cute");
         } 
        	finally 
         {
