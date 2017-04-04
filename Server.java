@@ -22,14 +22,14 @@ public class Server
 			while(true)
 			{
 				Socket socket = listener.accept();
-				socketList.add(socket);
+				//socketList.add(socket);
 
 				PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 				BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
 				out.println(socket.getRemoteSocketAddress().toString());
 				System.out.println(input);
-				System.out.println(socket.getRemoteSocketAddress());
+				//System.out.println(socket.getRemoteSocketAddress());
 				System.out.println("festival");
 			}
 		}
@@ -37,6 +37,5 @@ public class Server
 		{
 			listener.close();
 		}
-		//System.out.println("Hello World");
 	}
 }
