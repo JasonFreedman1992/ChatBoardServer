@@ -19,7 +19,8 @@ public class Server
 
 		try
 		{
-			while(true)
+			boolean hold = true;
+			while(hold)
 			{
 				Socket socket = listener.accept();
 				//socketList.add(socket);
