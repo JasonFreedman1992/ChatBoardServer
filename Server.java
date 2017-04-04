@@ -28,7 +28,7 @@ public class Server
 				BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
 				out.println(socket.getRemoteSocketAddress().toString());
-				System.out.println(out);
+				System.out.println(input);
 				System.out.println(socket.getRemoteSocketAddress());
 				System.out.println("festival");
 			}
