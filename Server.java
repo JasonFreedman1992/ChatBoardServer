@@ -32,7 +32,10 @@ public class Server
 				{
 					String line = streamIn.readUTF();
 					System.out.println(line);
-					hold = line.equals(".bye");
+					if(line == ".bye")
+					{
+						hold = false;
+					}
 				}
 				catch(IOException e)
 				{
