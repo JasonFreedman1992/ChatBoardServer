@@ -24,14 +24,15 @@ public class Server
 			{
 				Socket socket = listener.accept();
 				//socketList.add(socket);
-
-				PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-				BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-				// send to client
-				out.println(socket.getRemoteSocketAddress().toString());
-
-				System.out.println(input);
+				try 
+				{
+                    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                    out.println(new Date().toString());
+                } 
+               	finally 
+                {
+                   socket.close();
+                }
 				System.out.println(socket.getRemoteSocketAddress());
 				System.out.println("festival");
 			}
