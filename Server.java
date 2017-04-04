@@ -24,7 +24,7 @@ public class Server
 				}
 				finally
 				{
-					socket.close();
+					//socket.close();
 				}
 			}
 		}
