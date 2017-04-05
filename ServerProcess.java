@@ -52,6 +52,7 @@ public class ServerProcess
 	        	}
 	        	catch(IOException e)
 	        	{
+	        		System.out.println(streamOut);
 	        		break;
 	        	}
 			}
