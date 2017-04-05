@@ -30,8 +30,8 @@ public class ServerProcess
 	    	outThread.start();
 
 	    	inputThreadClosed = false;
-	    	inThread = new Thread(input)
-;	    	inThread.start();
+	    	inThread = new Thread(input);	    	
+	    	inThread.start();
 	    	query();
 	    }
 	    catch(Exception e)
@@ -90,9 +90,9 @@ public class ServerProcess
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
-			System.out.println("made it past conn");
 			Statement statement = conn.createStatement();
 			String query = "SELECT * FROM Accounts";
+
 			ResultSet rs = statement.executeQuery(query);
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columnsNumber = rsmd.getColumnCount();
