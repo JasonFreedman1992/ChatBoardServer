@@ -90,6 +90,7 @@ public class ServerProcess
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard", "ubuntu", "313m3n7!");
+			System.out.println("made it past conn");
 			Statement statement = conn.createStatement();
 			String query = "SELECT * FROM Accounts";
 			ResultSet rs = statement.executeQuery(query);
