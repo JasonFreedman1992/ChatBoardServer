@@ -1,10 +1,7 @@
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
 import java.io.*;
+import java.sql.*;
 
 public class ServerProcess
 {
@@ -32,6 +29,7 @@ public class ServerProcess
 
 	    	inThread = new Thread(input);
 	    	inThread.start();
+	    	query();
 	    }
 	    catch(Exception e)
 	    {
@@ -76,6 +74,22 @@ public class ServerProcess
 	            }
 			}
 			System.out.println("input thread finished");
+		}
+	}
+
+	void query()
+	{
+		try
+		{
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard", "usrname", "pswd");
+			Statement statement = conn.createStatement();
+			String query = "SELECT * FROM Accounts";
+			ResultSet rs = statement.executeQuery(query);
+			System.out.println(rs);
+		}
+		catch(SQLException e)
+		{
+
 		}
 	}
 }
