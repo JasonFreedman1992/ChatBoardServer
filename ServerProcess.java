@@ -100,7 +100,6 @@ public class ServerProcess
 			{
 				for(int i = 1; i <= columnsNumber; i++)
 				{
-					if(i > 1) System.out.print(", ");
 					String columnValue = rs.getString(i);
 					System.out.println(columnValue + " " + rsmd.getColumnName(i));
 				}
