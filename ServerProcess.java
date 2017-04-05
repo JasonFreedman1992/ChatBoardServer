@@ -47,16 +47,15 @@ public class ServerProcess
 			{
 				try
 				{
+					streamOut.writeUTF(console.nextLine());
+	        		streamOut.flush();
 	        		if(inputThreadClosed == true)
 	        		{
 	        			break;
 	        		}
-					streamOut.writeUTF(console.nextLine());
-	        		streamOut.flush();
 	        	}
 	        	catch(IOException e)
 	        	{
-	        		System.out.println(streamOut);
 	        		break;
 	        	}
 			}
