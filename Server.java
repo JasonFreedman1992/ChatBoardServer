@@ -17,8 +17,10 @@ public class Server
 		while(true)
 		{
 			socket = listener.accept();
-			System.out.println(socket.isBound());
-			ServerProcess process = new ServerProcess(socket);
+			if(socket.isBound())
+			{
+				ServerProcess process = new ServerProcess(socket);
+			}	
 		}
 	}
 }

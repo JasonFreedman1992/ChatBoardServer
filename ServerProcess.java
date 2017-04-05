@@ -55,6 +55,7 @@ public class ServerProcess
 	        		break;
 	        	}
 			}
+			System.out.println("output thread finished");
 		}
 	}
 
@@ -74,6 +75,7 @@ public class ServerProcess
 	            	break;
 	            }
 			}
+			System.out.println("input thread finished");
 		}
 	}
 }
