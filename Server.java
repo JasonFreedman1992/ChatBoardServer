@@ -16,8 +16,8 @@ public class Server
 		ServerSocket listener = new ServerSocket(49152);
 		while(true)
 		{
-			System.out.println(socket.isBound());
 			socket = listener.accept();
+			System.out.println(socket.isBound());
 			ServerProcess process = new ServerProcess(socket);
 		}
 	}
