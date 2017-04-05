@@ -30,8 +30,8 @@ public class ServerProcess
 	    	outThread.start();
 
 	    	inputThreadClosed = false;
-	    	inThread = new Thread(input);
-	    	inThread.start();
+	    	inThread = new Thread(input)
+;	    	inThread.start();
 	    	query();
 	    }
 	    catch(Exception e)
@@ -88,7 +88,7 @@ public class ServerProcess
 	{
 		try
 		{
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:6000/ChatBoard", "usrname", "pswd");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard");
 			Statement statement = conn.createStatement();
 			String query = "SELECT * FROM Accounts";
 			ResultSet rs = statement.executeQuery(query);
