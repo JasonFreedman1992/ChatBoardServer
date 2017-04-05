@@ -81,6 +81,7 @@ public class ServerProcess
 	            	break;
 	            }
 			}
+			System.out.println("input thread finished");
 		}
 	}
 
