@@ -94,7 +94,7 @@ public class ServerProcess
 			Statement statement = conn.createStatement();
 			String query = "SELECT * FROM Accounts";
 			ResultSet rs = statement.executeQuery(query);
-			System.out.println(rs);
+			System.out.println(rs.toString());
 		}
 		catch(SQLException e)
 		{
