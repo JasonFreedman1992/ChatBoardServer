@@ -13,7 +13,10 @@ public class Server
 	public static void main(String[] args) throws IOException
 	{
 		ServerSocket listener = new ServerSocket(49152);
-		Socket socket = listener.accept();
-		ServerProcess process = new ServerProcess(socket);
+		while(true)
+		{
+			Socket socket = listener.accept();
+			ServerProcess process = new ServerProcess(socket);
+		}
 	}
 }
