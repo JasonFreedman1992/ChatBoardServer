@@ -21,6 +21,8 @@ public class ServerProcess
 
 	public ServerProcess(Socket p_socket) throws IOException
 	{
+		System.out.println(p_socket.getRemoteSocketAddress());
+		System.out.println("festival");
 		streamOut = new DataOutputStream(p_socket.getOutputStream());
 		streamIn = new DataInputStream(new BufferedInputStream(p_socket.getInputStream()));
 	    try
