@@ -13,6 +13,8 @@ public class ServerProcess
 	Thread outThread = new Thread();
 	Thread inThread = new Thread();
 
+	boolean inputThreadClosed = false;
+
 	output output = new output();
 	input input = new input();
 
@@ -27,6 +29,7 @@ public class ServerProcess
 	    	outThread = new Thread(output);
 	    	outThread.start();
 
+	    	inputThreadClosed = false;
 	    	inThread = new Thread(input);
 	    	inThread.start();
 	    	query();
@@ -46,6 +49,10 @@ public class ServerProcess
 				{
 					streamOut.writeUTF(console.nextLine());
 	        		streamOut.flush();
+	        		if(inputThreadClosed == true)
+	        		{
+	        			break;
+	        		}
 	        	}
 	        	catch(IOException e)
 	        	{
@@ -70,10 +77,10 @@ public class ServerProcess
 				}
 	            catch(IOException e)
 	            {
+	            	inputThreadClosed = true;
 	            	break;
 	            }
 			}
-			System.out.println("input thread finished");
 		}
 	}
 
