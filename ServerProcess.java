@@ -88,6 +88,7 @@ public class ServerProcess
 	{
 		try
 		{
+			System.out.println("made it to query");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard");
 			Statement statement = conn.createStatement();
 			String query = "SELECT * FROM Accounts";
