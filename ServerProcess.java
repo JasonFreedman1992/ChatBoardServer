@@ -94,6 +94,18 @@ public class ServerProcess
 			Statement statement = conn.createStatement();
 			String query = "SELECT * FROM Accounts";
 			ResultSet rs = statement.executeQuery(query);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
+			while(rs.next())
+			{
+				for(int i = 1; i <= columnsNumber; i++)
+				{
+					if(i > 1) System.out.print(", ");
+					String columnValue = rs.getString(i);
+					System.out.println(columnValue + " " + rsmd.getColumnName(i));
+				}
+				System.out.println("");
+			}
 			System.out.println(rs.toString());
 		}
 		catch(SQLException e)
