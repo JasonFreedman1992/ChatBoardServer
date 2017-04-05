@@ -12,10 +12,12 @@ public class Server
 {
 	public static void main(String[] args) throws IOException
 	{
+		Socket socket = null;
 		ServerSocket listener = new ServerSocket(49152);
 		while(true)
 		{
-			Socket socket = listener.accept();
+			System.out.println(socket.isBound());
+			socket = listener.accept();
 			ServerProcess process = new ServerProcess(socket);
 		}
 	}

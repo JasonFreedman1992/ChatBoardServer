@@ -46,6 +46,7 @@ public class ServerProcess
 			{
 				try
 				{
+					
 					System.out.println(streamOut);
 					streamOut.writeUTF(console.nextLine());
 	        		streamOut.flush();
