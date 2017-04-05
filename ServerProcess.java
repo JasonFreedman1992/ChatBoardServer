@@ -93,10 +93,11 @@ public class ServerProcess
 			String query = "SELECT * FROM Accounts;";
 			ResultSet rs = statement.executeQuery(query);
 			System.out.println(rs);
+			System.out.println("made it to connection");
 		}
 		catch(SQLException e)
 		{
-
+			System.out.println("no connection");
 		}
 	}
 }
