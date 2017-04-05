@@ -89,7 +89,7 @@ public class ServerProcess
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "ubuntu", "313m3n7!");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard", "ubuntu", "313m3n7!");
 			System.out.println("made it past conn");
 			Statement statement = conn.createStatement();
 			String query = "SELECT * FROM Accounts";
