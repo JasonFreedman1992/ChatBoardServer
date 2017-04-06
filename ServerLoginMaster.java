@@ -30,6 +30,7 @@ public class ServerLoginMaster
 					else if(!serverData.softLogins.isEmpty())
 					{
 						Thread.sleep(1000);
+						System.out.println(serverData.softLogins.get(0).getRemoteSocketAddress());
 						System.out.println("not empty");
 					}
 					//Thread.sleep(1000);
