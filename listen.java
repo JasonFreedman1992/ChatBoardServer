@@ -57,12 +57,13 @@ public class listen implements Runnable
 	void handleAccept(SelectionKey key) throws IOException
 	{
 		SocketChannel sc = ((ServerSocketChannel) key.channel()).accept();
-		String address = (new StringBuilder( sc.socket().getInetAddress().toString() )).append(":").append( sc.socket().getPort() ).toString();
+		String address = (new StringBuilder(sc.socket().getInetAddress().toString())).append(":").append(sc.socket().getPort()).toString();
 		sc.configureBlocking(false);
 		sc.register(selector, SelectionKey.OP_READ, address);
 		sc.write(welcomeBuf);
 		welcomeBuf.rewind();
 		System.out.println("connection from " + address);
+		initChannellisten.close();
 	}
 
 	void handleRead(SelectionKey key) throws IOException
