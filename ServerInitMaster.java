@@ -7,9 +7,11 @@ import java.io.*;
 public class ServerInitMaster
 {
 	public ServerData serverData = new ServerData();
+	public DataOutputStream streamOut = null;
 	private ServerSocket listener;
 	public listen listen = new listen();
 	public Socket next;
+	public DataInputStream streamIn = null;
 
 	public ServerInitMaster(int p_port) throws IOException
 	{
@@ -27,8 +29,11 @@ public class ServerInitMaster
 					System.out.println("listening...");
 					next = listener.accept();
 					System.out.println("initialized... ");
-					System.out.println(next.getRemoteSocketAddress());
-					serverData.softLogins.add(next);
+					if(next.isBound())
+					{
+						System.out.println(next.getRemoteSocketAddress());
+						serverData.softLogins.add(next);
+					}
 				}
 				catch(IOException e)
 				{

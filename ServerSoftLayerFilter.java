@@ -7,6 +7,10 @@ public class ServerSoftLayerFilter
 	public DataOutputStream streamOut = null;
 	public listen listen = new listen();
 
+	public ServerSoftLayerFilter() throws IOException
+	{
+		
+	}
 	class listen implements Runnable
 	{
 		public void run()

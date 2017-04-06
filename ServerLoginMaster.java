@@ -9,6 +9,7 @@ public class ServerLoginMaster
 	Scanner console = new Scanner(System.in);
 	public ServerData serverData = new ServerData();
 	public listen listen = new listen();
+
 	public DataOutputStream streamOut = null;
 
 	public ServerLoginMaster() throws IOException
@@ -31,10 +32,10 @@ public class ServerLoginMaster
 					}
 					else if(!serverData.softLogins.isEmpty())
 					{
-						for(int i = 0; i < serverData.softLogins.size(); i++)
-						{
-							System.out.println("servicing rsa " + serverData.softLogins.get(i).getRemoteSocketAddress());
-						}
+						Thread.sleep(1000);
+						System.out.println("rsa" + serverData.softLogins.get(0).getRemoteSocketAddress());
+						System.out.println("lsa" + serverData.softLogins.get(0).getLocalSocketAddress());
+						System.out.println("not empty");
 					}
 					//Thread.sleep(1000);
 				}
