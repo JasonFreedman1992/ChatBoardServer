@@ -24,7 +24,7 @@ public class ServerLoginMaster
 				{
 					for(int i = 0; i <= serverData.softLogins.size(); i++)
 					{
-						System.out.println("softlogins " + i + " data");
+						System.out.println("softlogins " + i + " " + serverData.softLogins.get(i).toString());
 						Thread.sleep(1000);
 					}
 				}
