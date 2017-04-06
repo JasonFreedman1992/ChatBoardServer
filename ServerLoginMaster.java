@@ -26,7 +26,6 @@ public class ServerLoginMaster
 			{
 				try
 				{
-					Thread.sleep(1000);
 					if(serverData.softLogins.isEmpty())
 					{
 						//System.out.println("no soft logins to process");
