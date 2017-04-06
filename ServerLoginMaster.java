@@ -67,10 +67,14 @@ public class ServerLoginMaster
 				try
 				{
 					streamIn = new DataInputStream(serverData.softLogins.get(id).getInputStream());
+					if(!streamIn.readUTF().equals(""))
+					{
+						System.out.println(streamIn.readUTF());
+					}
 				}
 				catch(IOException e)
 				{
-					
+
 				}
 			}
 		}
