@@ -10,6 +10,7 @@ public class ServerSoftLayerFilter
 	public listen listen = new listen();
 	public ServerData serverData = new ServerData();
 	public CharsetEncoder enc = Charset.forName("UTF-8").newEncoder();
+	public ByteBuffer buffer = null;
 
 	class listen implements Runnable
 	{
@@ -31,7 +32,10 @@ public class ServerSoftLayerFilter
 						{
 							try
 							{
-								ServerData.Q.get(i).write(enc.encode(CharBuffer.wrap("p")));
+								String message = "packet";
+								byte[] messages = message.getBytes();
+								buffer.wrap(messages);
+								ServerData.Q.get(i).write(buffer);
 							}
 							catch(CharacterCodingException e)
 							{
