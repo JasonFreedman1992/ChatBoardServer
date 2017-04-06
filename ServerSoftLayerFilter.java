@@ -31,19 +31,27 @@ public class ServerSoftLayerFilter
 				}
 				else if(!serverData.softLogins.isEmpty())
 				{
-					for(int i = 0; i < serverData.softLogins.size(); i++)
-					{	
-						try
-						{
-							streamOut = new DataOutputStream(serverData.softLogins.get(i).getOutputStream());
-							streamOut.writeUTF("sending packet");
-							streamOut.flush();
+					try
+					{
+						Thread.sleep(1000);
+						for(int i = 0; i < serverData.softLogins.size(); i++)
+						{	
+							try
+							{
+								streamOut = new DataOutputStream(serverData.softLogins.get(i).getOutputStream());
+								streamOut.writeUTF("sending packet");
+								streamOut.flush();
+							}
+							catch(IOException e)
+							{
+								System.out.println(e);
+								serverData.softLogins.remove(i);
+							}
 						}
-						catch(IOException e)
-						{
-							System.out.println(e);
-							serverData.softLogins.remove(i);
-						}
+					}
+					catch(InterruptedException e)
+					{
+						System.out.println(e);
 					}
 				}
 			}
