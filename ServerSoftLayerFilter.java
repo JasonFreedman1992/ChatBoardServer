@@ -17,18 +17,7 @@ public class ServerSoftLayerFilter
 		{
 			while(true)
 			{
-				if(serverData.softLogins.isEmpty())
-				{
-					try	
-					{				
-
-					}
-					catch(Exception e)
-					{
-
-					}
-				}
-				else if(!serverData.softLogins.isEmpty())
+				if(!serverData.softLogins.isEmpty())
 				{
 					for(int i = 0; i < serverData.softLogins.size(); i++)
 					{	
