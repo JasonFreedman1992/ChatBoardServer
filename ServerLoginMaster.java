@@ -9,9 +9,7 @@ public class ServerLoginMaster
 	Scanner console = new Scanner(System.in);
 	public ServerData serverData = new ServerData();
 	public listen listen = new listen();
-	public DataOutputStream streamOut = null;
-	public DataInputStream streamIn = null;
-	public Thread[] threads = new Thread[5];
+	public DataInputStream[] streamIns = new DataInputStream[5];
 
 	public ServerLoginMaster() throws IOException
 	{
@@ -20,38 +18,71 @@ public class ServerLoginMaster
 
 	class listen implements Runnable
 	{
+		public stream[] threads = new stream[5];
 		public void run()
 		{
 			while(true)
 			{
-				try
+				if(serverData.softLogins.isEmpty())
 				{
-					Thread.sleep(1000);
-					System.out.println(serverData.softLogins.size());
-					if(!serverData.softLogins.isEmpty())
+					for(int i = 0; i < 5; i++)
 					{
-						for(int i = 0; i < serverData.softLogins.size(); i++)
+						threads[i] = null;
+					}
+				}
+				else
+				{
+					for(int i = 0; i < serverData.softLogins.size(); i++)
+					{
+						if(!threads[i].isAlive())
 						{
-							streamIn = new DataInputStream(serverData.softLogins.get(i).getInputStream());
-							if(streamIn.available() > 0)
+							threads[i] = new stream(serverData.softLogins.get(i));
+							threads[i].start();
+						}
+						if(i + 1 < 5)
+						{
+							if(threads[serverData.softLogins.size()].isAlive())
 							{
-								System.out.println(streamIn.available());
-							}
-							else
-							{
-								System.out.println(streamIn.available());
-								System.out.println(streamIn.readUTF());
+								threads[i].stop();
 							}
 						}
 					}
-					else
+				}
+			}
+		}
+
+		class stream extends Thread
+		{
+			public Socket socket;
+			public DataInputStream streamIn = null;
+			public DataOutputStream streamOut = null;
+			public stream(Socket p_socket)
+			{
+				socket = p_socket;
+			}
+			public void run()
+			{
+				while(true)
+				{
+					try
+					{
+						streamIn = new DataInputStream(socket.getInputStream());
+						System.out.println(streamIn.readUTF());
+						try
+						{
+							Thread.sleep(100);
+						}
+						catch(InterruptedException e)
+						{
+
+						}
+						System.out.println(streamIn.readUTF());
+
+					}
+					catch(IOException e)
 					{
 
 					}
-				}
-				catch(Exception e)
-				{
-
 				}
 			}
 		}
