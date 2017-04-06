@@ -40,6 +40,7 @@ public class ServerSoftLayerFilter
 							catch(IOException f)
 							{
 								System.out.println("Io " + f);
+								ServerData.Q.remove(i);
 							}
 						}
 					}
