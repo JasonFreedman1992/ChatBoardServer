@@ -9,6 +9,8 @@ public class ServerLoginMaster
 	public ServerData serverData = new ServerData();
 	public listen listen = new listen();
 
+	public DataOutputStream streamOut = null;
+
 	public ServerLoginMaster() throws IOException
 	{
 
@@ -29,6 +31,7 @@ public class ServerLoginMaster
 					}
 					else if(!serverData.softLogins.isEmpty())
 					{
+						streamOut = new DataOutputStream(serverData.softLogins.get(0).getOutputStream());
 						Thread.sleep(1000);
 						System.out.println("rsa" + serverData.softLogins.get(0).getRemoteSocketAddress());
 						System.out.println("lsa" + serverData.softLogins.get(0).getLocalSocketAddress());
