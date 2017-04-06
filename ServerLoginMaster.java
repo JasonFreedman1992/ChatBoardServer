@@ -25,12 +25,7 @@ public class ServerLoginMaster
 			{
 				try
 				{
-					if(serverData.softLogins.isEmpty())
-					{
-						Thread.sleep(1000);
-						System.out.println("empty");
-					}
-					else if(!serverData.softLogins.isEmpty())
+					if(!serverData.softLogins.isEmpty())
 					{
 						streamOut = new DataOutputStream(serverData.softLogins.get(0).getOutputStream());
 						try
