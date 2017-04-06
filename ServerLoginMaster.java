@@ -22,11 +22,17 @@ public class ServerLoginMaster
 			{
 				try
 				{
-					for(int i = 0; i < serverData.softLogins.size(); i++)
+					if(serverData.softLogins.isEmpty())
 					{
-						System.out.println(i + " is closed: " + serverData.softLogins.get(i).isConnected());
 						Thread.sleep(1000);
+						System.out.println("empty");
 					}
+					else if(!serverData.softLogins.isEmpty())
+					{
+						Thread.sleep(1000);
+						System.out.println("not empty");
+					}
+					//Thread.sleep(1000);
 				}
 				catch(Exception e)
 				{
