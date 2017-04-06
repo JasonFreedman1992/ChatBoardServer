@@ -22,10 +22,13 @@ public class ServerLoginMaster
 			{
 				try
 				{
-					for(int i = 0; i <= serverData.softLogins.size(); i++)
+					if(!serverData.softLogins.isEmpty())
 					{
-						System.out.println("softlogins " + i + " " + serverData.softLogins.get(i).toString());
-						Thread.sleep(1000);
+						for(int i = 0; i <= serverData.softLogins.size(); i++)
+						{
+							System.out.println("softlogins " + i + " " + serverData.softLogins.get(i).isBound());
+							Thread.sleep(1000);
+						}
 					}
 				}
 				catch(Exception e)
