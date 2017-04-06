@@ -14,15 +14,23 @@ public class listen implements Runnable
 
 	public listen() throws IOException
 	{
-		initChannellisten.open();
-		initChannellisten.socket().bind(new InetSocketAddress(port));
-		selector = Selector.open();
-		initChannellisten.register(selector, SelectionKey.OP_ACCEPT);
+
 	}
 
 
 	public void run()
 	{
+		try
+		{
+			initChannellisten.open();
+			initChannellisten.socket().bind(new InetSocketAddress(port));
+			selector = Selector.open();
+			initChannellisten.register(selector, SelectionKey.OP_ACCEPT);
+		}
+		catch(IOException e)
+		{
+		
+		}
 		try
 		{
 			Iterator<SelectionKey> iter;
