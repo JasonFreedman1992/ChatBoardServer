@@ -24,7 +24,7 @@ public class ServerInitMaster
 				initChannel.socket().bind(new InetSocketAddress(port));
 				while(true)
 				{
-					System.out.println("listening...");
+					System.out.println("listening on: " + initChannel.socket().getInetAddress());
 					initChannel.accept();
 					System.out.println("initialized...");
 					System.out.println(initChannel.socket().getInetAddress().getHostAddress());
