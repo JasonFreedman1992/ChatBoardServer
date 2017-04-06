@@ -9,7 +9,6 @@ public class ServerLoginMaster
 	Scanner console = new Scanner(System.in);
 	public ServerData serverData = new ServerData();
 	public listen listen = new listen();
-	public DataInputStream streamIn = null;
 	public DataOutputStream streamOut = null;
 
 	public ServerLoginMaster() throws IOException
@@ -34,15 +33,9 @@ public class ServerLoginMaster
 					{
 						for(int i = 0; i < serverData.softLogins.size(); i++)
 						{
-							streamIn = new DataInputStream(serverData.softLogins.get(i).getInputStream());
-							if(streamIn.readUTF().equals(""))
-							{
-								
-							}
-							else
-							{
-								System.out.println(streamIn.readUTF() + " " + streamIn.readUTF());
-							}
+							LinkedList<Thread> threads = new LinkedList<Thread>();
+							threads.add(new Thread(new SubServer(i)));
+							threads.get(i).start();
 						}
 					}
 				}
@@ -60,14 +53,36 @@ public class ServerLoginMaster
 				}
 			}
 		}
-	}
+		class SubServer implements Runnable
+		{	
+			int id;
+			public DataInputStream streamIn = null;
 
-	class SubServer
-	{
-		Socket socket;
-		public SubServer(Socket p_socket)
-		{
-			socket = p_socket;
+			public SubServer(int p_id)
+			{
+				id = p_id;
+			}
+			public void run()
+			{
+				try
+				{
+					streamIn = new DataInputStream(serverData.softLogins.get(id).getInputStream());
+				}
+				catch(IOException e)
+				{
+					
+				}
+			}
 		}
 	}
 }
+
+// streamIn = new DataInputStream(serverData.softLogins.get(i).getInputStream());
+// if(streamIn.readUTF().equals(""))
+// {
+
+// }
+// else
+// {
+// 	System.out.println(streamIn.readUTF() + " " + streamIn.readUTF());
+// }
