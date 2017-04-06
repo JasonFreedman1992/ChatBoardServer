@@ -21,10 +21,9 @@ public class ServerSoftLayerFilter
 				{
 					try	
 					{				
-						Thread.sleep(1000);
-						System.out.println("softlogins empty");
+
 					}
-					catch(InterruptedException e)
+					catch(Exception e)
 					{
 
 					}
