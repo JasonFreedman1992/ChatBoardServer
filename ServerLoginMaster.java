@@ -24,11 +24,8 @@ public class ServerLoginMaster
 				{
 					if(!serverData.softLogins.isEmpty())
 					{
-						for(int i = 0; i <= serverData.softLogins.size(); i++)
-						{
-							System.out.println("softlogins " + i + " " + serverData.softLogins.get(i).isBound());
-							Thread.sleep(1000);
-						}
+						System.out.println("softlogins " + serverData.softLogins.get(0).isBound());
+						Thread.sleep(1000);
 					}
 				}
 				catch(Exception e)
