@@ -63,7 +63,6 @@ public class listen implements Runnable
 		sc.write(welcomeBuf);
 		welcomeBuf.rewind();
 		System.out.println("connection from " + address);
-		initChannellisten.close();
 	}
 
 	void handleRead(SelectionKey key) throws IOException
