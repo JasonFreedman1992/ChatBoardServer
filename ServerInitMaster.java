@@ -28,7 +28,7 @@ public class ServerInitMaster
 					next = listener.accept();
 					if(next.isBound())
 					{
-						
+						System.out.println(next.getRemoteSocketAddress());
 					}
 					next = null;
 				}
