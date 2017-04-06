@@ -22,10 +22,9 @@ public class ServerLoginMaster
 			{
 				try
 				{
-					System.out.println("test");
 					if(!serverData.softLogins.isEmpty())
 					{
-						System.out.println("softlogins " + serverData.softLogins.get(0).isBound());
+						System.out.println("softlogins " + serverData.softLogins.get(0).toString());
 						Thread.sleep(1000);
 					}
 				}
