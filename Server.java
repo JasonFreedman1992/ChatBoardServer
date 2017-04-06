@@ -6,7 +6,7 @@ public class Server
 {
 	public static void main(String[] args) throws IOException
 	{
-		ServerLoginListener loginListener = new ServerLoginListener(49152);
-		loginListener.start();
+		ServerLoginMaster loginListener = new ServerLoginMaster(49152);
+		loginListener.listen();
 	}
 }
