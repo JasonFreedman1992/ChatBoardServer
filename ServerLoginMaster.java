@@ -24,7 +24,7 @@ public class ServerLoginMaster
 				{
 					for(int i = 0; i < serverData.softLogins.size(); i++)
 					{
-						System.out.println(i + " is closed: " + serverData.softLogins.get(i).isConnected());
+						System.out.println(i + " is closed: " + serverData.softLogins.get(i).isInputShutdown());
 						Thread.sleep(1000);
 					}
 				}
