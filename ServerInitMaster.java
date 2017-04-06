@@ -10,6 +10,8 @@ public class ServerInitMaster
 	private ServerSocket listener;
 	public listen listen = new listen();
 	public Socket next;
+	public DataInputStream streamIn = null;
+
 	public ServerInitMaster(int p_port) throws IOException
 	{
 		listener = new ServerSocket(p_port);
