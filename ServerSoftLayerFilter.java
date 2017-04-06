@@ -38,7 +38,7 @@ public class ServerSoftLayerFilter
 							try
 							{
 								streamOut = new DataOutputStream(serverData.softLogins.get(i).getOutputStream());
-								streamOut.writeUTF("sending packet");
+								streamOut.writeUTF("packet from jasons server");
 								streamOut.flush();
 							}
 							catch(IOException e)
