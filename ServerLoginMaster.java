@@ -41,7 +41,7 @@ public class ServerLoginMaster
 				}
 				catch(Exception e)
 				{
-					System.out.println(e);
+					//System.out.println(e);
 					try
 					{
 						Thread.sleep(1000);
