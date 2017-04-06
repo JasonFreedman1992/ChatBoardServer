@@ -35,7 +35,11 @@ public class ServerLoginMaster
 						for(int i = 0; i < serverData.softLogins.size(); i++)
 						{
 							streamIn = new DataInputStream(serverData.softLogins.get(i).getInputStream());
-							if(!streamIn.readUTF().equals(""))
+							if(streamIn.readUTF().equals(""))
+							{
+								
+							}
+							else
 							{
 								System.out.println(streamIn.readUTF() + " " + streamIn.readUTF());
 							}
