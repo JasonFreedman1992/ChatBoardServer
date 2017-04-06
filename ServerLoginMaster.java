@@ -25,8 +25,8 @@ public class ServerLoginMaster
 					for(int i = 0; i <= serverData.softLogins.size(); i++)
 					{
 						System.out.println(serverData.softLogins.get(i).isBound());
+						Thread.sleep(1000);
 					}
-					Thread.sleep(1000);
 				}
 				catch(Exception e)
 				{
