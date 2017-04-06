@@ -15,9 +15,9 @@ public class Server
 		initMasterThread = new Thread(initMaster.listen);
 		initMasterThread.start();
 
-		ServerLoginMaster loginMaster = new ServerLoginMaster();
-		loginMasterThread = new Thread(loginMaster.listen);
-		loginMasterThread.start();
+		//ServerLoginMaster loginMaster = new ServerLoginMaster();
+		//loginMasterThread = new Thread(loginMaster.listen);
+		//loginMasterThread.start();
 
 		ServerSoftLayerFilter softlayer = new ServerSoftLayerFilter();
 		softLayerFilterThread = new Thread(softlayer.listen);
