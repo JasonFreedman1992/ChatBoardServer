@@ -28,25 +28,14 @@ public class ServerLoginMaster
 					if(serverData.softLogins.isEmpty())
 					{
 						Thread.sleep(1000);
-						System.out.println("empty");
+						System.out.println("no soft logins to process");
 					}
 					else if(!serverData.softLogins.isEmpty())
 					{
-						Thread.sleep(1000);
-						streamOut = new DataOutputStream(serverData.softLogins.get(0).getOutputStream());
-						try
+						for(int i = 0; i < serverData.softLogins.size(); i++)
 						{
-							streamOut.writeUTF("sending packet");
-							streamOut.flush();
+							System.out.println("servicing rsa " + serverData.softLogins.get(i).getRemoteSocketAddress());
 						}
-						catch(IOException e)
-						{
-							System.out.println(e);
-							serverData.softLogins.remove(0);
-						}
-						System.out.println("rsa" + serverData.softLogins.get(0).getRemoteSocketAddress());
-						System.out.println("lsa" + serverData.softLogins.get(0).getLocalSocketAddress());
-						System.out.println("not empty");
 					}
 					//Thread.sleep(1000);
 				}
