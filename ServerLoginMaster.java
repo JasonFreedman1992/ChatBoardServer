@@ -43,7 +43,7 @@ public class ServerLoginMaster
 						{
 							if(threads[serverData.softLogins.size()].isAlive())
 							{
-								threads[i].stop();
+								//threads[i].stop();
 							}
 						}
 					}
@@ -59,6 +59,14 @@ public class ServerLoginMaster
 			public stream(Socket p_socket)
 			{
 				socket = p_socket;
+				try
+				{
+					streamIn = new DataInputStream(socket.getInputStream());
+				}
+				catch(IOException e)
+				{
+
+				}
 			}
 			public void run()
 			{
@@ -66,18 +74,8 @@ public class ServerLoginMaster
 				{
 					try
 					{
-						streamIn = new DataInputStream(socket.getInputStream());
 						System.out.println(streamIn.readUTF());
-						try
-						{
-							Thread.sleep(100);
-						}
-						catch(InterruptedException e)
-						{
-
-						}
 						System.out.println(streamIn.readUTF());
-
 					}
 					catch(IOException e)
 					{
