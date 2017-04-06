@@ -8,29 +8,21 @@ public class listen implements Runnable
 {
 	public int port = 49152;
 	public ServerData serverData = new ServerData();
-	public ServerSocketChannel initChannellisten;
+	public ServerSocketChannel initChannellisten = null;
 	public Selector selector;
 	public ByteBuffer buffer = ByteBuffer.allocate(256);
 
 	public listen() throws IOException
 	{
-
+		initChannellisten.open();
+		initChannellisten.socket().bind(new InetSocketAddress(port));
+		selector = Selector.open();
+		initChannellisten.register(selector, SelectionKey.OP_ACCEPT);
 	}
 
 
 	public void run()
 	{
-		try
-		{
-			initChannellisten.open();
-			initChannellisten.socket().bind(new InetSocketAddress(port));
-			selector = Selector.open();
-			initChannellisten.register(selector, SelectionKey.OP_ACCEPT);
-		}
-		catch(IOException e)
-		{
-		
-		}
 		try
 		{
 			Iterator<SelectionKey> iter;
