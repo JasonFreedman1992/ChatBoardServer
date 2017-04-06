@@ -11,8 +11,9 @@ public class Server
 		ServerInitMaster initMaster = new ServerInitMaster(49152);
 		initMasterThread = new Thread(initMaster.listen);
 		initMasterThread.start();
-
-		ServerLoginMaster loginListener = new ServerLoginMaster(49152);
+		ServerLoginMaster loginMaster = new ServerLoginMaster(49152);
+		loginMasterThread = new Thread(loginMaster.listen);
+		loginMasterThread.start();
 		//serverThread = new Thread(loginListener.listen);
 	}
 }

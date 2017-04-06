@@ -33,6 +33,7 @@ public class ServerInitMaster
 					{
 						System.out.println(next.getRemoteSocketAddress());
 						serverData.softLogins.add(next);
+						System.out.println(serverData.softLogins.size());
 					}
 					next = null;
 				}
