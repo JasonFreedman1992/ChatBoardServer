@@ -22,7 +22,7 @@ public class ServerLoginMaster
 			{
 				try
 				{
-					if(serverData.softLogins.get(0) != null)
+					if(!serverData.softLogins.isEmpty())
 					{
 						serverData.softLogins.get(0).isInputShutdown();
 						Thread.sleep(1000);
