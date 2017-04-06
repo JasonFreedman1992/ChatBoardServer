@@ -9,7 +9,7 @@ public class ServerSoftLayerFilter
 
 	public ServerSoftLayerFilter() throws IOException
 	{
-		
+
 	}
 	class listen implements Runnable
 	{
@@ -19,7 +19,7 @@ public class ServerSoftLayerFilter
 			{
 				if(serverData.softLogins.isEmpty())
 				{
-
+					System.out.println("empty");
 				}
 				else if(!serverData.softLogins.isEmpty())
 				{
