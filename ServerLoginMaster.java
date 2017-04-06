@@ -10,6 +10,7 @@ public class ServerLoginMaster
 	public ServerData serverData = new ServerData();
 	public listen listen = new listen();
 	public DataOutputStream streamOut = null;
+	public Thread[] threads = new Thread[5];
 
 	public ServerLoginMaster() throws IOException
 	{
@@ -18,7 +19,6 @@ public class ServerLoginMaster
 
 	class listen implements Runnable
 	{
-		Thread[] threads = new Thread[5];
 		public void run()
 		{
 			while(true)
@@ -68,9 +68,12 @@ public class ServerLoginMaster
 				{
 					try
 					{
+						if(serverData.softLogins.size() > 0)
+						{
 						streamIn = new DataInputStream(serverData.softLogins.get(id).getInputStream());
 						System.out.println(streamIn.readUTF());
 						System.out.println(streamIn.readUTF());
+						}
 					}
 					catch(IOException e)
 					{
