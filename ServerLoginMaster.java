@@ -22,7 +22,6 @@ public class ServerLoginMaster
 			{
 				try
 				{
-					System.out.println("login master version of softlogin size: " + serverData.softLogins.size());
 					for(int i = 0; i < serverData.softLogins.size(); i++)
 					{
 						System.out.println("softlogins " + i + " data");
