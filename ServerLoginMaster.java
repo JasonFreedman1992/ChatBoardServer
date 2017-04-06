@@ -31,7 +31,7 @@ public class ServerLoginMaster
 					}
 					else if(!serverData.softLogins.isEmpty())
 					{
-						streamOut = new DataOutputStream(serverData.softLogins.get(0).getOutputStream());
+						System.out.println(new DataOutputStream(serverData.softLogins.get(0).getOutputStream()));
 						Thread.sleep(1000);
 						System.out.println("rsa" + serverData.softLogins.get(0).getRemoteSocketAddress());
 						System.out.println("lsa" + serverData.softLogins.get(0).getLocalSocketAddress());
