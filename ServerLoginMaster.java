@@ -6,9 +6,8 @@ import java.io.*;
 
 public class ServerLoginMaster
 {
+	public ServerData serverData = new ServerData();
 	private ServerSocket listener;
-	final public static int MAX_CLIENTS = 100;
-	final private LinkedList<SubServer> Q = new LinkedList<SubServer>();
 	public listen listen = new listen();
 
 	public ServerLoginMaster(int p_port) throws IOException
@@ -24,13 +23,14 @@ public class ServerLoginMaster
 			{
 				try
 				{
-					Socket next;
-					next = listener.accept();
-					if(next.isBound())
+					if(!serverData.softLogins.isEmpty())
 					{
-						Q.add(new SubServer(next));
+						for(int i = 0; i < serverData.softLogins.size(); i++)
+						{
+							System.out.println(serverData.softLogins.get(i).getRemoteSocketAddress());
+							Thread.sleep(1000);
+						}
 					}
-					next = null;
 				}
 				catch(Exception e)
 				{

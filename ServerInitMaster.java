@@ -6,6 +6,7 @@ import java.io.*;
 
 public class ServerInitMaster
 {
+	public ServerData serverData = new ServerData();
 	public DataOutputStream streamOut = null;
 	private ServerSocket listener;
 	public listen listen = new listen();
@@ -31,6 +32,7 @@ public class ServerInitMaster
 					if(next.isBound())
 					{
 						System.out.println(next.getRemoteSocketAddress());
+						serverData.softLogins.add(next);
 					}
 					next = null;
 				}
