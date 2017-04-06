@@ -25,7 +25,9 @@ public class ServerInitMaster
 			{
 				try
 				{
+					System.out.println("listening...");
 					next = listener.accept();
+					System.out.println("found... ");
 					if(next.isBound())
 					{
 						System.out.println(next.getRemoteSocketAddress());
