@@ -35,7 +35,6 @@ public class ServerInitMaster
 						serverData.softLogins.add(next);
 						System.out.println(serverData.softLogins.size());
 					}
-					next = null;
 				}
 				catch(IOException e)
 				{
