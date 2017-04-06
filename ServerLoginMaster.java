@@ -28,7 +28,8 @@ public class ServerLoginMaster
 				{
 					if(serverData.softLogins.isEmpty())
 					{
-						//System.out.println("no soft logins to process");
+						Thread.sleep(1000);
+						System.out.println("no soft logins to process");
 					}
 					else if(!serverData.softLogins.isEmpty())
 					{
