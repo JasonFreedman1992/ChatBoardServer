@@ -4,5 +4,5 @@ import java.io.*;
 
 public class ServerData
 {
-	public static volatile LinkedList<Socket> softLogins = new LinkedList<Socket>();
+	public static LinkedList<Socket> softLogins = new LinkedList<Socket>();
 }
