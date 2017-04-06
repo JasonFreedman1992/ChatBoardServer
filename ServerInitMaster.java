@@ -25,7 +25,7 @@ public class ServerInitMaster
 		public listen() throws IOException
 		{
 			initChannellisten.open();
-			initChannellisten.socket().bind(new InetSocketAddress(port));
+			initChannellisten.socket().bind(new InetSocketAddress(49512));
 			selector = Selector.open();
 			initChannellisten.register(selector, SelectionKey.OP_ACCEPT);
 		}
