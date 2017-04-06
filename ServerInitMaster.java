@@ -6,7 +6,6 @@ import java.net.*;
 
 public class ServerInitMaster
 {
-	int port = 49152;
 	public listen listen = new listen();
 
 	public ServerInitMaster() throws IOException
@@ -25,7 +24,7 @@ public class ServerInitMaster
 		public listen() throws IOException
 		{
 			initChannellisten.open();
-			initChannellisten.socket().bind(new InetSocketAddress(49512));
+			initChannellisten.socket().bind(new InetSocketAddress(port));
 			selector = Selector.open();
 			initChannellisten.register(selector, SelectionKey.OP_ACCEPT);
 		}
