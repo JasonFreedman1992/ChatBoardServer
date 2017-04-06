@@ -8,7 +8,7 @@ public class ServerProcess
 	public String line = "";
 	public Scanner console = new Scanner(System.in);
 	public DataInputStream streamIn = null;
-	public DataOutputStream streamOut = null;
+
 	public ArrayList<Socket> socketList = new ArrayList<Socket>();
 	Thread outThread = new Thread();
 	Thread inThread = new Thread();
@@ -39,7 +39,7 @@ public class ServerProcess
 
 	    }
 	}
-	
+
 	class output implements Runnable
 	{
 		public void run()

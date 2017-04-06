@@ -18,7 +18,7 @@ public class ServerLoginMaster
 
 	class listen implements Runnable
 	{
-		LinkedList<Thread> threads = new LinkedList<Thread>();
+		Thread[] threads = new Thread[10];
 		public void run()
 		{
 			while(true)
@@ -34,8 +34,8 @@ public class ServerLoginMaster
 					{
 						for(int i = 0; i < serverData.softLogins.size(); i++)
 						{
-							threads.add(new Thread(new SubServer(i)));
-							threads.get(i).start();
+							threads[i] = new Thread(new SubServer(i));
+							threads[i].start();
 						}
 					}
 				}
