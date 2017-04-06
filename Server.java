@@ -10,7 +10,7 @@ public class Server
 		Thread instanceMasterThread = new Thread();
 		ServerInitMaster initMaster = new ServerInitMaster(49152);
 		initMasterThread = new Thread(initMaster.listen);
-		//initMasterThread.start();
+		initMasterThread.start();
 		//ServerLoginMaster loginListener = new ServerLoginMaster(49152);
 		//serverThread = new Thread(loginListener.listen);
 	}
