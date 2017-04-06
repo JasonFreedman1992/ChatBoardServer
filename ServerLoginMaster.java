@@ -41,7 +41,6 @@ public class ServerLoginMaster
 							{
 								System.out.println(streamIn.available());
 								System.out.println(streamIn.readUTF());
-								System.out.println(streamIn.readUTF());
 							}
 						}
 					}
