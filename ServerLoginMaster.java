@@ -25,7 +25,7 @@ public class ServerLoginMaster
 			{
 				try
 				{
-					if(!serverData.softLogins.isEmpty())
+					if(serverData.softLogins.size() > 0)
 					{
 						streamOut = new DataOutputStream(serverData.softLogins.get(0).getOutputStream());
 						try
