@@ -30,6 +30,7 @@ public class listen implements Runnable
 			SelectionKey key;
 			while(initChannellisten.isOpen())
 			{
+				System.out.println("iterating");
 				selector.select();
 				iter = selector.selectedKeys().iterator();
 				while(iter.hasNext())
