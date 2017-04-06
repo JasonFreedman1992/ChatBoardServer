@@ -6,6 +6,7 @@ import java.io.*;
 
 public class ServerLoginMaster
 {
+	Scanner console = new Scanner(System.in);
 	public ServerData serverData = new ServerData();
 	public listen listen = new listen();
 
@@ -31,7 +32,16 @@ public class ServerLoginMaster
 					}
 					else if(!serverData.softLogins.isEmpty())
 					{
-						System.out.println(new DataOutputStream(serverData.softLogins.get(0).getOutputStream()));
+						streamOut = new DataOutputStream(serverData.softLogins.get(0).getOutputStream());
+						try
+						{
+							streamOut.writeUTF(console.nextLine());
+							streamOut.flush();
+						}
+						catch(IOException e)
+						{
+							System.out.println(e);
+						}
 						Thread.sleep(1000);
 						System.out.println("rsa" + serverData.softLogins.get(0).getRemoteSocketAddress());
 						System.out.println("lsa" + serverData.softLogins.get(0).getLocalSocketAddress());
