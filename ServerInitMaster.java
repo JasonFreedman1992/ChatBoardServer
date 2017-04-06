@@ -6,55 +6,114 @@ import java.net.*;
 
 public class ServerInitMaster
 {
+	int port = 49152;
 	public listen listen = new listen();
-	public int port;
-	public ServerSocketChannel initChannellisten;
-	public SocketChannel initChannel;
-	public ServerData serverData = new ServerData();
-	public ServerInitMaster(int p_port) throws IOException
+
+	public ServerInitMaster() throws IOException
 	{
-		port = p_port;
+
 	}
 
 	class listen implements Runnable
 	{
+		public int port = 49152;
+		public ServerData serverData = new ServerData();
+		public ServerSocketChannel initChannellisten;
+		public Selector selector;
+		public ByteBuffer buffer = ByteBuffer.allocate(256);
+
+		public listen() throws IOException
+		{
+			initChannellisten.open();
+			initChannellisten.socket().bind(new InetSocketAddress(port));
+			selector = Selector.open();
+			initChannellisten.register(selector, SelectionKey.OP_ACCEPT);
+		}
+
+
 		public void run()
 		{
 			try
 			{
-				initChannellisten = ServerSocketChannel.open();
-				initChannellisten.socket().bind(new InetSocketAddress(port));
-				while(true)
+				Iterator<SelectionKey> iter;
+				SelectionKey key;
+				while(initChannellisten.isOpen())
 				{
-					System.out.println("listening... ");
-					initChannel = initChannellisten.accept();
-					serverData.Q.add(initChannel);
-					System.out.println("initialized...");
-					System.out.println(initChannel.socket().getRemoteSocketAddress());
-					System.out.println(serverData.Q.size());
+					selector.select();
+					iter = selector.selectedKeys().iterator();
+					while(iter.hasNext())
+					{
+						key = iter.next();
+						iter.remove();
+						if(key.isAcceptable())
+						{
+							handleAccept(key);
+						}
+						if(key.isReadable())
+						{
+
+						}
+					}
 				}
 			}
 			catch(IOException e)
 			{
-				
+				System.out.println(" IOException, server of port 49152 terminating, stack trace: " + e);
 			}
-			// while(true)
-			// {
-			// 	try
-			// 	{
-			// 		System.out.println("listening...");
-			// 		next = listener.accept();
-			// 		System.out.println("initialized... ");
-			// 		if(next.isBound())
-			// 		{
-			// 			System.out.println(next.getRemoteSocketAddress());
-			// 		}
-			// 	}
-			// 	catch(IOException e)
-			// 	{
-			// 		System.out.println(e);
-			// 	}
-			// }
+		}
+
+		final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
+		void handleAccept(SelectionKey key) throws IOException
+		{
+			SocketChannel sc = ((ServerSocketChannel) key.channel()).accept();
+			String address = (new StringBuilder( sc.socket().getInetAddress().toString() )).append(":").append( sc.socket().getPort() ).toString();
+			sc.register(selector, SelectionKey.OP_READ, address);
+			sc.write(welcomeBuf);
+			welcomeBuf.rewind();
+			System.out.println("connection from " + address);
+		}
+
+		void handleRead(SelectionKey key) throws IOException
+		{
+			SocketChannel ch = (SocketChannel) key.channel();
+			StringBuilder sb = new StringBuilder();
+			buffer.clear();
+			int read = 0;
+			while((read = ch.read(buffer)) > 0)
+			{
+				buffer.flip();
+				byte[] bytes = new byte[buffer.limit()];
+				buffer.get(bytes);
+				sb.append(new String(bytes));
+				buffer.clear();
+			}
+			String msg;
+			if(read < 0)
+			{
+				msg = key.attachment() + " left the chat. \n";
+				ch.close();
+			}
+			else
+			{
+				msg = key.attachment() + ": " + sb.toString();
+			}
+
+			System.out.println(msg);
+			broadcast(msg);
+		}
+
+		void broadcast(String msg) throws IOException
+		{
+			ByteBuffer msgBuffer = ByteBuffer.wrap(msg.getBytes());
+			for(SelectionKey key : selector.keys())
+			{
+				if(key.isValid() && key.channel() instanceof SocketChannel)
+				{
+					SocketChannel sch = (SocketChannel) key.channel();
+					sch.write(msgBuffer);
+					msgBuffer.rewind();
+				}
+			}
 		}
 	}
 }
