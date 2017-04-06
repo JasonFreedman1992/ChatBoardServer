@@ -22,11 +22,7 @@ public class ServerLoginMaster
 			{
 				try
 				{
-					if(serverData.softLogins.size() > 0)
-					{
-						System.out.println("softlogins " + serverData.softLogins.get(0).toString());
-						Thread.sleep(1000);
-					}
+					
 				}
 				catch(Exception e)
 				{
