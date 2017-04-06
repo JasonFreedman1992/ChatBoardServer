@@ -9,7 +9,6 @@ public class ServerLoginMaster
 	Scanner console = new Scanner(System.in);
 	public ServerData serverData = new ServerData();
 	public listen listen = new listen();
-
 	public DataInputStream streamIn = null;
 	public DataOutputStream streamOut = null;
 
@@ -36,8 +35,11 @@ public class ServerLoginMaster
 						for(int i = 0; i < serverData.softLogins.size(); i++)
 						{
 							streamIn = new DataInputStream(serverData.softLogins.get(i).getInputStream());
-							System.out.println(streamIn.readUTF());
-							System.out.println(streamIn.readUTF());
+							if(!streamIn.readUTF().equals(""))
+							{
+								System.out.println(streamIn.readUTF());
+								System.out.println(streamIn.readUTF());
+							}
 						}
 					}
 				}
