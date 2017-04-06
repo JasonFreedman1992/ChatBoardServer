@@ -27,7 +27,7 @@ public class ServerInitMaster
 					System.out.println("listening...");
 					initChannel.accept();
 					System.out.println("initialized...");
-					System.out.println(initChannel.socket().getInetAddress().toString());
+					System.out.println(new StringBuilder(initChannel.socket().getInetAddress().toString()));
 
 				}
 			}
