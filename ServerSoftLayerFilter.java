@@ -11,18 +11,21 @@ public class ServerSoftLayerFilter
 	{
 		public void run()
 		{
-			for(int i = 0; i < serverData.softLogins.size(); i++)
-			{	
-				try
-				{
-					streamOut = new DataOutputStream(serverData.softLogins.get(i).getOutputStream());
-					streamOut.writeUTF("sending packet");
-					streamOut.flush();
-				}
-				catch(IOException e)
-				{
-					System.out.println(e);
-					serverData.softLogins.remove(i);
+			while(true)
+			{
+				for(int i = 0; i < serverData.softLogins.size(); i++)
+				{	
+					try
+					{
+						streamOut = new DataOutputStream(serverData.softLogins.get(i).getOutputStream());
+						streamOut.writeUTF("sending packet");
+						streamOut.flush();
+					}
+					catch(IOException e)
+					{
+						System.out.println(e);
+						serverData.softLogins.remove(i);
+					}
 				}
 			}
 		}
