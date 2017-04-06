@@ -9,8 +9,7 @@ public class Server
 		Thread instanceMasterThread = new Thread();
 		Thread softLayerFilterThread = new Thread();
 		
-		listen initMaster = new listen();
-		initMasterThread = new Thread(initMaster);
+		initMasterThread = new Thread(new listen());
 		initMasterThread.start();
 
 		//serverThread = new Thread(loginListener.listen);
