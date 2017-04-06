@@ -19,7 +19,15 @@ public class ServerSoftLayerFilter
 			{
 				if(serverData.softLogins.isEmpty())
 				{
-					System.out.println("empty");
+					try
+					{
+						Thread.sleep(1000);
+						System.out.println("empty");
+					}
+					catch(InterruptedException e)
+					{
+						System.out.println(e);
+					}
 				}
 				else if(!serverData.softLogins.isEmpty())
 				{
