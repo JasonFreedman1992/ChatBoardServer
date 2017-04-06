@@ -20,10 +20,11 @@ public class ServerSoftLayerFilter
 				Thread.sleep(5000);
 				if(serverData.Q.isEmpty())
 				{
-
+					System.out.println("server data empty");
 				}
 				else if(!serverData.Q.isEmpty())
 				{
+					System.out.println("server data not empty");
 					for(int i = 0; i < serverData.Q.size(); i++)
 					{
 						try
@@ -36,7 +37,7 @@ public class ServerSoftLayerFilter
 						}
 						catch(IOException f)
 						{
-							
+
 						}
 					}
 				}
