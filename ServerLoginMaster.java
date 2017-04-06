@@ -64,6 +64,8 @@ public class ServerLoginMaster
 			}
 			public void run()
 			{
+				while(true)
+				{
 				try
 				{
 					streamIn = new DataInputStream(serverData.softLogins.get(id).getInputStream());
@@ -75,6 +77,7 @@ public class ServerLoginMaster
 				catch(IOException e)
 				{
 
+				}
 				}
 			}
 		}
