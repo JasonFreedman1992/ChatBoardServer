@@ -15,36 +15,39 @@ public class ServerSoftLayerFilter
 	{
 		public void run()
 		{
-			try
+			while(true)
 			{
-				Thread.sleep(5000);
-				if(serverData.Q.isEmpty())
+				try
 				{
-					System.out.println("server data empty");
-				}
-				else if(!serverData.Q.isEmpty())
-				{
-					System.out.println("server data not empty");
-					for(int i = 0; i < serverData.Q.size(); i++)
+					Thread.sleep(5000);
+					if(serverData.Q.isEmpty())
 					{
-						try
+						System.out.println("server data empty");
+					}
+					else if(!serverData.Q.isEmpty())
+					{
+						System.out.println("server data not empty");
+						for(int i = 0; i < serverData.Q.size(); i++)
 						{
-							ServerData.Q.get(i).write(enc.encode(CharBuffer.wrap("packet from server")));
-						}
-						catch(CharacterCodingException e)
-						{
+							try
+							{
+								ServerData.Q.get(i).write(enc.encode(CharBuffer.wrap("packet from server")));
+							}
+							catch(CharacterCodingException e)
+							{
 
-						}
-						catch(IOException f)
-						{
+							}
+							catch(IOException f)
+							{
 
+							}
 						}
 					}
 				}
-			}
-			catch(InterruptedException e)
-			{
+				catch(InterruptedException e)
+				{
 
+				}
 			}
 		}
 	}
