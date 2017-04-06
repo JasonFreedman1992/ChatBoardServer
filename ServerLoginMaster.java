@@ -7,12 +7,11 @@ import java.io.*;
 public class ServerLoginMaster
 {
 	public ServerData serverData = new ServerData();
-	private ServerSocket listener;
 	public listen listen = new listen();
 
-	public ServerLoginMaster(int p_port) throws IOException
+	public ServerLoginMaster() throws IOException
 	{
-		listener = new ServerSocket(p_port);
+
 	}
 
 	class listen implements Runnable
