@@ -9,7 +9,7 @@ public class ServerSoftLayerFilter
 {
 	public listen listen = new listen();
 	public ServerData serverData = new ServerData();
-	public CharsetEncoder enc = Charset.forName("US-ASCII").newEncoder();
+	public CharsetEncoder enc = Charset.forName("UTF-8").newEncoder();
 
 	class listen implements Runnable
 	{
@@ -31,7 +31,7 @@ public class ServerSoftLayerFilter
 						{
 							try
 							{
-								ServerData.Q.get(i).write(enc.encode(CharBuffer.wrap("packet from server")));
+								ServerData.Q.get(i).write(enc.encode(CharBuffer.wrap("p")));
 							}
 							catch(CharacterCodingException e)
 							{
