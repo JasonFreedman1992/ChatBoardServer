@@ -26,21 +26,19 @@ public class ServerLoginMaster
 			{
 				try
 				{
+					Thread.sleep(1000);
 					if(serverData.softLogins.isEmpty())
 					{
-						Thread.sleep(1000);
 						//System.out.println("no soft logins to process");
 					}
 					else if(!serverData.softLogins.isEmpty())
 					{
-						Thread.sleep(1000);
 						for(int i = 0; i < serverData.softLogins.size(); i++)
 						{
 							streamIn = new DataInputStream(new BufferedInputStream(serverData.softLogins.get(i).getInputStream()));
 							System.out.println(streamIn.readUTF());
 						}
 					}
-					//Thread.sleep(1000);
 				}
 				catch(Exception e)
 				{
