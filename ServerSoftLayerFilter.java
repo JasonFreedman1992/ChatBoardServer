@@ -22,7 +22,6 @@ public class ServerSoftLayerFilter
 					try
 					{
 						Thread.sleep(1000);
-						System.out.println("empty");
 					}
 					catch(InterruptedException e)
 					{
