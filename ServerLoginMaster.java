@@ -55,7 +55,7 @@ public class ServerLoginMaster
 		}
 		class SubServer implements Runnable
 		{	
-			int id;
+			int id = 0;
 			public DataInputStream streamIn = null;
 
 			public SubServer(int p_id)
