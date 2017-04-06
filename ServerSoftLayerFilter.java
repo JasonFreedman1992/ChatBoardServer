@@ -30,7 +30,7 @@ public class ServerSoftLayerFilter
 						}
 						catch(IOException e)
 						{
-							System.out.println(e);
+							//System.out.println(e);
 							serverData.softLogins.remove(i);
 						}
 					}
