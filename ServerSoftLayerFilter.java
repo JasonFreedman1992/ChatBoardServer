@@ -22,7 +22,7 @@ public class ServerSoftLayerFilter
 					Thread.sleep(5000);
 					if(serverData.softLogins.isEmpty())
 					{
-						Thread.sleep(1);
+						Thread.sleep(10);
 					}
 					else if(!serverData.softLogins.isEmpty())
 					{
