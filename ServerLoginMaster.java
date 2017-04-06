@@ -27,9 +27,9 @@ public class ServerLoginMaster
 				try
 				{
 					Thread.sleep(1000);
+					System.out.println(serverData.softLogins.size());
 					if(!serverData.softLogins.isEmpty())
 					{
-						System.out.println(serverData.softLogins.size());
 						for(int i = 0; i < serverData.softLogins.size(); i++)
 						{
 
