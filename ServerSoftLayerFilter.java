@@ -19,10 +19,10 @@ public class ServerSoftLayerFilter
 			{
 				try
 				{
+					Thread.sleep(500);
 					if(serverData.softLogins.isEmpty())
 					{
-
-						Thread.sleep(1000);
+						Thread.sleep(500);
 					}
 					else if(!serverData.softLogins.isEmpty())
 					{
