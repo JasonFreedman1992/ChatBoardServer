@@ -8,7 +8,8 @@ public class ServerInitMaster
 {
 	public listen listen = new listen();
 	public int port;
-	public ServerSocketChannel initChannel;
+	public ServerSocketChannel initChannellisten;
+	public SocketChannel initChannel;
 	public ServerInitMaster(int p_port) throws IOException
 	{
 		port = p_port;
@@ -20,15 +21,14 @@ public class ServerInitMaster
 		{
 			try
 			{
-				initChannel = ServerSocketChannel.open();
-				initChannel.socket().bind(new InetSocketAddress(port));
+				initChannellisten = ServerSocketChannel.open();
+				initChannellisten.socket().bind(new InetSocketAddress(port));
 				while(true)
 				{
-					System.out.println("listening on: " + initChannel.socket().getInetAddress());
-					initChannel.accept();
+					System.out.println("listening... ");
+					initChannel = initChannellisten.accept();
 					System.out.println("initialized...");
-					System.out.println(initChannel.socket().getInetAddress().getHostAddress());
-
+					System.out.println(initChannel.socket().getRemoteSocketAddress());
 				}
 			}
 			catch(IOException e)
