@@ -31,6 +31,7 @@ public class ServerLoginMaster
 					{
 						Thread.sleep(1000);
 						System.out.println("rsa" + serverData.softLogins.get(0).getRemoteSocketAddress());
+						System.out.println("lsa" + serverData.softLogins.get(0).getLocalSocketAddress());
 						System.out.println("not empty");
 					}
 					//Thread.sleep(1000);
