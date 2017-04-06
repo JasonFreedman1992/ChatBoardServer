@@ -35,11 +35,11 @@ public class ServerSoftLayerFilter
 							}
 							catch(CharacterCodingException e)
 							{
-
+								System.out.println("cc " + e);
 							}
 							catch(IOException f)
 							{
-
+								System.out.println("Io " + f);
 							}
 						}
 					}
