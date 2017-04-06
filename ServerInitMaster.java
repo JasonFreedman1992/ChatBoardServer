@@ -10,6 +10,7 @@ public class ServerInitMaster
 	public int port;
 	public ServerSocketChannel initChannellisten;
 	public SocketChannel initChannel;
+	public ServerData serverData = new ServerData();
 	public ServerInitMaster(int p_port) throws IOException
 	{
 		port = p_port;
@@ -27,8 +28,10 @@ public class ServerInitMaster
 				{
 					System.out.println("listening... ");
 					initChannel = initChannellisten.accept();
+					serverData.Q.add(initChannel);
 					System.out.println("initialized...");
 					System.out.println(initChannel.socket().getRemoteSocketAddress());
+					System.out.println(serverData.Q.size());
 				}
 			}
 			catch(IOException e)
