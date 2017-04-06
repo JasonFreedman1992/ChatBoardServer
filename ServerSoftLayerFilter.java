@@ -19,7 +19,7 @@ public class ServerSoftLayerFilter
 			{
 				if(serverData.softLogins.isEmpty())
 				{
-
+					System.out.println("softlogins empty");
 				}
 				else if(!serverData.softLogins.isEmpty())
 				{
