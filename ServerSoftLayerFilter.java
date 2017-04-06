@@ -26,7 +26,7 @@ public class ServerSoftLayerFilter
 					}
 					catch(InterruptedException e)
 					{
-						
+
 					}
 				}
 				else if(!serverData.softLogins.isEmpty())
@@ -38,6 +38,14 @@ public class ServerSoftLayerFilter
 							streamOut = new DataOutputStream(serverData.softLogins.get(i).getOutputStream());
 							streamOut.writeUTF("packet from jasons server");
 							streamOut.flush();
+							try
+							{
+								Thread.sleep(1000);
+							}
+							catch(InterruptedException e)
+							{
+
+							}
 						}
 						catch(IOException e)
 						{
