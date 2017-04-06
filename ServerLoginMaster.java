@@ -18,7 +18,7 @@ public class ServerLoginMaster
 
 	class listen implements Runnable
 	{
-		Thread[] threads = new Thread[10];
+		Thread[] threads = new Thread[5];
 		public void run()
 		{
 			while(true)
