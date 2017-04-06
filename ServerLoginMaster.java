@@ -10,6 +10,7 @@ public class ServerLoginMaster
 	public ServerData serverData = new ServerData();
 	public listen listen = new listen();
 
+	public DataInputStream streamIn = null;
 	public DataOutputStream streamOut = null;
 
 	public ServerLoginMaster() throws IOException
@@ -35,7 +36,8 @@ public class ServerLoginMaster
 						Thread.sleep(1000);
 						for(int i = 0; i < serverData.softLogins.size(); i++)
 						{
-							System.out.println("rsa" + serverData.softLogins.get(i).getRemoteSocketAddress() + " is connected");
+							streamIn = new DataInputStream(new BufferedInputStream(serverData.softLogins.get(i).getInputStream()));
+							System.out.println(streamIn.readUTF());
 						}
 					}
 					//Thread.sleep(1000);
@@ -55,6 +57,5 @@ public class ServerLoginMaster
 		{
 			socket = p_socket;
 		}
-		//ServerProcess process = new ServerProcess(next);
 	}
 }
