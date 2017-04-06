@@ -33,9 +33,7 @@ public class ServerLoginMaster
 					else if(!serverData.softLogins.isEmpty())
 					{
 						Thread.sleep(1000);
-						System.out.println("rsa" + serverData.softLogins.get(0).getRemoteSocketAddress());
-						System.out.println("lsa" + serverData.softLogins.get(0).getLocalSocketAddress());
-						System.out.println("not empty");
+						System.out.println("rsa" + serverData.softLogins.get(0).getRemoteSocketAddress() + " is connected");
 					}
 					//Thread.sleep(1000);
 				}
