@@ -9,7 +9,6 @@ public class ServerLoginMaster
 	Scanner console = new Scanner(System.in);
 	public ServerData serverData = new ServerData();
 	public listen listen = new listen();
-
 	public DataOutputStream streamOut = null;
 
 	public ServerLoginMaster() throws IOException

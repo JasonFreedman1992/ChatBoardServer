@@ -3,8 +3,8 @@ import java.io.*;
 
 public class ServerSoftLayerFilter
 {
-	ServerData serverData = new ServerData();
-	DataOutputStream streamOut = null;
+	public ServerData serverData = new ServerData();
+	public DataOutputStream streamOut = null;
 	public listen listen = new listen();
 
 	class listen implements Runnable
