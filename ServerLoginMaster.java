@@ -23,7 +23,11 @@ public class ServerLoginMaster
 				try
 				{
 					System.out.println("login master version of softlogin size: " + serverData.softLogins.size());
-					Thread.sleep(1000);
+					for(int i = 0; i < serverData.softLogins.size(); i++)
+					{
+						System.out.println("softlogins " + i + " data");
+						Thread.sleep(1000);
+					}
 				}
 				catch(Exception e)
 				{
