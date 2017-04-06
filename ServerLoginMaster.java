@@ -22,11 +22,16 @@ public class ServerLoginMaster
 			{
 				try
 				{
-					for(int i = 0; i < serverData.softLogins.size(); i++)
+					if(serverData.softLogins.get(0) != null)
 					{
-						System.out.println(i + " is closed: " + serverData.softLogins.get(i).isInputShutdown());
+						serverData.softLogins.get(0).isInputShutdown();
 						Thread.sleep(1000);
 					}
+					// for(int i = 0; i < serverData.softLogins.size(); i++)
+					// {
+					// 	System.out.println(i + " is closed: " + serverData.softLogins.get(i).isInputShutdown());
+					// 	Thread.sleep(1000);
+					// }
 				}
 				catch(Exception e)
 				{
