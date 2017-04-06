@@ -15,7 +15,7 @@ public class listen implements Runnable
 	public listen() throws IOException
 	{
 		initChannellisten.open();
-		initChannellisten.socket().bind(new InetSocketAddress(port));
+		initChannellisten.socket().bind(new InetSocketAddress("54.70.172.148",port));
 		selector = Selector.open();
 		initChannellisten.register(selector, SelectionKey.OP_ACCEPT);
 	}
