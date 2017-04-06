@@ -32,6 +32,7 @@ public class ServerLoginMaster
 					}
 					else if(!serverData.softLogins.isEmpty())
 					{
+						Thread.sleep(1000);
 						for(int i = 0; i < serverData.softLogins.size(); i++)
 						{
 							streamIn = new DataInputStream(serverData.softLogins.get(i).getInputStream());
