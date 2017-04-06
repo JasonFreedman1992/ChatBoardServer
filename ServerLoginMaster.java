@@ -23,14 +23,8 @@ public class ServerLoginMaster
 			{
 				try
 				{
-					if(!serverData.softLogins.isEmpty())
-					{
-						for(int i = 0; i < serverData.softLogins.size(); i++)
-						{
-							System.out.println(serverData.softLogins.get(i).getRemoteSocketAddress());
-							Thread.sleep(1000);
-						}
-					}
+					System.out.println("login master version of softlogin size: " + serverData.softLogins.size());
+					Thread.sleep(1000);
 				}
 				catch(Exception e)
 				{
