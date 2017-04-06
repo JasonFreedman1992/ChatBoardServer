@@ -66,18 +66,16 @@ public class ServerLoginMaster
 			{
 				while(true)
 				{
-				try
-				{
-					streamIn = new DataInputStream(serverData.softLogins.get(id).getInputStream());
-					if(!streamIn.readUTF().equals(""))
+					try
 					{
+						streamIn = new DataInputStream(serverData.softLogins.get(id).getInputStream());
+						System.out.println(streamIn.readUTF());
 						System.out.println(streamIn.readUTF());
 					}
-				}
-				catch(IOException e)
-				{
+					catch(IOException e)
+					{
 
-				}
+					}
 				}
 			}
 		}
