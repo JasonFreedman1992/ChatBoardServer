@@ -22,7 +22,7 @@ public class ServerLoginMaster
 			{
 				try
 				{
-					for(int i = 0; i <= serverData.softLogins.size(); i++)
+					for(int i = 0; i < serverData.softLogins.size(); i++)
 					{
 						System.out.println(serverData.softLogins.get(i).isBound());
 						Thread.sleep(1000);
