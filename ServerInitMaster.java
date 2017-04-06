@@ -30,7 +30,6 @@ public class ServerInitMaster
 					if(next.isBound())
 					{
 						System.out.println(next.getRemoteSocketAddress());
-						serverData.softLogins.add(next);
 					}
 				}
 				catch(IOException e)
