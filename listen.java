@@ -16,6 +16,7 @@ public class listen implements Runnable
 	{
 		initChannellisten = ServerSocketChannel.open();
 		initChannellisten.socket().bind(new InetSocketAddress(port));
+		initChannellisten.configureBlocking(false);
 		selector = Selector.open();
 		initChannellisten.register(selector, SelectionKey.OP_ACCEPT);
 	}
