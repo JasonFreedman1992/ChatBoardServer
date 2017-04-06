@@ -43,7 +43,7 @@ public class ServerSoftLayerFilter
 				}
 				catch(Exception e)
 				{
-					System.out.println(e);
+					//System.out.println(e);
 				}
 			}
 		}
