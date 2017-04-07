@@ -43,6 +43,7 @@ public class listen implements Runnable
 					}
 					else
 					{
+						run();
 						// will go here if nothing is coming in
 					}
 					if(key.isReadable())
