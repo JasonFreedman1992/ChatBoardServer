@@ -71,7 +71,6 @@ public class listen implements Runnable
 	//
 	void handleAccept(SelectionKey key) throws IOException
 	{
-		System.out.println("waiting...");
 		SocketChannel sc = ((ServerSocketChannel) key.channel()).accept();
 		String address = (new StringBuilder( sc.socket().getInetAddress().toString() )).append(":").append( sc.socket().getPort() ).toString();
 		sc.configureBlocking(false);
