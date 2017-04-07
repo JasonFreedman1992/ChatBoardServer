@@ -43,11 +43,12 @@ public class listen implements Runnable
 					}
 					else
 					{
-						
+						// will go here if nothing is coming in
 					}
 					if(key.isReadable())
 					{
-
+						handleRead(key);
+						// will go here if nothing is coming in
 					}
 					else
 					{
@@ -63,6 +64,9 @@ public class listen implements Runnable
 	}
 
 	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
+	//
+	// handle accepting clients into eco system
+	//
 	void handleAccept(SelectionKey key) throws IOException
 	{
 		System.out.println("waiting...");
@@ -74,7 +78,9 @@ public class listen implements Runnable
 		welcomeBuf.rewind();
 		System.out.println("connection from " + address);
 	}
-
+	//
+	// handle reading data into eco system
+	//
 	void handleRead(SelectionKey key) throws IOException
 	{
 		SocketChannel ch = (SocketChannel) key.channel();
@@ -103,7 +109,9 @@ public class listen implements Runnable
 		System.out.println(msg);
 		broadcast(msg);
 	}
-
+	//
+	// broadcast
+	//
 	void broadcast(String msg) throws IOException
 	{
 		ByteBuffer msgBuffer = ByteBuffer.wrap(msg.getBytes());
