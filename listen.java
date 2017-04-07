@@ -14,7 +14,7 @@ public class listen implements Runnable
 
 	public listen() throws IOException
 	{
-		initChannellisten.open();
+		initChannellisten = ServerSocketChannel.open();
 		initChannellisten.socket().bind(new InetSocketAddress(port));
 		selector = Selector.open();
 		initChannellisten.register(selector, SelectionKey.OP_ACCEPT);
@@ -35,7 +35,6 @@ public class listen implements Runnable
 				{
 					key = iter.next();
 					iter.remove();
-					System.out.println("listening...");
 					if(key.isAcceptable())
 					{
 						handleAccept(key);
