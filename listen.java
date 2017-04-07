@@ -39,7 +39,7 @@ public class listen implements Runnable
 					if(key.isAcceptable())
 					{
 						//System.out.println("is acceptable");
-						handleAccept(key);
+						//handleAccept(key);
 					}
 					else
 					{
