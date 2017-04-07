@@ -60,7 +60,14 @@ public class listen implements Runnable
 		catch(IOException e)
 		{
 			System.out.println(" IOException, server of port 49152 terminating, stack trace: " + e);
-			Thread.currentThread().run();
+			try
+			{
+				initChannellisten.open();
+			}
+			catch(IOException f)
+			{
+				
+			}
 		}
 	}
 
