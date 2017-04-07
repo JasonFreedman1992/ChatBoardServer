@@ -43,11 +43,11 @@ public class listen implements Runnable
 					}
 					else
 					{
-						System.out.println("not acceptable");
+						
 					}
 					if(key.isReadable())
 					{
-						System.out.println("readable");
+
 					}
 					else
 					{
