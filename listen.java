@@ -9,7 +9,7 @@ public class listen implements Runnable
 	public int port = 49152;
 	public ServerData serverData = new ServerData();
 	public ServerSocketChannel initChannellisten;
-	public Selector selector;
+	public Selector selector = null;
 	public ByteBuffer buffer = ByteBuffer.allocate(256);
 
 	public listen() throws IOException
