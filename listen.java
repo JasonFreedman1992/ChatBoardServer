@@ -8,15 +8,14 @@ public class listen implements Runnable
 {
 	public int port = 49152;
 	public ServerData serverData = new ServerData();
-	public ServerSocketChannel initChannellisten = null;
+	public ServerSocketChannel initChannellisten;
 	public Selector selector;
 	public ByteBuffer buffer = ByteBuffer.allocate(256);
 
 	public listen() throws IOException
 	{
-		initChannellisten = ServerSocketChannel.open();
+		initChannellisten.open();
 		initChannellisten.socket().bind(new InetSocketAddress(port));
-		initChannellisten.configureBlocking(false);
 		selector = Selector.open();
 		initChannellisten.register(selector, SelectionKey.OP_ACCEPT);
 	}
@@ -34,9 +33,9 @@ public class listen implements Runnable
 				iter = selector.selectedKeys().iterator();
 				while(iter.hasNext())
 				{
-				System.out.println("listening...");
 					key = iter.next();
 					iter.remove();
+					System.out.println("listening...");
 					if(key.isAcceptable())
 					{
 						handleAccept(key);
@@ -58,8 +57,7 @@ public class listen implements Runnable
 	void handleAccept(SelectionKey key) throws IOException
 	{
 		SocketChannel sc = ((ServerSocketChannel) key.channel()).accept();
-		String address = (new StringBuilder(sc.socket().getInetAddress().toString())).append(":").append(sc.socket().getPort()).toString();
-		sc.configureBlocking(false);
+		String address = (new StringBuilder( sc.socket().getInetAddress().toString() )).append(":").append( sc.socket().getPort() ).toString();
 		sc.register(selector, SelectionKey.OP_READ, address);
 		sc.write(welcomeBuf);
 		welcomeBuf.rewind();
