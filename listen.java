@@ -38,11 +38,20 @@ public class listen implements Runnable
 					iter.remove();
 					if(key.isAcceptable())
 					{
+						System.out.println("is acceptable");
 						handleAccept(key);
+					}
+					else
+					{
+						System.out.println("not acceptable");
 					}
 					if(key.isReadable())
 					{
-
+						System.out.println("readable");
+					}
+					else
+					{
+						System.out.println("not readable");
 					}
 				}
 			}
