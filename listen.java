@@ -16,6 +16,7 @@ public class listen implements Runnable
 	{
 		initChannellisten = ServerSocketChannel.open();
 		initChannellisten.socket().bind(new InetSocketAddress(port));
+		initChannellisten.configureBlocking(false);
 		selector = Selector.open();
 		initChannellisten.register(selector, SelectionKey.OP_ACCEPT);
 	}
@@ -57,6 +58,7 @@ public class listen implements Runnable
 	{
 		SocketChannel sc = ((ServerSocketChannel) key.channel()).accept();
 		String address = (new StringBuilder( sc.socket().getInetAddress().toString() )).append(":").append( sc.socket().getPort() ).toString();
+		sc.configureBlocking(false);
 		sc.register(selector, SelectionKey.OP_READ, address);
 		sc.write(welcomeBuf);
 		welcomeBuf.rewind();
