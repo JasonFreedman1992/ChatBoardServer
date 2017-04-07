@@ -21,7 +21,9 @@ public class listen implements Runnable
 		initChannellisten.register(selector, SelectionKey.OP_ACCEPT);
 	}
 
-
+	//
+	// key can write, read, connect and accept
+	//
 	public void run()
 	{
 		while(initChannellisten.isOpen())
@@ -63,8 +65,14 @@ public class listen implements Runnable
 			}
 		}
 	}
+	//
+	// handle writing to ecosystem
+	//
+	void handleWrite(SelectionKey key)
+	{
 
-	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
+	}
+
 	//
 	// handle accepting clients into eco system
 	//
@@ -73,11 +81,13 @@ public class listen implements Runnable
 		SocketChannel sc = ((ServerSocketChannel) key.channel()).accept();
 		String address = (new StringBuilder( sc.socket().getInetAddress().toString() )).append(":").append( sc.socket().getPort() ).toString();
 		sc.configureBlocking(false);
-		sc.register(selector, SelectionKey.OP_READ, address);
+		sc.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE, address);
 		sc.write(welcomeBuf);
 		welcomeBuf.rewind();
 		System.out.println("connection from " + address);
 	}
+	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
+
 	//
 	// handle reading data into eco system
 	//
@@ -109,6 +119,7 @@ public class listen implements Runnable
 		System.out.println(msg);
 		broadcast(msg);
 	}
+	
 	//
 	// broadcast
 	//
