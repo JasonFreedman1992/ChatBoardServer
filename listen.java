@@ -35,7 +35,6 @@ public class listen implements Runnable
 				while(iter.hasNext())
 				{
 					key = iter.next();
-					System.out.println(key);
 					iter.remove();
 					if(key.isAcceptable())
 					{
