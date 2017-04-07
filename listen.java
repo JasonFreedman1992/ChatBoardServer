@@ -24,93 +24,44 @@ public class listen implements Runnable
 
 	public void run()
 	{
-			while(initChannellisten.isOpen())
+		while(initChannellisten.isOpen())
+		{
+			try
 			{
-		try
-		{
-			Iterator<SelectionKey> iter;
-			SelectionKey key;
+				Iterator<SelectionKey> iter;
+				SelectionKey key;
 
-				selector.select();
-				iter = selector.selectedKeys().iterator();
-				while(iter.hasNext())
-				{
-					key = iter.next();
-					iter.remove();
-					if(key.isAcceptable())
+					selector.select();
+					iter = selector.selectedKeys().iterator();
+					while(iter.hasNext())
 					{
-						System.out.println("is acceptable");
-						handleAccept(key);
+						key = iter.next();
+						iter.remove();
+						if(key.isAcceptable())
+						{
+							//System.out.println("is acceptable");
+							handleAccept(key);
+						}
+						else
+						{
+							// will go here if nothing is coming in
+						}
+						if(key.isReadable())
+						{
+							handleRead(key);
+							// will go here if nothing is coming in
+						}
+						else
+						{
+							//System.out.println("not readable");
+						}
 					}
-					else
-					{
-						// will go here if nothing is coming in
-					}
-					if(key.isReadable())
-					{
-						handleRead(key);
-						// will go here if nothing is coming in
-					}
-					else
-					{
-						System.out.println("not readable");
-					}
-				}
-			
-		}
-		catch(IOException e)
-		{
-			System.out.println(" IOException, server of port 49152 terminating, stack trace: " + e);
-			// try
-			// {
-			// 	initChannellisten.open();
-			// }
-			// catch(IOException f)
-			// {
-
-			// }
-		}
-	}
-	}
-
-	void mainLoop() throws IOException
-	{
-		try
-		{
-			Iterator<SelectionKey> iter;
-			SelectionKey key;
-			while(initChannellisten.isOpen())
-			{
-				selector.select();
-				iter = selector.selectedKeys().iterator();
-				while(iter.hasNext())
-				{
-					key = iter.next();
-					iter.remove();
-					if(key.isAcceptable())
-					{
-						System.out.println("is acceptable");
-						handleAccept(key);
-					}
-					else
-					{
-						// will go here if nothing is coming in
-					}
-					if(key.isReadable())
-					{
-						handleRead(key);
-						// will go here if nothing is coming in
-					}
-					else
-					{
-						System.out.println("not readable");
-					}
-				}
+				
 			}
-		}
-		catch(IOException e)
-		{
-			System.out.println(" IOException, server of port 49152 terminating, stack trace: " + e);
+			catch(IOException e)
+			{
+				System.out.println(" IOException, server of port 49152 terminating, stack trace: " + e);
+			}
 		}
 	}
 
