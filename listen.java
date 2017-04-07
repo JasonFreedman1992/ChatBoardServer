@@ -32,6 +32,7 @@ public class listen implements Runnable
 			{
 				selector.select();
 				iter = selector.selectedKeys().iterator();
+				System.out.println("listening...");
 				while(iter.hasNext())
 				{
 					key = iter.next();
@@ -56,7 +57,6 @@ public class listen implements Runnable
 	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
 	void handleAccept(SelectionKey key) throws IOException
 	{
-		System.out.println("listening");
 		SocketChannel sc = ((ServerSocketChannel) key.channel()).accept();
 		String address = (new StringBuilder(sc.socket().getInetAddress().toString())).append(":").append(sc.socket().getPort()).toString();
 		sc.configureBlocking(false);
