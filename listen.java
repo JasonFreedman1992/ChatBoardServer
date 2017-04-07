@@ -32,9 +32,9 @@ public class listen implements Runnable
 			{
 				selector.select();
 				iter = selector.selectedKeys().iterator();
-				System.out.println("listening...");
 				while(iter.hasNext())
 				{
+				System.out.println("listening...");
 					key = iter.next();
 					iter.remove();
 					if(key.isAcceptable())
