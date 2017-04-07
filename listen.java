@@ -36,7 +36,6 @@ public class listen implements Runnable
 				{
 					key = iter.next();
 					iter.remove();
-					System.out.println("waiting...");
 					if(key.isAcceptable())
 					{
 						handleAccept(key);
