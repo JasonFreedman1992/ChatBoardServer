@@ -5,9 +5,6 @@ public class Server
 	public static void main(String[] args) throws IOException
 	{
 		Thread initMasterThread = new Thread();
-		Thread loginMasterThread = new Thread();
-		Thread instanceMasterThread = new Thread();
-		Thread softLayerFilterThread = new Thread();
 		
 		listen initMaster = new listen();
 		initMasterThread = new Thread(initMaster);

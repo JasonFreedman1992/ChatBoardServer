@@ -30,33 +30,31 @@ public class listen implements Runnable
 			{
 				Iterator<SelectionKey> iter;
 				SelectionKey key;
-
-					selector.select();
-					iter = selector.selectedKeys().iterator();
-					while(iter.hasNext())
+				selector.select();
+				iter = selector.selectedKeys().iterator();
+				while(iter.hasNext())
+				{
+					key = iter.next();
+					iter.remove();
+					if(key.isAcceptable())
 					{
-						key = iter.next();
-						iter.remove();
-						if(key.isAcceptable())
-						{
-							//System.out.println("is acceptable");
-							handleAccept(key);
-						}
-						else
-						{
-							// will go here if nothing is coming in
-						}
-						if(key.isReadable())
-						{
-							handleRead(key);
-							// will go here if nothing is coming in
-						}
-						else
-						{
-							//System.out.println("not readable");
-						}
+						//System.out.println("is acceptable");
+						handleAccept(key);
 					}
-				
+					else
+					{
+						// will go here if nothing is coming in
+					}
+					if(key.isReadable())
+					{
+						handleRead(key);
+						// will go here if nothing is coming in
+					}
+					else
+					{
+						//System.out.println("not readable");
+					}
+				}
 			}
 			catch(IOException e)
 			{
