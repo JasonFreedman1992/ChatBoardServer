@@ -60,6 +60,48 @@ public class listen implements Runnable
 		catch(IOException e)
 		{
 			System.out.println(" IOException, server of port 49152 terminating, stack trace: " + e);
+			try
+			{
+				mainLoop();
+			}
+			catch(Exception f)
+			{
+				
+			}
+		}
+	}
+
+	void mainLoop() throws IOException
+	{
+		Iterator<SelectionKey> iter;
+		SelectionKey key;
+		while(initChannellisten.isOpen())
+		{
+			selector.select();
+			iter = selector.selectedKeys().iterator();
+			while(iter.hasNext())
+			{
+				key = iter.next();
+				iter.remove();
+				if(key.isAcceptable())
+				{
+					System.out.println("is acceptable");
+					handleAccept(key);
+				}
+				else
+				{
+					// will go here if nothing is coming in
+				}
+				if(key.isReadable())
+				{
+					handleRead(key);
+					// will go here if nothing is coming in
+				}
+				else
+				{
+					System.out.println("not readable");
+				}
+			}
 		}
 	}
 
