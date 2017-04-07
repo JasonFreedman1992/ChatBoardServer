@@ -26,6 +26,18 @@ public class listen implements Runnable
 	{
 		try
 		{
+			mainLoop();
+		}
+		catch(IOException e)
+		{
+			
+		}
+	}
+
+	void mainLoop() throws IOException
+	{
+		try
+		{
 			Iterator<SelectionKey> iter;
 			SelectionKey key;
 			while(initChannellisten.isOpen())
@@ -60,6 +72,7 @@ public class listen implements Runnable
 		catch(IOException e)
 		{
 			System.out.println(" IOException, server of port 49152 terminating, stack trace: " + e);
+			mainLoop();
 		}
 	}
 
