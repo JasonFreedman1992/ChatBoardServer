@@ -24,12 +24,13 @@ public class listen implements Runnable
 
 	public void run()
 	{
+			while(initChannellisten.isOpen())
+			{
 		try
 		{
 			Iterator<SelectionKey> iter;
 			SelectionKey key;
-			while(initChannellisten.isOpen())
-			{
+
 				selector.select();
 				iter = selector.selectedKeys().iterator();
 				while(iter.hasNext())
@@ -55,20 +56,21 @@ public class listen implements Runnable
 						System.out.println("not readable");
 					}
 				}
-			}
+			
 		}
 		catch(IOException e)
 		{
 			System.out.println(" IOException, server of port 49152 terminating, stack trace: " + e);
-			try
-			{
-				initChannellisten.open();
-			}
-			catch(IOException f)
-			{
-				
-			}
+			// try
+			// {
+			// 	initChannellisten.open();
+			// }
+			// catch(IOException f)
+			// {
+
+			// }
 		}
+	}
 	}
 
 	void mainLoop() throws IOException
