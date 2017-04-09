@@ -131,8 +131,16 @@ public class listen implements Runnable
 				msg = sb.toString();
 				//msg = msg.substring(msg.indexOf("=") + 1);
 				String[] split = msg.split("=");
-				System.out.println(split[0]);
-				System.out.println(split[1]);
+				String username = split[0];
+				String password = split[1];
+				if(serverData.userBase.get(username) == password)
+				{
+					System.out.println("username has matched with a password in the database");
+				}
+				else
+				{
+					System.out.println("username did not match with a password in the database");
+				}
 				System.out.println(msg);
 				broadcast(msg);
 				// msg = key.attachment() + ": " + sb.toString();
