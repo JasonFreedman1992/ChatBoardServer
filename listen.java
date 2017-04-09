@@ -133,7 +133,7 @@ public class listen implements Runnable
 				String[] split = msg.split("=");
 				String username = split[0];
 				String password = split[1];
-				if(serverData.userBase.get(username) == password)
+				if(serverData.userBase.get(username).equals(password))
 				{
 					System.out.println("username has matched with a password in the database");
 				}
