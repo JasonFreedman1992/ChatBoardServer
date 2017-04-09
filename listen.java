@@ -111,7 +111,14 @@ public class listen implements Runnable
 			sb.append(new String(bytes));
 			for(int i = 0; i < 256; i++)
 			{
-				System.out.println("109: " + bytes[i]);
+				try
+				{
+					System.out.println("109: " + bytes[i]);
+				}
+				catch(IndexOutOfBoundsException e)
+				{
+
+				}
 			}
 
 			//buffer.flip();
