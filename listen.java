@@ -106,7 +106,7 @@ public class listen implements Runnable
 		{
 			buffer.flip();
 			byte[] bytes = new byte[buffer.limit()];
-			System.out.println("109: " + bytes);
+			System.out.println("109: " + bytes.toString());
 			buffer.get(bytes);
 			sb.append(new String(bytes));
 			buffer.flip();
