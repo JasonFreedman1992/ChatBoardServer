@@ -154,9 +154,9 @@ public class listen implements Runnable
 			{
 				for(int i = 1; i <= columnsNumber; i++)
 				{
-					String columnValue = rs.getString(i);
 					String columnName = rsmd.getColumnName(i);
-					System.out.println(columnValue + " " + columnName);
+					String columnValue = rs.getString(i);
+					//System.out.println(columnValue + " " + columnName);
 				}
 				System.out.println("");
 			}
