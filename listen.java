@@ -4,6 +4,8 @@ import java.nio.*;
 import java.nio.channels.*;
 import java.net.*;
 import java.sql.*;
+import javax.swing.JOptionPane;
+
 
 public class listen implements Runnable
 {
@@ -142,16 +144,16 @@ public class listen implements Runnable
 						compPassword = serverData.userBase.get(username);
 						if(compPassword.equals(password))
 						{
-							System.out.println("password matches the username in the database");
+							System.out.println("Password matches the Username.");
 						}
 						else 
 						{
-							System.out.println("password did not match with the username in the database");	
+							System.out.println("Password doesnt match Username.");	
 						}
 					}
 					else
 					{
-						System.out.println("username was not found in the database");
+						System.out.println("Username not found.");
 					}
 					//System.out.println(msg);
 					broadcast(msg);
@@ -161,11 +163,23 @@ public class listen implements Runnable
 				}
 				else if(type.equals("create"))
 				{
+					msg = sb.toString();
 
+					String[] split = msg.split("=");
+					String username = split[0];
+					String password = split[1];
+					if(serverData.userBase.containsKey(username))
+					{
+						System.out.println("Username already exists.");
+					}
+					else
+					{
+						serverData.userBase.put(username, password);
+					}
 				}
 				else
 				{
-
+					System.out.println("Type of packet not recognized.");
 				}
 			}
 			System.out.println("type: " + type);
