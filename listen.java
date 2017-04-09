@@ -156,6 +156,14 @@ public class listen implements Runnable
 				{
 					String columnValue = rs.getString(i);
 					String columnName = rsmd.getColumnName(i);
+					if(columnName == "name")
+					{
+						System.out.println("made it into name");
+					}
+					else if(columnName == "password")
+					{
+						System.out.println("made it into password");
+					}
 					System.out.println(columnValue + " " + columnName);
 				}
 				System.out.println("");
