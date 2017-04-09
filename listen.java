@@ -108,7 +108,8 @@ public class listen implements Runnable
 			byte[] bytes = new byte[buffer.limit()];
 			buffer.get(bytes);
 			sb.append(new String(bytes));
-			buffer.clear();
+			buffer.flip();
+			//buffer.clear();
 		}
 		if(read < 0)
 		{
