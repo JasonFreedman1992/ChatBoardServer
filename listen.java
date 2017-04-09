@@ -96,14 +96,15 @@ public class listen implements Runnable
 	void handleRead(SelectionKey key) throws IOException
 	{
 		SocketChannel ch = (SocketChannel) key.channel();
-		StringBuilder sb = new StringBuilder();
 		buffer.clear();
 		int read = 0;
 		String commandtag = "/1z=";
 		String command = "";
 		String msg;
+		StringBuilder sb = new StringBuilder();
 		while((read = ch.read(buffer)) > 0)
 		{
+			sb = new StringBuilder();
 			buffer.flip();
 			byte[] bytes = new byte[buffer.limit()];
 			buffer.get(bytes);
