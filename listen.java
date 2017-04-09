@@ -121,40 +121,52 @@ public class listen implements Runnable
 		else
 		{
 			System.out.println("currently parsing " + sb.toString());
+			String type = "";
 			if(sb.toString().startsWith(commandtag))
 			{
-				String type = sb.toString().substring(4);
+				type = sb.toString().substring(4);
 				System.out.println(type);
 			}
 			else if(!sb.toString().startsWith(commandtag))
 			{
-				msg = sb.toString();
-				//msg = msg.substring(msg.indexOf("=") + 1);
-				String[] split = msg.split("=");
-				String username = split[0];
-				String password = split[1];
-				String compPassword = "";
-				if(serverData.userBase.containsKey(username))
+				if(type == "login")
 				{
-					compPassword = serverData.userBase.get(username);
-					if(compPassword.equals(password))
+					msg = sb.toString();
+					//msg = msg.substring(msg.indexOf("=") + 1);
+					String[] split = msg.split("=");
+					String username = split[0];
+					String password = split[1];
+					String compPassword = "";
+					if(serverData.userBase.containsKey(username))
 					{
-						System.out.println("password matches the username in the database");
+						compPassword = serverData.userBase.get(username);
+						if(compPassword.equals(password))
+						{
+							System.out.println("password matches the username in the database");
+						}
+						else 
+						{
+							System.out.println("password did not match with the username in the database");	
+						}
 					}
-					else 
+					else
 					{
-						System.out.println("password did not match with the username in the database");	
+						System.out.println("username was not found in the database");
 					}
+					//System.out.println(msg);
+					broadcast(msg);
+					// msg = key.attachment() + ": " + sb.toString();
+					// System.out.println("msg = " + msg);
+					// broadcast(msg);
+				}
+				else if(type == "create")
+				{
+
 				}
 				else
 				{
-					System.out.println("username was not found in the database");
+					
 				}
-				//System.out.println(msg);
-				broadcast(msg);
-				// msg = key.attachment() + ": " + sb.toString();
-				// System.out.println("msg = " + msg);
-				// broadcast(msg);
 			}
 		}
 		//
@@ -186,7 +198,6 @@ public class listen implements Runnable
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 			Statement statement = conn.createStatement();
 			String query = "SELECT * FROM Accounts";
-
 			ResultSet rs = statement.executeQuery(query);
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columnsNumber = rsmd.getColumnCount();
