@@ -129,7 +129,7 @@ public class listen implements Runnable
 			}
 			else if(!sb.toString().startsWith(commandtag))
 			{
-				if(type == "login")
+				if(type.equals("login"))
 				{
 					msg = sb.toString();
 					//msg = msg.substring(msg.indexOf("=") + 1);
@@ -159,13 +159,13 @@ public class listen implements Runnable
 					// System.out.println("msg = " + msg);
 					// broadcast(msg);
 				}
-				else if(type == "create")
+				else if(type.equals("create"))
 				{
 
 				}
 				else
 				{
-					
+
 				}
 			}
 		}
