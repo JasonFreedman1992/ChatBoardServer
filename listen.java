@@ -175,11 +175,13 @@ public class listen implements Runnable
 					}
 					//System.out.println(columnValue + " " + columnName);
 				}
-				for(String key : serverData.userBase.keySet())
-				{
-					System.out.println(key);
-					System.out.println(serverData.userBase.get(key));
-				}
+				//for(String key : serverData.userBase.keySet())
+				//{
+					//System.out.println(key);
+					//System.out.println(serverData.userBase.get(key));
+				//}
+				System.out.println(serverData.userBase.get("caspianpuddle"));
+				System.out.println(serverData.userBase.get("jinson"));
 			}
 		}
 		catch(SQLException e)
