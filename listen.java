@@ -104,7 +104,7 @@ public class listen implements Runnable
 		String msg;
 		while((read = ch.read(buffer)) > 0)
 		{
-			buffer.flip();
+			//buffer.flip();
 			byte[] bytes = new byte[buffer.limit()];
 			System.out.println("109: " + bytes.toString());
 			buffer.get(bytes);
