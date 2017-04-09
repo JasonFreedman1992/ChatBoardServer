@@ -96,9 +96,8 @@ public class listen implements Runnable
 	String type = "";
 	void handleRead(SelectionKey key) throws IOException
 	{
-		
 		SocketChannel ch = (SocketChannel) key.channel();
-		buffer.clear();
+		//buffer.clear();
 		int read = 0;
 		String commandtag = "/1z=";
 		String command = "";
