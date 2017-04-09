@@ -27,6 +27,7 @@ public class listen implements Runnable
 	//
 	public void run()
 	{
+		query();
 		while(initChannellisten.isOpen())
 		{
 			try
