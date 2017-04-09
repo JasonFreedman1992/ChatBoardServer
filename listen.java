@@ -163,10 +163,12 @@ public class listen implements Runnable
 					if(columnName == "name")
 					{
 						username = columnValue;
+						System.out.println("username " + username);
 					}
 					else if(columnName == "password")
 					{
 						password = columnValue;
+						System.out.println("password " + password);
 					}
 					if(count == 2)
 					{
