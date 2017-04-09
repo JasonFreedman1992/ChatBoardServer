@@ -119,17 +119,18 @@ public class listen implements Runnable
 		{
 			if(sb.toString().startsWith(commandtag))
 			{
-				String temp = sb.toString().substring(4);
-				System.out.println(temp);
+				String type = sb.toString().substring(4);
+				System.out.println(type);
 			}
 			else if(!sb.toString().startsWith(commandtag))
 			{
-
+				msg = key.attachment() + ": " + sb.toString();
+				System.out.println(msg);
 			}
-			msg = key.attachment() + ": " + sb.toString();
 		}
-		System.out.println(msg);
-		broadcast(msg);
+		//
+		// broadcasting below this will result in entire message being concatenated
+		//
 	}
 	
 	//
