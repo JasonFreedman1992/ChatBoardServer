@@ -113,8 +113,6 @@ public class listen implements Runnable
 			buffer.get(bytes);
 			System.out.println(sb);
 			sb.append(new String(bytes));
-			//buffer.flip();
-			//buffer.clear();
 		}
 		if(read < 0)
 		{
@@ -134,7 +132,6 @@ public class listen implements Runnable
 				if(type.equals("login"))
 				{
 					msg = sb.toString();
-					//msg = msg.substring(msg.indexOf("=") + 1);
 					String[] split = msg.split("=");
 					String username = split[0];
 					String password = split[1];
@@ -158,12 +155,10 @@ public class listen implements Runnable
 						System.out.println("Username not found.");
 						broadcast("Username not found.");
 					}
-					//broadcast(msg);
 				}
 				else if(type.equals("create"))
 				{
 					msg = sb.toString();
-
 					String[] split = msg.split("=");
 					String username = split[0];
 					String password = split[1];
