@@ -44,7 +44,6 @@ public class listen implements Runnable
 					iter.remove();
 					if(key.isAcceptable())
 					{
-						//System.out.println("is acceptable");
 						handleAccept(key);
 						// will go here if detected as an acceptable entry
 					}
@@ -94,6 +93,7 @@ public class listen implements Runnable
 
 	//
 	// handle reading data into eco system
+	// key.attachment() = ip + port of external user.
 	//
 	String type = "";
 	void handleRead(SelectionKey key) throws IOException
@@ -155,11 +155,7 @@ public class listen implements Runnable
 					{
 						System.out.println("Username not found.");
 					}
-					//System.out.println(msg);
 					broadcast(msg);
-					// msg = key.attachment() + ": " + sb.toString();
-					// System.out.println("msg = " + msg);
-					// broadcast(msg);
 				}
 				else if(type.equals("create"))
 				{
@@ -175,6 +171,7 @@ public class listen implements Runnable
 					else
 					{
 						serverData.userBase.put(username, password);
+						addDatabase(username, password);
 					}
 				}
 				else
@@ -184,9 +181,6 @@ public class listen implements Runnable
 			}
 			System.out.println("type: " + type);
 		}
-		//
-		// broadcasting below this will result in entire message being concatenated
-		//
 	}
 	
 	//
@@ -205,6 +199,9 @@ public class listen implements Runnable
 			}
 		}
 	}
+	//
+	// initial mapping of serverData hashmap to database
+	//
 	void mapDatabase()
 	{
 		try
@@ -255,5 +252,28 @@ public class listen implements Runnable
 		{
 			System.out.println("not found class");
 		}
+	}
+	//
+	// adding new account to database with password
+	//
+	void addDatabase(String p_username, String p_password)
+	{
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
+			Statement statement = conn.createStatement();
+			String query = "INSERT INTO Accounts " + "VALUES ('" + p_username + "', '" + p_password + "')"; 
+			ResultSet rs = statement.executeQuery(query);
+		}
+		catch(SQLException e)
+		{
+			System.out.println("no connection");
+		}
+		catch(ClassNotFoundException e)
+		{
+			System.out.println("not found class");
+		}
+
 	}
 }
