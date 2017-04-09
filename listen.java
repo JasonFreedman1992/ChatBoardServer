@@ -95,6 +95,7 @@ public class listen implements Runnable
 	//
 	void handleRead(SelectionKey key) throws IOException
 	{
+		String type = "";
 		SocketChannel ch = (SocketChannel) key.channel();
 		buffer.clear();
 		int read = 0;
@@ -121,7 +122,6 @@ public class listen implements Runnable
 		else
 		{
 			System.out.println("currently parsing " + sb.toString());
-			String type = "";
 			if(sb.toString().startsWith(commandtag))
 			{
 				type = sb.toString().substring(4);
