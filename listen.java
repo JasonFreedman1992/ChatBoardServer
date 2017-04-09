@@ -108,8 +108,8 @@ public class listen implements Runnable
 			buffer.flip();
 			byte[] bytes = new byte[buffer.limit()];
 			buffer.get(bytes);
-			sb.append(new String(bytes));
 			System.out.println(sb);
+			sb.append(new String(bytes));
 			//buffer.flip();
 			//buffer.clear();
 		}
@@ -128,9 +128,13 @@ public class listen implements Runnable
 			}
 			else if(!sb.toString().startsWith(commandtag))
 			{
-				msg = key.attachment() + ": " + sb.toString();
-				System.out.println("msg = " + msg);
+				msg = sb.toString();
+				msg = msg.substring(msg.indexOf("="));
+				System.out.println(msg);
 				broadcast(msg);
+				// msg = key.attachment() + ": " + sb.toString();
+				// System.out.println("msg = " + msg);
+				// broadcast(msg);
 			}
 		}
 		//
