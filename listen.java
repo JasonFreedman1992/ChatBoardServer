@@ -112,6 +112,7 @@ public class listen implements Runnable
 			//buffer.flip();
 			//buffer.clear();
 		}
+		System.out.println(sb);
 		if(read < 0)
 		{
 			msg = key.attachment() + " left the chat. \n";
