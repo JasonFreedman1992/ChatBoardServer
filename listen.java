@@ -158,7 +158,7 @@ public class listen implements Runnable
 						System.out.println("Username not found.");
 						broadcast("Username not found.");
 					}
-					broadcast(msg);
+					//broadcast(msg);
 				}
 				else if(type.equals("create"))
 				{
