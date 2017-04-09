@@ -109,10 +109,10 @@ public class listen implements Runnable
 			byte[] bytes = new byte[buffer.limit()];
 			buffer.get(bytes);
 			sb.append(new String(bytes));
+			System.out.println(sb);
 			//buffer.flip();
 			//buffer.clear();
 		}
-		System.out.println(sb);
 		if(read < 0)
 		{
 			msg = key.attachment() + " left the chat. \n";
