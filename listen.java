@@ -150,37 +150,15 @@ public class listen implements Runnable
 			ResultSet rs = statement.executeQuery(query);
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columnsNumber = rsmd.getColumnCount();
-			int count = 0;
-			String username = "";
-			String password = "";
 			while(rs.next())
 			{
 				for(int i = 1; i <= columnsNumber; i++)
 				{
-					String columnName = rsmd.getColumnName(i);
 					String columnValue = rs.getString(i);
-					count++;
-					if(columnName == "name")
-					{
-						username = columnValue;
-						System.out.println("username " + username);
-					}
-					else if(columnName == "password")
-					{
-						password = columnValue;
-						System.out.println("password " + password);
-					}
-					if(count == 2)
-					{
-						serverData.userBase.put(username, password);
-						count = 0;
-					}
+					String columnName = rsmd.getColumnName(i);
+					System.out.println(columnValue + " " + columnName);
 				}
-			}
-			for(String key : serverData.userBase.keySet())
-			{
-				System.out.println(key);
-				System.out.println(serverData.userBase.get(key));
+				System.out.println("");
 			}
 		}
 		catch(SQLException e)
@@ -192,4 +170,58 @@ public class listen implements Runnable
 			System.out.println("not found class");
 		}
 	}
+	// void query()
+	// {
+	// 	try
+	// 	{
+	// 		Class.forName("com.mysql.jdbc.Driver");
+	// 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
+	// 		Statement statement = conn.createStatement();
+	// 		String query = "SELECT * FROM Accounts";
+
+	// 		ResultSet rs = statement.executeQuery(query);
+	// 		ResultSetMetaData rsmd = rs.getMetaData();
+	// 		int columnsNumber = rsmd.getColumnCount();
+	// 		int count = 0;
+	// 		String username = "";
+	// 		String password = "";
+	// 		while(rs.next())
+	// 		{
+	// 			for(int i = 1; i <= columnsNumber; i++)
+	// 			{
+	// 				String columnName = rsmd.getColumnName(i);
+	// 				String columnValue = rs.getString(i);
+	// 				count++;
+	// 				if(columnName == "name")
+	// 				{
+	// 					username = columnValue;
+	// 					System.out.println("username " + username);
+	// 				}
+	// 				else if(columnName == "password")
+	// 				{
+	// 					password = columnValue;
+	// 					System.out.println("password " + password);
+	// 				}
+	// 				if(count == 2)
+	// 				{
+	// 					serverData.userBase.put(username, password);
+	// 					count = 0;
+	// 				}
+	// 			}
+	// 		}
+	// 		for(String key : serverData.userBase.keySet())
+	// 		{
+	// 			System.out.println(key);
+	// 			System.out.println(serverData.userBase.get(key));
+	// 		}
+	// 	}
+	// 	catch(SQLException e)
+	// 	{
+	// 		System.out.println("no connection");
+	// 	}
+	// 	catch(ClassNotFoundException e)
+	// 	{
+	// 		System.out.println("not found class");
+	// 	}
+	// }
 }
