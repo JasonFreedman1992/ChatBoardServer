@@ -99,6 +99,9 @@ public class listen implements Runnable
 		StringBuilder sb = new StringBuilder();
 		buffer.clear();
 		int read = 0;
+		String commandtag = "/1z=";
+		String command = "";
+		String msg;
 		while((read = ch.read(buffer)) > 0)
 		{
 			buffer.flip();
@@ -107,7 +110,6 @@ public class listen implements Runnable
 			sb.append(new String(bytes));
 			buffer.clear();
 		}
-		String msg;
 		if(read < 0)
 		{
 			msg = key.attachment() + " left the chat. \n";
@@ -115,9 +117,17 @@ public class listen implements Runnable
 		}
 		else
 		{
+			if(sb.toString().startsWith(commandtag))
+			{
+				String temp = sb.toString().substring(3);
+				System.out.println(temp);
+			}
+			else if(!sb.toString().startsWith(commandtag))
+			{
+				
+			}
 			msg = key.attachment() + ": " + sb.toString();
 		}
-
 		System.out.println(msg);
 		broadcast(msg);
 	}
