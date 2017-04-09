@@ -150,15 +150,35 @@ public class listen implements Runnable
 			ResultSet rs = statement.executeQuery(query);
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columnsNumber = rsmd.getColumnCount();
+			int count = 0;
+			String username = "";
+			String password = "";
 			while(rs.next())
 			{
 				for(int i = 1; i <= columnsNumber; i++)
 				{
 					String columnName = rsmd.getColumnName(i);
 					String columnValue = rs.getString(i);
-					//System.out.println(columnValue + " " + columnName);
+					count++;
+					if(columnName == "name")
+					{
+						username = columnValue;
+					}
+					else if(columnName == "password")
+					{
+						password = columnValue;
+					}
+					if(count == 2)
+					{
+						serverData.userBase.put(username, password);
+						count = 0;
+					}
 				}
-				System.out.println("");
+			}
+			for(String key : serverData.userBase.keySet())
+			{
+				System.out.println(key);
+				System.out.println(serverData.userBase.get(key));
 			}
 		}
 		catch(SQLException e)
