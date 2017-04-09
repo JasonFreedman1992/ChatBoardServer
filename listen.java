@@ -126,6 +126,7 @@ public class listen implements Runnable
 			{
 				msg = key.attachment() + ": " + sb.toString();
 				System.out.println(msg);
+				broadcast(msg);
 			}
 		}
 		//
