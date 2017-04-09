@@ -145,15 +145,18 @@ public class listen implements Runnable
 						if(compPassword.equals(password))
 						{
 							System.out.println("Password matches the Username.");
+							broadcast("Password matches the Username.");
 						}
 						else 
 						{
 							System.out.println("Password doesnt match Username.");	
+							broadcast("Password doesnt matches the Username.");
 						}
 					}
 					else
 					{
 						System.out.println("Username not found.");
+						broadcast("Username not found.");
 					}
 					broadcast(msg);
 				}
@@ -167,6 +170,7 @@ public class listen implements Runnable
 					if(serverData.userBase.containsKey(username))
 					{
 						System.out.println("Username already exists.");
+						broadcast("Username already exists.");
 					}
 					else
 					{
