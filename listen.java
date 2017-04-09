@@ -131,7 +131,8 @@ public class listen implements Runnable
 				msg = sb.toString();
 				//msg = msg.substring(msg.indexOf("=") + 1);
 				String[] split = msg.split("=");
-				System.out.println(split.length);
+				System.out.println(split[0]);
+				System.out.println(split[1]);
 				System.out.println(msg);
 				broadcast(msg);
 				// msg = key.attachment() + ": " + sb.toString();
