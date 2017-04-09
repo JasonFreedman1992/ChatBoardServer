@@ -97,7 +97,7 @@ public class listen implements Runnable
 	{
 		SocketChannel ch = (SocketChannel) key.channel();
 		StringBuilder sb = new StringBuilder();
-		buffer.clear();
+		//buffer.clear();
 		int read = 0;
 		String commandtag = "/1z=";
 		String command = "";
