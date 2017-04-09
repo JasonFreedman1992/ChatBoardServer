@@ -110,7 +110,7 @@ public class listen implements Runnable
 			sb.append(new String(bytes));
 			System.out.println("109: " + bytes.toString());
 			buffer.flip();
-			//buffer.clear();
+			buffer.clear();
 		}
 		if(read < 0)
 		{
