@@ -117,6 +117,7 @@ public class listen implements Runnable
 		}
 		else
 		{
+			System.out.println("currently parsing " + sb.toString());
 			if(sb.toString().startsWith(commandtag))
 			{
 				String type = sb.toString().substring(4);
