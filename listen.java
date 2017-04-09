@@ -27,7 +27,7 @@ public class listen implements Runnable
 	//
 	public void run()
 	{
-		query();
+		mapDatabase();
 		while(initChannellisten.isOpen())
 		{
 			try
@@ -138,7 +138,7 @@ public class listen implements Runnable
 			}
 		}
 	}
-	void query()
+	void mapDatabase()
 	{
 		try
 		{
