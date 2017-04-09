@@ -150,7 +150,7 @@ public class listen implements Runnable
 				{
 					System.out.println("username was not found in the database");
 				}
-				System.out.println(msg);
+				//System.out.println(msg);
 				broadcast(msg);
 				// msg = key.attachment() + ": " + sb.toString();
 				// System.out.println("msg = " + msg);
