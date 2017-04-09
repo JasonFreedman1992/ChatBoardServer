@@ -147,7 +147,7 @@ public class listen implements Runnable
 						else 
 						{
 							System.out.println("Password doesnt match Username.");	
-							broadcast("Password doesnt matches the Username.");
+							broadcast("Password doesnt match the Username.");
 						}
 					}
 					else
