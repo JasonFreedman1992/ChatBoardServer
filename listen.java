@@ -134,14 +134,21 @@ public class listen implements Runnable
 				String username = split[0];
 				String password = split[1];
 				String compPassword = "";
-				compPassword = serverData.userBase.get(username);
-				if(compPassword.equals(password))
+				if(serverData.userBase.containsKey(username))
 				{
-					System.out.println("username has matched with a password in the database");
+					compPassword = serverData.userBase.get(username);
+					if(compPassword.equals(password))
+					{
+						System.out.println("password matches the username in the database");
+					}
+					else 
+					{
+						System.out.println("password did not match with the username in the database");	
+					}
 				}
 				else
 				{
-					System.out.println("username did not match with a password in the database");
+					System.out.println("username was not found in the database");
 				}
 				System.out.println(msg);
 				broadcast(msg);
