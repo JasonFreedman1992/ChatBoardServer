@@ -93,9 +93,10 @@ public class listen implements Runnable
 	//
 	// handle reading data into eco system
 	//
+	String type = "";
 	void handleRead(SelectionKey key) throws IOException
 	{
-		String type = "";
+		
 		SocketChannel ch = (SocketChannel) key.channel();
 		buffer.clear();
 		int read = 0;
