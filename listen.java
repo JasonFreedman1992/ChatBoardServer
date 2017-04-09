@@ -126,7 +126,6 @@ public class listen implements Runnable
 	void broadcast(String msg) throws IOException
 	{
 		ByteBuffer msgBuffer = ByteBuffer.wrap(msg.getBytes());
-		System.out.println("Message wrapped: " + msg);
 		for(SelectionKey key : selector.keys())
 		{
 			if(key.isValid() && key.channel() instanceof SocketChannel)
