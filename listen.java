@@ -125,7 +125,7 @@ public class listen implements Runnable
 			else if(!sb.toString().startsWith(commandtag))
 			{
 				msg = key.attachment() + ": " + sb.toString();
-				System.out.println(msg);
+				System.out.println("msg = " + msg);
 				broadcast(msg);
 			}
 		}
