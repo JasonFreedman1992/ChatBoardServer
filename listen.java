@@ -180,9 +180,9 @@ public class listen implements Runnable
 					//System.out.println(key);
 					//System.out.println(serverData.userBase.get(key));
 				//}
-				System.out.println(serverData.userBase.get("caspianpuddle"));
-				System.out.println(serverData.userBase.get("jinson"));
 			}
+			System.out.println(serverData.userBase.get("caspianpuddle"));
+			System.out.println(serverData.userBase.get("jinson"));
 		}
 		catch(SQLException e)
 		{
