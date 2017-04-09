@@ -168,6 +168,7 @@ public class listen implements Runnable
 
 				}
 			}
+			System.out.println("type: " + type);
 		}
 		//
 		// broadcasting below this will result in entire message being concatenated
