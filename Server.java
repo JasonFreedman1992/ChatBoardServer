@@ -5,7 +5,8 @@ public class Server
 	public static void main(String[] args) throws IOException
 	{
 		Thread initMasterThread = new Thread();
-		
+		ServerData serverData = new ServerData();
+
 		listen initMaster = new listen();
 		initMasterThread = new Thread(initMaster);
 		initMasterThread.start();
