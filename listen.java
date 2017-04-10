@@ -135,7 +135,7 @@ public class listen implements Runnable
 				if(type.equals("login"))
 				{
 					msg = sb.toString();
-					split = msg.split("=");
+					split = msg.split("=", -1);
 					String username = split[0];
 					String password = split[1];
 					String compPassword = "";
@@ -162,7 +162,7 @@ public class listen implements Runnable
 				else if(type.equals("create"))
 				{
 					msg = sb.toString();
-					split = msg.split("=");
+					split = msg.split("=", -1);
 					String username = split[0];
 					String password = split[1];
 					if(serverData.userBase.containsKey(username))
