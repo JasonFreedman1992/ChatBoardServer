@@ -14,12 +14,9 @@ public class listen implements Runnable
 	public ServerSocketChannel initChannellisten;
 	public Selector selector = null;
 	public ByteBuffer buffer = ByteBuffer.allocate(256);
-	String[] split = new String[2];
 
 	public listen() throws IOException
 	{
-		split[0] = "";
-		split[1] = "";
 		initChannellisten = ServerSocketChannel.open();
 		initChannellisten.socket().bind(new InetSocketAddress(port));
 		initChannellisten.configureBlocking(false);
@@ -101,6 +98,9 @@ public class listen implements Runnable
 	String type = "";
 	void handleRead(SelectionKey key) throws IOException
 	{
+		String[] split = new String[2];
+		split[0] = "";
+		split[1] = "";
 		SocketChannel ch = (SocketChannel) key.channel();
 		buffer.clear();
 		int read = 0;
@@ -162,7 +162,7 @@ public class listen implements Runnable
 				else if(type.equals("create"))
 				{
 					msg = sb.toString();
-					String[] split = msg.split("=");
+					split = msg.split("=");
 					String username = split[0];
 					String password = split[1];
 					if(serverData.userBase.containsKey(username))
