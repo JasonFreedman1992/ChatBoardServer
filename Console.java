@@ -20,15 +20,14 @@ public class Console implements Runnable
 				split[0] = "";
 				split[1] = "";
 				String command = Console.nextLine();
-				System.out.println("echo : " + command);
+				//System.out.println("echo : " + command);
 				if(command.startsWith("getuser="))
 				{
-					System.out.println("made it");
 					String value;
 					split = command.split("=");
 					value = split[1];
 					//
-					System.out.println(serverData.userBase.get(value));
+					System.out.println("Password for user : " + value + " " + serverData.userBase.get(value));
 				}
 			}
 			catch(InterruptedException e)
