@@ -176,6 +176,11 @@ public class listen implements Runnable
 						addDatabase(username, password);
 					}
 				}
+				else if(type.equals("msg"))
+				{
+					msg = sb.toString();
+					System.out.println(msg);
+				}
 				else
 				{
 					System.out.println("Type of packet not recognized.");
