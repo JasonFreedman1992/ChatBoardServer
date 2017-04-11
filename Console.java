@@ -23,6 +23,7 @@ public class Console implements Runnable
 				System.out.println("echo : " + command);
 				if(command.startsWith("getuser="))
 				{
+					System.out.println("made it");
 					String value;
 					split = command.split("=");
 					value = split[1];
