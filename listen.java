@@ -45,20 +45,18 @@ public class listen implements Runnable
 					if(key.isAcceptable())
 					{
 						handleAccept(key);
-						// will go here if detected as an acceptable entry
 					}
 					else
 					{
-						// will go here if nothing is coming in
+
 					}
 					if(key.isReadable())
 					{
 						handleRead(key);
-						// will go here if detected as a readable entry
 					}
 					else
 					{
-						//System.out.println("not readable");
+
 					}
 				}
 			}
@@ -126,7 +124,7 @@ public class listen implements Runnable
 		}
 		else
 		{
-			System.out.println("currently parsing " + sb.toString());
+			System.out.println("currently parsing " + sb.toString() + " from " + key.attachment());
 			if(sb.toString().startsWith(commandtag))
 			{
 				type = sb.toString().substring(4);
