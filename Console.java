@@ -31,7 +31,14 @@ public class Console implements Runnable
 				}
 				if(command.startsWith("getQ="))
 				{
-					System.out.println(serverData.Q.get(0));
+					if(serverData.Q.isEmpty())
+					{
+
+					}
+					else
+					{
+						System.out.println(serverData.Q.get(0));
+					}
 				}
 			}
 			catch(InterruptedException e)
