@@ -27,7 +27,8 @@ public class Console implements Runnable
 					String value;
 					split = command.split("=");
 					value = split[1];
-					serverData.userBase.get(value);
+					//
+					System.out.println(serverData.userBase.get(value));
 				}
 			}
 			catch(InterruptedException e)
