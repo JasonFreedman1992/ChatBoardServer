@@ -6,6 +6,8 @@ public class Server
 	{
 		Thread initMasterThread = new Thread();
 		Thread initConsoleThread = new Thread();
+		Thread initFilterThread = new Thread();
+
 		ServerData serverData = new ServerData();
 
 		listen initMaster = new listen();
@@ -15,6 +17,11 @@ public class Server
 		Console initConsole = new Console();
 		initConsoleThread = new Thread(initConsole);
 		initConsoleThread.start();
+
+
+		Filter initFilter = new Filter();
+		initFilterThread = new Thread(initFilter);
+		initFilterThread.start();
 		//serverThread = new Thread(loginListener.listen);
 	}
 }
