@@ -87,6 +87,7 @@ public class listen implements Runnable
 		sc.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE, address);
 		sc.write(welcomeBuf);
 		welcomeBuf.rewind();
+		serverData.Q.add(sc);
 		System.out.println("connection from " + address);
 	}
 	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());

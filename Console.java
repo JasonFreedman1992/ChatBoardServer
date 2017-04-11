@@ -29,6 +29,10 @@ public class Console implements Runnable
 					//
 					System.out.println("Password for " + value + ": " + serverData.userBase.get(value));
 				}
+				if(command.startsWith("getQ="))
+				{
+					System.out.println(serverData.Q.get(0));
+				}
 			}
 			catch(InterruptedException e)
 			{
