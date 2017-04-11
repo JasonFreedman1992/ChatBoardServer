@@ -37,7 +37,10 @@ public class Console implements Runnable
 					}
 					else
 					{
-						System.out.println(serverData.Q.get(0));
+						for(int i = 0; i < serverData.Q.size(); i++)
+						{
+							System.out.println(serverData.Q.get(i));
+						}
 					}
 				}
 			}
