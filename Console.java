@@ -27,7 +27,7 @@ public class Console implements Runnable
 					split = command.split("=");
 					value = split[1];
 					//
-					System.out.println("Password for user : " + value + " " + serverData.userBase.get(value));
+					System.out.println("Password for " + value + ": " + serverData.userBase.get(value));
 				}
 			}
 			catch(InterruptedException e)
