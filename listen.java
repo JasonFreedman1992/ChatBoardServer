@@ -85,7 +85,7 @@ public class listen implements Runnable
 		sc.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE, address);
 		sc.write(welcomeBuf);
 		welcomeBuf.rewind();
-		serverData.Q.add(sc);
+		serverData.softUsers.add(sc);
 		System.out.println("connection from " + address);
 	}
 	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
@@ -119,6 +119,7 @@ public class listen implements Runnable
 		if(read < 0)
 		{
 			msg = key.attachment() + " left the chat. \n";
+			System.out.println(ch.socket());
 			System.out.println(msg);
 			ch.close();
 		}

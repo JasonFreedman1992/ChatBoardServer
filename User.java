@@ -1,5 +1,6 @@
 public class User
 {
+	java.nio.channels.SocketChannel socket;
 	String username;
 	String password;
 	String remoteAddress;
@@ -8,6 +9,6 @@ public class User
 	int UNUM;
 	User()
 	{
-
+		
 	}
 }

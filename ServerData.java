@@ -4,6 +4,10 @@ import java.util.HashMap;
 
 public class ServerData
 {
-	public static LinkedList<SocketChannel> Q = new LinkedList<SocketChannel>();
+	//
+	// users only connected by ip and not user/password in softUsers
+	//
+	public static LinkedList<SocketChannel> softUsers = new LinkedList<SocketChannel>();
 	public static HashMap<String, String> userBase = new HashMap<String, String>();
+	public static LinkedList<User> onlineUsers = new LinkedList<User>();
 }

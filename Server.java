@@ -19,9 +19,10 @@ public class Server
 		initConsoleThread.start();
 
 
-		Filter initFilter = new Filter();
-		initFilterThread = new Thread(initFilter);
-		initFilterThread.start();
+		//Filter initFilter = new Filter();
+		//initFilterThread = new Thread(initFilter);
+		//initFilterThread.start();
+		
 		//serverThread = new Thread(loginListener.listen);
 	}
 }
