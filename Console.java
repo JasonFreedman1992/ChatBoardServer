@@ -31,15 +31,15 @@ public class Console implements Runnable
 				}
 				if(command.startsWith("getQ="))
 				{
-					if(serverData.Q.isEmpty())
+					if(serverData.softUsers.isEmpty())
 					{
 
 					}
 					else
 					{
-						for(int i = 0; i < serverData.Q.size(); i++)
+						for(int i = 0; i < serverData.softUsers.size(); i++)
 						{
-							System.out.println(serverData.Q.get(i));
+							System.out.println(serverData.softUsers.get(i));
 						}
 					}
 				}
