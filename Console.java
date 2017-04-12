@@ -63,7 +63,9 @@ public class Console implements Runnable
 					String value;
 					String[] value1;
 					value = command.substring(4);
-					value1 = value.split("/");
+					value1 = value.split("/", -1);
+					value1[0] = "";
+					value1[1] = "";
 					serverData.msg = value1[0];
 					serverData.address = value1[1];
 					serverData.msgSent = true;
