@@ -84,6 +84,20 @@ public class Console implements Runnable
 						}
 					}
 				}
+				else if(command.startsWith("get=in"))
+				{
+					if(serverData.instances.isEmpty())
+					{
+
+					}
+					else
+					{
+						for(int i = 0; i < serverData.instances.size(); i++)
+						{
+							System.out.println("instance ID: " + serverData.instances.get(i).ID);
+						}
+					}
+				}
 			}
 			catch(InterruptedException e)
 			{

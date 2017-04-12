@@ -14,7 +14,6 @@ public class listen implements Runnable
 	public ServerSocketChannel initChannellisten;
 	public Selector selector = null;
 	public ByteBuffer buffer = ByteBuffer.allocate(256);
-	public Instance instance = new Instance();
 	String type = "";
 	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
 
@@ -123,6 +122,7 @@ public class listen implements Runnable
 	//
 	void handleRead(SelectionKey key) throws IOException
 	{
+		// setup for a split for parsing data
 		String[] split = new String[2];
 		split[0] = "";
 		split[1] = "";
@@ -144,8 +144,19 @@ public class listen implements Runnable
 		if(read < 0) // if user disconnects
 		{
 			msg = key.attachment() + " left the server.\n";
+			// remove from softUsers and getsocket list
 			serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
 			serverData.getSocket.remove(key.attachment().toString());
+			for(int i = 0; i < serverData.instances.size(); i++)
+			{
+				for(int j = 0; j < serverData.instances.get(i).top; j++)
+				{
+					if(serverData.instances.get(i).users.get(j).address.equals(key.attachment().toString()))
+					{
+						serverData.instances.get(i).users.remove(j);
+					}
+				}
+			}
 			broadcast(msg);
 			ch.close();
 		}
@@ -171,16 +182,34 @@ public class listen implements Runnable
 						if(compPassword.equals(password))
 						{
 							msg("Password matches the Username.", ch);
-							serverData.onlineUsers.add(new User(key.attachment().toString(), username, ch));
-							if(serverData.onlineUsers.size() == 1)
+							User user = new User(key.attachment().toString(), username, ch);
+							serverData.onlineUsers.add(user);
+							serverData.getSocket.put(key.attachment().toString(), ch);
+							if(serverData.instances.isEmpty())
 							{
-								instance.user1 = serverData.onlineUsers.get(0);
+								serverData.instances.add(new Instance(0));
+								serverData.instanceTop++;
+							}
+							else if(!serverData.instances.isEmpty() && (serverData.getSocket.size() % 2 == 0))
+							{
+								serverData.instances.add(new Instance(serverData.instanceTop));
+								serverData.instanceTop++;
 							}
 							else
 							{
-								instance.user2 = serverData.onlineUsers.get(1);
+
 							}
-							serverData.getSocket.put(key.attachment().toString(), ch);
+							serverData.instances.get(0).addUser(user);
+							//serverData.instances.get(0).add(user);
+
+							// if(serverData.onlineUsers.size() == 1)
+							// {
+							// 	//instance.user1 = serverData.onlineUsers.get(0);
+							// }
+							// else
+							// {
+							// 	//instance.user2 = serverData.onlineUsers.get(1);
+							// }
 						}
 						else 
 						{
@@ -211,16 +240,31 @@ public class listen implements Runnable
 				else if(type.equals("msg"))
 				{
 					msg = sb.toString();
-					if(key.attachment().toString().equals(instance.user1.address))
+
+					for(int i = 0; i < serverData.instances.size(); i++)
 					{
-						ch = instance.user2.socket;
-						msg(msg, ch);
+						for(int j = 0; j < serverData.instances.get(i).users.size(); j++)
+						{
+							if(key.attachment().toString().equals(serverData.instances.get(i).users.get(j)))
+							{
+								for(int x = 0; x < serverData.instances.get(i).users.size(); x++)
+								{
+									msg(msg, serverData.instances.get(i).users.get(x).socket);
+								}
+							}
+						}
 					}
-					else if(key.attachment().toString().equals(instance.user2.address))
-					{
-						ch = instance.user1.socket;
-						msg(msg, ch);
-					}
+					//if(key.attachment().toString().equals(instance.users.))
+					// if(key.attachment().toString().equals(instance.user1.address))
+					// {
+					// 	ch = instance.user2.socket;
+					// 	msg(msg, ch);
+					// }
+					// else if(key.attachment().toString().equals(instance.user2.address))
+					// {
+					// 	ch = instance.user1.socket;
+					// 	msg(msg, ch);
+					// }
 				}
 				else
 				{
@@ -331,6 +375,5 @@ public class listen implements Runnable
 		{
 			System.out.println("not found class");
 		}
-
 	}
 }
