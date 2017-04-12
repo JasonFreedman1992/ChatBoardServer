@@ -116,14 +116,15 @@ public class listen implements Runnable
 			System.out.println(sb);
 			sb.append(new String(bytes));
 		}
-		if(read < 0)
+		if(read < 0) // if user disconnects
 		{
 			msg = key.attachment() + " left the chat. \n";
 			System.out.println(ch.socket().getRemoteSocketAddress());
+			System.out.println("index of user in softusers" + serverData.softUsers.indexOf(ch));
 			System.out.println(msg);
 			ch.close();
 		}
-		else
+		else // if msg received from ecosystem
 		{
 			System.out.println("currently parsing " + sb.toString() + " from " + key.attachment());
 			if(sb.toString().startsWith(commandtag))
