@@ -95,6 +95,10 @@ public class Console implements Runnable
 						for(int i = 0; i < serverData.instances.size(); i++)
 						{
 							System.out.println("instance ID: " + serverData.instances.get(i).ID);
+							for(int j = 0; j < serverData.instances.get(i).users.size(); j++)
+							{
+								System.out.println("instance ID: " + serverData.instances.get(i).ID + " " + serverData.instances.get(i).users.get(j).username);
+							}
 						}
 					}
 				}
