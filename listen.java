@@ -210,11 +210,18 @@ public class listen implements Runnable
 		}
 	}
 
-	void firstSingle(String msg) throws IOException
+	void firstSingle(String p_msg) throws IOException
 	{
+		String msg = p_msg;
 		msg = msg + "0special";
 		ByteBuffer msgBuffer = ByteBuffer.wrap(msg.getBytes());
 		SocketChannel sch = serverData.softUsers.get(0);
+		sch.write(msgBuffer);
+		msgBuffer.rewind();
+
+		msg = p_msg + "1special";
+		msgBuffer = ByteBuffer.wrap(msg.getBytes());
+		sch = serverData.softUsers.get(1);
 		sch.write(msgBuffer);
 		msgBuffer.rewind();
 
