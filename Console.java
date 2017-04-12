@@ -68,6 +68,22 @@ public class Console implements Runnable
 					serverData.address = value1[1];
 					serverData.msgSent = true;
 				}
+				else if(command.startsWith("get=ou"))
+				{
+					if(serverData.onlineUsers.isEmpty())
+					{
+
+					}
+					else
+					{
+						for(int i = 0; i < serverData.onlineUsers.size(); i++)
+						{
+							System.out.println(serverData.onlineUsers.get(i).username);
+							System.out.println(serverData.onlineUsers.get(i).address);
+							System.out.println(serverData.onlineUsers.get(i).socket);
+						}
+					}
+				}
 			}
 			catch(InterruptedException e)
 			{
