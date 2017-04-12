@@ -180,9 +180,20 @@ public class listen implements Runnable
 				else if(type.equals("msg"))
 				{
 					msg = sb.toString();
+					if(key.attachment() == serverData.softUsers.get(0).socket().getRemoteSocketAddress())
+					{
+						System.out.println("if msg");
+						System.out.println(key.attachment());
+					}
+					else
+					{
+						System.out.println("else msg");
+						System.out.println(key.attachment());
+					}
+					//msg = sb.toString();
 					//broadcast(msg);
-					firstSingle(msg);
-					System.out.println(msg);
+					//firstSingle(msg);
+					//System.out.println(msg);
 				}
 				else
 				{
