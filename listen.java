@@ -113,7 +113,7 @@ public class listen implements Runnable
 		sc.write(welcomeBuf);
 		welcomeBuf.rewind();
 		serverData.softUsers.add(sc);
-		System.out.println("connection from " + address);
+		System.out.println("Connection from " + address);
 	}
 
 	//
@@ -155,7 +155,6 @@ public class listen implements Runnable
 			if(sb.toString().startsWith(commandtag))
 			{
 				type = sb.toString().substring(4);
-				System.out.println(type);
 			}
 			else if(!sb.toString().startsWith(commandtag))
 			{
@@ -172,7 +171,6 @@ public class listen implements Runnable
 						if(compPassword.equals(password))
 						{
 							msg("Password matches the Username.", ch);
-							System.out.println(key.attachment().toString());
 							serverData.onlineUsers.add(new User(key.attachment().toString(), username, ch));
 							if(serverData.onlineUsers.size() == 1)
 							{
@@ -232,7 +230,6 @@ public class listen implements Runnable
 					System.out.println("Type of packet not recognized.");
 				}
 			}
-			System.out.println("type: " + type);
 		}
 	}
 	
