@@ -9,6 +9,7 @@ public class ServerData
 	//
 	public static boolean msgSent = false;
 	public static String msg = "";
+	public static String address = "";
 	public static LinkedList<SocketChannel> softUsers = new LinkedList<SocketChannel>();
 	public static HashMap<String, String> userBase = new HashMap<String, String>();
 	public static HashMap<String, SocketChannel> onlineUsers = new HashMap<String, SocketChannel>();

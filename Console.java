@@ -46,8 +46,13 @@ public class Console implements Runnable
 				else if(command.startsWith("send"))
 				{
 					String value;
+					String[] value1;
 					value = command.substring(4);
-					System.out.println(value);
+					value1 = value.split("/");
+					serverData.msg = value1[0];
+					serverData.address = value1[1];
+					System.out.println(value1[0]);
+					System.out.println(value1[1]);
 				}
 			}
 			catch(InterruptedException e)
