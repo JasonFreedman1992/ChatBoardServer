@@ -161,6 +161,7 @@ public class listen implements Runnable
 							msg("Password matches the Username.", ch);
 							serverData.loggedIn.add(username);
 							//serverData.onlineUsers.put(username, ch);
+							System.out.println(key.attachment());
 							serverData.getSocket.put(key.attachment().toString(), ch);
 							//broadcast("Password matches the Username.");
 						}
