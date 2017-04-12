@@ -252,7 +252,7 @@ public class listen implements Runnable
 					{
 						for(int j = 0; j < serverData.instances.get(i).users.size(); j++)
 						{
-							if(key.attachment().toString().equals(serverData.instances.get(i).users.get(j)))
+							if(key.attachment().toString().equals(serverData.instances.get(i).users.get(j).address))
 							{
 								for(int x = 0; x < serverData.instances.get(i).users.size(); x++)
 								{
