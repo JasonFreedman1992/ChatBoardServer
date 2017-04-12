@@ -184,11 +184,13 @@ public class listen implements Runnable
 					{
 						System.out.println("if msg");
 						System.out.println(key.attachment());
+						System.out.println(serverData.softUsers.get(0).socket().getRemoteSocketAddress());
 					}
 					else
 					{
 						System.out.println("else msg");
 						System.out.println(key.attachment());
+						System.out.println(serverData.softUsers.get(0).socket().getRemoteSocketAddress());
 					}
 					//msg = sb.toString();
 					//broadcast(msg);
