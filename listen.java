@@ -146,7 +146,7 @@ public class listen implements Runnable
 						if(compPassword.equals(password))
 						{
 							System.out.println("Password matches the Username.");
-							firstSingle("Password matches the Username.", ch);
+							msg("Password matches the Username.", ch);
 							//broadcast("Password matches the Username.");
 						}
 						else 
@@ -187,7 +187,7 @@ public class listen implements Runnable
 						System.out.println(key.attachment());
 						System.out.println(serverData.softUsers.get(0).socket().getRemoteSocketAddress());
 						ch = serverData.softUsers.get(1);
-						firstSingle(msg, ch);
+						msg(msg, ch);
 					}
 					else
 					{
@@ -195,7 +195,7 @@ public class listen implements Runnable
 						System.out.println(key.attachment());
 						System.out.println(serverData.softUsers.get(0).socket().getRemoteSocketAddress());
 						ch = serverData.softUsers.get(0);
-						firstSingle(msg, ch);
+						msg(msg, ch);
 					}
 					//msg = sb.toString();
 					//broadcast(msg);
@@ -228,7 +228,7 @@ public class listen implements Runnable
 		}
 	}
 
-	void firstSingle(String p_msg, SocketChannel p_ch) throws IOException
+	void msg(String p_msg, SocketChannel p_ch) throws IOException
 	{
 		String msg = p_msg;
 		ByteBuffer msgBuffer = ByteBuffer.wrap(msg.getBytes());
