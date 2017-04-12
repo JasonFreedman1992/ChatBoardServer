@@ -94,7 +94,7 @@ public class listen implements Runnable
 		{
 			SocketChannel socket = serverData.getSocket.get(serverData.address);
 			ByteBuffer msgBuffer = ByteBuffer.wrap(serverData.msg.getBytes());
-			System.out.println(serverData.msg);
+			//System.out.println(serverData.msg);
 			try
 			{
 				socket.write(msgBuffer);
@@ -247,7 +247,7 @@ public class listen implements Runnable
 				else if(type.equals("msg"))
 				{
 					msg = sb.toString();
-
+					System.out.println(msg);
 					for(int i = 0; i < serverData.instances.size(); i++)
 					{
 						for(int j = 0; j < serverData.instances.get(i).users.size(); j++)
