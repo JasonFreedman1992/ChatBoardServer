@@ -58,17 +58,21 @@ public class listen implements Runnable
 					{
 
 					}
-					if(key.isWritable())
+					try
 					{
-						try
+						if(key.isWritable())
 						{
 							handleWrite();
 						}
-						catch(CancelledKeyException e)
+						else
 						{
-							e.printStackTrace();
+
 						}
 					}
+					catch(CancelledKeyException e)
+					{
+						e.printStackTrace();
+					}					
 
 				}
 			}
