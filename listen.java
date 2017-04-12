@@ -219,21 +219,26 @@ public class listen implements Runnable
 				else if(type.equals("msg"))
 				{
 					msg = sb.toString();
-					if(key.attachment().toString().equals(serverData.softUsers.get(0).socket().getRemoteSocketAddress().toString()))
+					if(key.attachment().toString().equals(instance.user1.address))
 					{
-						System.out.println("if msg");
-						System.out.println(key.attachment());
-						System.out.println(serverData.softUsers.get(0).socket().getRemoteSocketAddress());
-						ch = serverData.softUsers.get(1);
+						ch = instance.user2.socket;
 						msg(msg, ch);
+						// System.out.println("if msg");
+						// System.out.println(key.attachment());
+						// System.out.println(serverData.softUsers.get(0).socket().getRemoteSocketAddress());
+						// ch = serverData.softUsers.get(1);
+						// msg(msg, ch);
 					}
-					else
+					else if(key.attachment().toString().equals(instance.user2.address))
 					{
-						System.out.println("else msg");
-						System.out.println(key.attachment());
-						System.out.println(serverData.softUsers.get(0).socket().getRemoteSocketAddress());
-						ch = serverData.softUsers.get(0);
+						ch = instance.user1.socket;
 						msg(msg, ch);
+
+						// System.out.println("else msg");
+						// System.out.println(key.attachment());
+						// System.out.println(serverData.softUsers.get(0).socket().getRemoteSocketAddress());
+						// ch = serverData.softUsers.get(0);
+						// msg(msg, ch);
 					}
 					//msg = sb.toString();
 					//broadcast(msg);
