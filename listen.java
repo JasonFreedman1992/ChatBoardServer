@@ -14,6 +14,7 @@ public class listen implements Runnable
 	public ServerSocketChannel initChannellisten;
 	public Selector selector = null;
 	public ByteBuffer buffer = ByteBuffer.allocate(256);
+	public Instance instance = new Instance();
 
 	public listen() throws IOException
 	{
@@ -144,6 +145,7 @@ public class listen implements Runnable
 		{
 			msg = key.attachment() + " left the chat. \n";
 			serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
+			serverData.getSocket.remove(key.attachment().toString());
 			System.out.println(msg);
 			ch.close();
 		}
@@ -171,7 +173,6 @@ public class listen implements Runnable
 						{
 							System.out.println("Password matches the Username.");
 							msg("Password matches the Username.", ch);
-							serverData.loggedIn.add(username);
 							//serverData.onlineUsers.put(username, ch);
 							System.out.println(key.attachment().toString());
 							serverData.getSocket.put(key.attachment().toString(), ch);
