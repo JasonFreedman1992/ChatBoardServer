@@ -77,6 +77,8 @@ public class listen implements Runnable
 	{
 		if(serverData.msgSent)
 		{
+			System.out.println("server data: " + serverData.address);
+			System.out.println("msg : " + serverData.msg);
 			SocketChannel socket = serverData.getSocket.get(serverData.address);
 			ByteBuffer msgBuffer = ByteBuffer.wrap(serverData.msg.getBytes());
 			System.out.println(serverData.msg);
