@@ -74,7 +74,8 @@ public class listen implements Runnable
 					}
 					catch(CancelledKeyException e)
 					{
-						e.printStackTrace();
+						//e.printStackTrace();
+						System.out.println("Cancelled Key!, key.isWritable() exception!");
 					}					
 
 				}
