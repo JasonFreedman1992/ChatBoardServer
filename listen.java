@@ -143,7 +143,7 @@ public class listen implements Runnable
 		}
 		if(read < 0) // if user disconnects
 		{
-			msg = key.attachment() + " left the chat. \n";
+			msg = key.attachment() + " left the server.\n";
 			serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
 			serverData.getSocket.remove(key.attachment().toString());
 			broadcast(msg);
