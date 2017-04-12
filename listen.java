@@ -185,12 +185,16 @@ public class listen implements Runnable
 						System.out.println("if msg");
 						System.out.println(key.attachment());
 						System.out.println(serverData.softUsers.get(0).socket().getRemoteSocketAddress());
+						ch = serverData.softUsers.get(1);
+						firstSingle(msg, ch);
 					}
 					else
 					{
 						System.out.println("else msg");
 						System.out.println(key.attachment());
 						System.out.println(serverData.softUsers.get(0).socket().getRemoteSocketAddress());
+						ch = serverData.softUsers.get(0);
+						firstSingle(msg, ch);
 					}
 					//msg = sb.toString();
 					//broadcast(msg);
@@ -223,21 +227,13 @@ public class listen implements Runnable
 		}
 	}
 
-	void firstSingle(String p_msg) throws IOException
+	void firstSingle(String p_msg, SocketChannel p_ch) throws IOException
 	{
 		String msg = p_msg;
-		msg = msg + "0special";
 		ByteBuffer msgBuffer = ByteBuffer.wrap(msg.getBytes());
-		SocketChannel sch = serverData.softUsers.get(0);
+		SocketChannel sch = p_ch;
 		sch.write(msgBuffer);
 		msgBuffer.rewind();
-
-		msg = p_msg + "1special";
-		msgBuffer = ByteBuffer.wrap(msg.getBytes());
-		sch = serverData.softUsers.get(1);
-		sch.write(msgBuffer);
-		msgBuffer.rewind();
-
 	}
 	//
 	// initial mapping of serverData hashmap to database
