@@ -73,11 +73,15 @@ public class listen implements Runnable
 	//
 	// handle writing to ecosystem
 	//
-	void handleWrite(SelectionKey key)
+	void handleWrite(SelectionKey key) throws IOException
 	{
 		if(serverData.msgSent)
 		{
-			//SocketChannel ch =
+			SocketChannel socket = serverData.getSocket.get(serverData.address);
+			ByteBuffer msgBuffer = ByteBuffer.wrap(serverData.msg.getBytes());
+			socket.write(msgBuffer);
+			msgBuffer.rewind();
+			serverData.msgSent = false;
 		}
 	}
 
