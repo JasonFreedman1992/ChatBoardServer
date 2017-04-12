@@ -138,7 +138,6 @@ public class listen implements Runnable
 			buffer.flip();
 			byte[] bytes = new byte[buffer.limit()];
 			buffer.get(bytes);
-			System.out.println(sb);
 			sb.append(new String(bytes));
 		}
 		if(read < 0) // if user disconnects
@@ -184,13 +183,11 @@ public class listen implements Runnable
 						}
 						else 
 						{
-							System.out.println("Password doesnt match Username.");	
 							msg("Password doesnt match the Username.", ch);
 						}
 					}
 					else
 					{
-						System.out.println("Username not found.");
 						broadcast("Username not found.");
 					}
 				}
@@ -202,7 +199,6 @@ public class listen implements Runnable
 					String password = split[1];
 					if(serverData.userBase.containsKey(username))
 					{
-						System.out.println("Username already exists.");
 						broadcast("Username already exists.");
 					}
 					else
