@@ -95,7 +95,14 @@ public class listen implements Runnable
 			SocketChannel socket = serverData.getSocket.get(serverData.address);
 			ByteBuffer msgBuffer = ByteBuffer.wrap(serverData.msg.getBytes());
 			System.out.println(serverData.msg);
-			socket.write(msgBuffer);
+			try
+			{
+				socket.write(msgBuffer);
+			}
+			catch(NullPointerException e)
+			{
+
+			}
 			msgBuffer.rewind();
 			serverData.msgSent = false;
 		}
