@@ -180,6 +180,7 @@ public class listen implements Runnable
 				else if(type.equals("msg"))
 				{
 					msg = sb.toString();
+					broadcast(msg);
 					System.out.println(msg);
 				}
 				else
