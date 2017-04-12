@@ -15,6 +15,8 @@ public class listen implements Runnable
 	public Selector selector = null;
 	public ByteBuffer buffer = ByteBuffer.allocate(256);
 	public Instance instance = new Instance();
+	String type = "";
+	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
 
 	public listen() throws IOException
 	{
@@ -113,13 +115,11 @@ public class listen implements Runnable
 		serverData.softUsers.add(sc);
 		System.out.println("connection from " + address);
 	}
-	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
 
 	//
 	// handle reading data into eco system
 	// key.attachment() = ip + port of external user.
 	//
-	String type = "";
 	void handleRead(SelectionKey key) throws IOException
 	{
 		String[] split = new String[2];
@@ -146,7 +146,7 @@ public class listen implements Runnable
 			msg = key.attachment() + " left the chat. \n";
 			serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
 			serverData.getSocket.remove(key.attachment().toString());
-			System.out.println(msg);
+			broadcast(msg);
 			ch.close();
 		}
 		else // if msg received from ecosystem
@@ -171,9 +171,7 @@ public class listen implements Runnable
 						compPassword = serverData.userBase.get(username);
 						if(compPassword.equals(password))
 						{
-							System.out.println("Password matches the Username.");
 							msg("Password matches the Username.", ch);
-							//serverData.onlineUsers.put(username, ch);
 							System.out.println(key.attachment().toString());
 							serverData.onlineUsers.add(new User(key.attachment().toString(), username, ch));
 							if(serverData.onlineUsers.size() == 1)
@@ -185,7 +183,6 @@ public class listen implements Runnable
 								instance.user2 = serverData.onlineUsers.get(1);
 							}
 							serverData.getSocket.put(key.attachment().toString(), ch);
-							//broadcast("Password matches the Username.");
 						}
 						else 
 						{
@@ -223,27 +220,12 @@ public class listen implements Runnable
 					{
 						ch = instance.user2.socket;
 						msg(msg, ch);
-						// System.out.println("if msg");
-						// System.out.println(key.attachment());
-						// System.out.println(serverData.softUsers.get(0).socket().getRemoteSocketAddress());
-						// ch = serverData.softUsers.get(1);
-						// msg(msg, ch);
 					}
 					else if(key.attachment().toString().equals(instance.user2.address))
 					{
 						ch = instance.user1.socket;
 						msg(msg, ch);
-
-						// System.out.println("else msg");
-						// System.out.println(key.attachment());
-						// System.out.println(serverData.softUsers.get(0).socket().getRemoteSocketAddress());
-						// ch = serverData.softUsers.get(0);
-						// msg(msg, ch);
 					}
-					//msg = sb.toString();
-					//broadcast(msg);
-					//firstSingle(msg);
-					//System.out.println(msg);
 				}
 				else
 				{
@@ -259,6 +241,7 @@ public class listen implements Runnable
 	//
 	void broadcast(String msg) throws IOException
 	{
+		System.out.println(msg);
 		ByteBuffer msgBuffer = ByteBuffer.wrap(msg.getBytes());
 		for(SelectionKey key : selector.keys())
 		{
