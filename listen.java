@@ -60,8 +60,16 @@ public class listen implements Runnable
 					}
 					if(key.isWritable())
 					{
-						handleWrite(key);
+						try
+						{
+							handleWrite();
+						}
+						catch(CancelledKeyException e)
+						{
+							e.printStackTrace();
+						}
 					}
+
 				}
 			}
 			catch(IOException e)
@@ -73,7 +81,7 @@ public class listen implements Runnable
 	//
 	// handle writing to ecosystem
 	//
-	void handleWrite(SelectionKey key) throws IOException
+	void handleWrite() throws IOException
 	{
 		if(serverData.msgSent)
 		{
