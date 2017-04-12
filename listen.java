@@ -176,13 +176,21 @@ public class listen implements Runnable
 							//serverData.onlineUsers.put(username, ch);
 							System.out.println(key.attachment().toString());
 							serverData.onlineUsers.add(new User(key.attachment().toString(), username, ch));
+							if(serverData.onlineUsers.size() == 1)
+							{
+								instance.user1 = serverData.onlineUsers.get(0);
+							}
+							else
+							{
+								instance.user2 = serverData.onlineUsers.get(1);
+							}
 							serverData.getSocket.put(key.attachment().toString(), ch);
 							//broadcast("Password matches the Username.");
 						}
 						else 
 						{
 							System.out.println("Password doesnt match Username.");	
-							broadcast("Password doesnt match the Username.");
+							msg("Password doesnt match the Username.", ch);
 						}
 					}
 					else
