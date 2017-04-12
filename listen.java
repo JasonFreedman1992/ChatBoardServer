@@ -180,7 +180,8 @@ public class listen implements Runnable
 				else if(type.equals("msg"))
 				{
 					msg = sb.toString();
-					broadcast(msg);
+					//broadcast(msg);
+					firstSingle(msg);
 					System.out.println(msg);
 				}
 				else
@@ -207,6 +208,16 @@ public class listen implements Runnable
 				msgBuffer.rewind();
 			}
 		}
+	}
+
+	void firstSingle(String msg) throws IOException
+	{
+		msg = msg + "0special";
+		ByteBuffer msgBuffer = ByteBuffer.wrap(msg.getBytes());
+		SocketChannel sch = serverData.softUsers.get(0);
+		sch.write(msgBuffer);
+		msgBuffer.rewind();
+
 	}
 	//
 	// initial mapping of serverData hashmap to database
