@@ -146,7 +146,8 @@ public class listen implements Runnable
 						if(compPassword.equals(password))
 						{
 							System.out.println("Password matches the Username.");
-							broadcast("Password matches the Username.");
+							firstSingle("Password matches the Username.", ch);
+							//broadcast("Password matches the Username.");
 						}
 						else 
 						{
