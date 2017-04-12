@@ -29,7 +29,7 @@ public class Console implements Runnable
 					//
 					System.out.println("Password for " + value + ": " + serverData.userBase.get(value));
 				}
-				if(command.startsWith("getQ="))
+				else if(command.startsWith("get="))
 				{
 					if(serverData.softUsers.isEmpty())
 					{
@@ -42,6 +42,12 @@ public class Console implements Runnable
 							System.out.println(serverData.softUsers.get(i));
 						}
 					}
+				}
+				else if(command.startsWith("send"))
+				{
+					String value;
+					value = command.substring(4);
+					System.out.println(value);
 				}
 			}
 			catch(InterruptedException e)

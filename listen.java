@@ -58,6 +58,10 @@ public class listen implements Runnable
 					{
 
 					}
+					if(key.isWritable())
+					{
+						handleWrite(key);
+					}
 				}
 			}
 			catch(IOException e)
@@ -71,7 +75,10 @@ public class listen implements Runnable
 	//
 	void handleWrite(SelectionKey key)
 	{
-
+		if(serverData.msgSent)
+		{
+			
+		}
 	}
 
 	//
@@ -147,6 +154,8 @@ public class listen implements Runnable
 						{
 							System.out.println("Password matches the Username.");
 							msg("Password matches the Username.", ch);
+							serverData.loggedIn.add(username);
+							serverData.onlineUsers.put(username, ch);
 							//broadcast("Password matches the Username.");
 						}
 						else 
@@ -228,7 +237,7 @@ public class listen implements Runnable
 		}
 	}
 
-	void msg(String p_msg, SocketChannel p_ch) throws IOException
+	public void msg(String p_msg, SocketChannel p_ch) throws IOException
 	{
 		String msg = p_msg;
 		ByteBuffer msgBuffer = ByteBuffer.wrap(msg.getBytes());
