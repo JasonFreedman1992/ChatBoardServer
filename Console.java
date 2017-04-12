@@ -29,7 +29,7 @@ public class Console implements Runnable
 					//
 					System.out.println("Password for " + value + ": " + serverData.userBase.get(value));
 				}
-				else if(command.startsWith("get="))
+				else if(command.startsWith("get=su"))
 				{
 					if(serverData.softUsers.isEmpty())
 					{
@@ -43,6 +43,21 @@ public class Console implements Runnable
 						}
 					}
 				}
+				else if(command.startsWith("get=gs"))
+				{
+					if(serverData.getSocket.isEmpty())
+					{
+
+					}
+					else
+					{
+						for(String key : serverData.getSocket.keySet())
+						{
+							System.out.println(key);
+							System.out.println(serverData.getSocket.get(key).toString());
+						}
+					}
+				}
 				else if(command.startsWith("send"))
 				{
 					String value;
@@ -51,8 +66,7 @@ public class Console implements Runnable
 					value1 = value.split("/");
 					serverData.msg = value1[0];
 					serverData.address = value1[1];
-					System.out.println(value1[0]);
-					System.out.println(value1[1]);
+					serverData.msgSent = true;
 				}
 			}
 			catch(InterruptedException e)

@@ -77,7 +77,7 @@ public class listen implements Runnable
 	{
 		if(serverData.msgSent)
 		{
-			
+			//SocketChannel ch =
 		}
 	}
 
@@ -155,7 +155,8 @@ public class listen implements Runnable
 							System.out.println("Password matches the Username.");
 							msg("Password matches the Username.", ch);
 							serverData.loggedIn.add(username);
-							serverData.onlineUsers.put(username, ch);
+							//serverData.onlineUsers.put(username, ch);
+							serverData.getSocket.put(key.attachment().toString(), ch);
 							//broadcast("Password matches the Username.");
 						}
 						else 
