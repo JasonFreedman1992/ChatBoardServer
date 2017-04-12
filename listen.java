@@ -197,6 +197,7 @@ public class listen implements Runnable
 	//
 	void broadcast(String msg) throws IOException
 	{
+		msg = "Server: " + msg;
 		ByteBuffer msgBuffer = ByteBuffer.wrap(msg.getBytes());
 		for(SelectionKey key : selector.keys())
 		{
