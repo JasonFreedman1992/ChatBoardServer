@@ -17,12 +17,5 @@ public class Server
 		Console initConsole = new Console();
 		initConsoleThread = new Thread(initConsole);
 		initConsoleThread.start();
-
-
-		//Filter initFilter = new Filter();
-		//initFilterThread = new Thread(initFilter);
-		//initFilterThread.start();
-		
-		//serverThread = new Thread(loginListener.listen);
 	}
 }

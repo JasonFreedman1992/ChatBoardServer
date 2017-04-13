@@ -102,7 +102,6 @@ public class Console implements Runnable
 						}
 					}
 				}
-
 				else if(command.startsWith("get=if"))
 				{
 					if(serverData.idToFriends.isEmpty())
@@ -118,6 +117,7 @@ public class Console implements Runnable
 						}
 					}
 				}
+				else if(command.startsWith("add="))
 			}
 			catch(InterruptedException e)
 			{

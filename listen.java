@@ -151,7 +151,6 @@ public class listen implements Runnable
 		if(read < 0) // if user disconnects
 		{
 			msg = key.attachment() + " left the server.\n";
-			// remove from softUsers and getsocket list
 			serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
 			serverData.getSocket.remove(key.attachment().toString());
 			try
@@ -385,13 +384,11 @@ public class listen implements Runnable
 					String columnName = rsmd.getColumnName(i);
 					if(columnName.equals("idOwner"))
 					{
-						System.out.println("equals idowner");
 						idOwned = columnValue;
 						list.add(new FriendList(idOwned));
 					}
 					else if(!columnName.startsWith("idOwner"))
 					{
-						System.out.println("doesnt start with idowner");
 						if(!columnValue.equals("x"))
 						{
 							idFriend = columnValue;
