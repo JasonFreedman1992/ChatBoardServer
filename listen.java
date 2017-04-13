@@ -239,7 +239,7 @@ public class listen implements Runnable
 					{
 						serverData.userBase.put(username, password);
 						String s = Integer.toString(serverData.clientTotal+1);
-						addAccountDatabase(username, password, s);
+						addAccountDatabase(username, password);
 						serverData.clientTotal++;
 					}
 				}
@@ -417,7 +417,7 @@ public class listen implements Runnable
 	//
 	// adding new account to database with password
 	//
-	void addAccountDatabase(String p_username, String p_password, String p_idOwner)
+	void addAccountDatabase(String p_username, String p_password)
 	{
 		try
 		{
