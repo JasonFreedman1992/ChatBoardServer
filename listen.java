@@ -429,7 +429,7 @@ public class listen implements Runnable
 
 			Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 			Statement statement1 = conn1.createStatement();
-			query = "Insert INTO Friends " + "VALUES ('" + p_idOwner + "')";
+			query = "Insert INTO Friends " + "VALUES ('" + p_idOwner + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "')";
 			statement1.executeUpdate(query);
 		}
 		catch(SQLException e)
