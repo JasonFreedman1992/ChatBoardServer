@@ -238,7 +238,8 @@ public class listen implements Runnable
 					else
 					{
 						serverData.userBase.put(username, password);
-						addAccountDatabase(username, password, Integer.toString(serverData.clientTotal+1));
+						String idOwner = Integer.toString(serverData.clientTotal+1);
+						addAccountDatabase(username, password, idOwner);
 						serverData.clientTotal++;
 					}
 				}
