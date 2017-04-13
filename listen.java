@@ -366,7 +366,7 @@ public class listen implements Runnable
 
 		try
 		{
-			Class.forName("com.mysql.jdbc.Driver");
+			//Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 			Statement statement = conn.createStatement();
 			String query = "SELECT * FROM Friends";
@@ -406,10 +406,6 @@ public class listen implements Runnable
 			}
 		}
 		catch(SQLException e)
-		{
-
-		}
-		catch(ClassNotFoundException e)
 		{
 
 		}
