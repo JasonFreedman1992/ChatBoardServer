@@ -384,13 +384,13 @@ public class listen implements Runnable
 					String columnName = rsmd.getColumnName(i);
 					if(columnName.equals("idOwner"))
 					{
-						System.out.println("equals idowner");
+						//System.out.println("equals idowner");
 						idOwned = columnValue;
 						list.add(new FriendList(idOwned));
 					}
 					else if(!columnName.startsWith("idOwner"))
 					{
-						System.out.println("doesnt start with idowner");
+						//System.out.println("doesnt start with idowner");
 						if(!columnValue.equals("x"))
 						{
 							idFriend = columnValue;
@@ -428,7 +428,7 @@ public class listen implements Runnable
 
 			System.out.println("made it 429");
 			Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
-			Statement statement1 = conn.createStatement();
+			Statement statement1 = conn1.createStatement();
 			System.out.println("made it 432");
 			query = "Insert INTO Friends " + "VALUES ('" + p_idOwner + "')";
 			statement1.executeUpdate(query);
