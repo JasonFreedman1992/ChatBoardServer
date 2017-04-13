@@ -323,7 +323,7 @@ public class listen implements Runnable
 		public ArrayList<String> list = new ArrayList<String>();
 		FriendList(String p_idOwned)
 		{
-
+			idOwned = p_idOwned;
 		}
 	}
 
