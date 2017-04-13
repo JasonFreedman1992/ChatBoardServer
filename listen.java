@@ -238,7 +238,7 @@ public class listen implements Runnable
 					else
 					{
 						serverData.userBase.put(username, password);
-						String id = Integer.toString(serverData.clientTotal+1);
+						String id = Integer.toString(serverData.clientTotal);
 						addAccountDatabase(username, password, id);
 						serverData.clientTotal++;
 					}
@@ -426,6 +426,8 @@ public class listen implements Runnable
 			String query = "INSERT INTO Accounts " + "VALUES ('" + p_username + "', '" + p_password + "', '" + p_idOwner + "')"; 
 			Statement statement = conn.createStatement();
 			statement.executeUpdate(query);
+
+
 		}
 		catch(SQLException e)
 		{
