@@ -438,6 +438,7 @@ public class listen implements Runnable
 		catch(SQLException e)
 		{
 			System.out.println("no connection");
+			e.printStackTrace();
 		}
 		catch(ClassNotFoundException e)
 		{
