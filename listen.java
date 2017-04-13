@@ -425,8 +425,11 @@ public class listen implements Runnable
 			Statement statement = conn.createStatement();
 			String query = "INSERT INTO Accounts " + "VALUES ('" + p_username + "', '" + p_password + "')"; 
 			statement.executeUpdate(query);
+
+			Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
+			Statement statement1 = conn.createStatement();
 			query = "Insert INTO Friends " + "VALUES ('" + p_idOwner + "')";
-			statement.executeUpdate(query);
+			statement1.executeUpdate(query);
 		}
 		catch(SQLException e)
 		{
