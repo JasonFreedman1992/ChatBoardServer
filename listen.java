@@ -417,9 +417,11 @@ public class listen implements Runnable
 	{
 		try
 		{
+			System.out.println("420");
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 			Statement statement = conn.createStatement();
+			System.out.println("424");
 			String query = "INSERT INTO Accounts " + "VALUES ('" + p_username + "', '" + p_password + "')"; 
 			statement.executeUpdate(query);
 
