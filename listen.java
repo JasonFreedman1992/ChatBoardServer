@@ -367,6 +367,37 @@ public class listen implements Runnable
 		{
 			System.out.println("not found class");
 		}
+
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
+			Statement statement = conn.createStatement();
+			String query = "SELECT * FROM Friends";
+			ResultSet rs = statement.executeQuery(query);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
+			String idOwned = "";
+			String idFriend = "";
+			int counter = 0;
+			while(rs.next())
+			{
+				for(int i = 1; i <= columnsNumber; i++)
+				{
+					String columnValue = rs.getString(i);
+					String columnName = rsmd.getColumnName(i);
+					if()
+				}
+			}
+		}
+		catch(SQLException e)
+		{
+
+		}
+		catch(ClassNotFoundException e)
+		{
+
+		}
 	}
 	//
 	// adding new account to database with password

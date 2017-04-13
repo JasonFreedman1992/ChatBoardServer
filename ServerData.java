@@ -1,5 +1,6 @@
 import java.nio.channels.*;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.HashMap;
 
 public class ServerData
@@ -13,6 +14,7 @@ public class ServerData
 	public static LinkedList<SocketChannel> softUsers = new LinkedList<SocketChannel>();
 	public static HashMap<String, String> userBase = new HashMap<String, String>();
 	public static HashMap<String, SocketChannel> getSocket = new HashMap<String, SocketChannel>();
+	public static HashMap<String, List<String>> idToFriends = new HashMap<String, List<String>>();
 	public static LinkedList<User> onlineUsers = new LinkedList<User>();
 	public static LinkedList<Instance> instances = new LinkedList<Instance>();
 	public static int instanceTop = 0;
