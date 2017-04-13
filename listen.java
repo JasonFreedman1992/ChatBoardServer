@@ -154,15 +154,22 @@ public class listen implements Runnable
 			// remove from softUsers and getsocket list
 			serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
 			serverData.getSocket.remove(key.attachment().toString());
-			for(int i = 0; i < serverData.instances.size(); i++)
+			try
 			{
-				for(int j = 0; j < serverData.instances.get(i).top; j++)
+				for(int i = 0; i < serverData.instances.size(); i++)
 				{
-					if(serverData.instances.get(i).users.get(j).address.equals(key.attachment().toString()))
+					for(int j = 0; j < serverData.instances.get(i).top; j++)
 					{
-						serverData.instances.get(i).users.remove(j);
+						if(serverData.instances.get(i).users.get(j).address.equals(key.attachment().toString()))
+						{
+							serverData.instances.get(i).users.remove(j);
+						}
 					}
 				}
+			}
+			catch(Exception e)
+			{
+
 			}
 			broadcast(msg);
 			ch.close();
