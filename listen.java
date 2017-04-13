@@ -239,7 +239,7 @@ public class listen implements Runnable
 					{
 						serverData.userBase.put(username, password);
 						String s = Integer.toString(serverData.clientTotal+1);
-						addAccountDatabase(username, password);
+						addAccountDatabase(username, password, s);
 						serverData.clientTotal++;
 					}
 				}
@@ -364,60 +364,60 @@ public class listen implements Runnable
 			System.out.println("not found class");
 		}
 
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
-			Statement statement = conn.createStatement();
-			String query = "SELECT * FROM Friends";
-			ResultSet rs = statement.executeQuery(query);
-			ResultSetMetaData rsmd = rs.getMetaData();
-			int columnsNumber = rsmd.getColumnCount();
-			String idOwned = "";
-			String idFriend = "";
-			ArrayList<FriendList> list = new ArrayList<FriendList>();
-			int counter = 0;
-			while(rs.next())
-			{
-				for(int i = 1; i <= columnsNumber; i++)
-				{
-					String columnValue = rs.getString(i);
-					String columnName = rsmd.getColumnName(i);
-					if(columnName.equals("idOwner"))
-					{
-						System.out.println("equals idowner");
-						idOwned = columnValue;
-						list.add(new FriendList(idOwned));
-					}
-					else if(!columnName.startsWith("idOwner"))
-					{
-						System.out.println("doesnt start with idowner");
-						if(!columnValue.equals("x"))
-						{
-							idFriend = columnValue;
-							list.get(list.size() - 1).list.add(idFriend);
-						}
-					}
-				}
-			}
-			for(int i = 0; i < list.size(); i++)
-			{
-				serverData.idToFriends.put(list.get(i).idOwned, list.get(i).list);
-			}
-		}
-		catch(SQLException e)
-		{
+		// try
+		// {
+		// 	Class.forName("com.mysql.jdbc.Driver");
+		// 	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
+		// 	Statement statement = conn.createStatement();
+		// 	String query = "SELECT * FROM Friends";
+		// 	ResultSet rs = statement.executeQuery(query);
+		// 	ResultSetMetaData rsmd = rs.getMetaData();
+		// 	int columnsNumber = rsmd.getColumnCount();
+		// 	String idOwned = "";
+		// 	String idFriend = "";
+		// 	ArrayList<FriendList> list = new ArrayList<FriendList>();
+		// 	int counter = 0;
+		// 	while(rs.next())
+		// 	{
+		// 		for(int i = 1; i <= columnsNumber; i++)
+		// 		{
+		// 			String columnValue = rs.getString(i);
+		// 			String columnName = rsmd.getColumnName(i);
+		// 			if(columnName.equals("idOwner"))
+		// 			{
+		// 				System.out.println("equals idowner");
+		// 				idOwned = columnValue;
+		// 				list.add(new FriendList(idOwned));
+		// 			}
+		// 			else if(!columnName.startsWith("idOwner"))
+		// 			{
+		// 				System.out.println("doesnt start with idowner");
+		// 				if(!columnValue.equals("x"))
+		// 				{
+		// 					idFriend = columnValue;
+		// 					list.get(list.size() - 1).list.add(idFriend);
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// 	for(int i = 0; i < list.size(); i++)
+		// 	{
+		// 		serverData.idToFriends.put(list.get(i).idOwned, list.get(i).list);
+		// 	}
+		// }
+		// catch(SQLException e)
+		// {
 
-		}
-		catch(ClassNotFoundException e)
-		{
+		// }
+		// catch(ClassNotFoundException e)
+		// {
 
-		}
+		// }
 	}
 	//
 	// adding new account to database with password
 	//
-	void addAccountDatabase(String p_username, String p_password)
+	void addAccountDatabase(String p_username, String p_password, String p_idOwner)
 	{
 		try
 		{
