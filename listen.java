@@ -423,7 +423,9 @@ public class listen implements Runnable
 			Statement statement = conn.createStatement();
 			System.out.println("424");
 			String query = "INSERT INTO Accounts " + "VALUES ('" + p_username + "', '" + p_password + "')"; 
+			System.out.println("426");
 			statement.executeUpdate(query);
+			System.out.println("428");
 
 			// System.out.println("made it 429");
 			// Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
