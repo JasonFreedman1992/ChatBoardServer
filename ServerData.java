@@ -17,5 +17,6 @@ public class ServerData
 	public static HashMap<String, ArrayList<String>> idToFriends = new HashMap<String, ArrayList<String>>();
 	public static LinkedList<User> onlineUsers = new LinkedList<User>();
 	public static LinkedList<Instance> instances = new LinkedList<Instance>();
+	public static int clientTotal = 0;
 	public static int instanceTop = 0;
 }

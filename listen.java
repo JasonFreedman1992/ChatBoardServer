@@ -214,16 +214,6 @@ public class listen implements Runnable
 
 							}
 							serverData.instances.get(0).addUser(user);
-							//serverData.instances.get(0).add(user);
-
-							// if(serverData.onlineUsers.size() == 1)
-							// {
-							// 	//instance.user1 = serverData.onlineUsers.get(0);
-							// }
-							// else
-							// {
-							// 	//instance.user2 = serverData.onlineUsers.get(1);
-							// }
 						}
 						else 
 						{
@@ -248,7 +238,8 @@ public class listen implements Runnable
 					else
 					{
 						serverData.userBase.put(username, password);
-						addDatabase(username, password);
+						addAccountDatabase(username, password, Integer.toString(serverData.clientTotal+1));
+						serverData.clientTotal++;
 					}
 				}
 				else if(type.equals("msg"))
@@ -268,17 +259,6 @@ public class listen implements Runnable
 							}
 						}
 					}
-					//if(key.attachment().toString().equals(instance.users.))
-					// if(key.attachment().toString().equals(instance.user1.address))
-					// {
-					// 	ch = instance.user2.socket;
-					// 	msg(msg, ch);
-					// }
-					// else if(key.attachment().toString().equals(instance.user2.address))
-					// {
-					// 	ch = instance.user1.socket;
-					// 	msg(msg, ch);
-					// }
 				}
 				else
 				{
@@ -314,6 +294,7 @@ public class listen implements Runnable
 		sch.write(msgBuffer);
 		msgBuffer.rewind();
 	}
+
 	//
 	// sql mapping class
 	//
@@ -353,6 +334,7 @@ public class listen implements Runnable
 					counter++;
 					if(columnName.equals("name"))
 					{
+						serverData.clientTotal++;
 						username = columnValue;
 					}
 					else if(columnName.equals("password"))
@@ -400,8 +382,6 @@ public class listen implements Runnable
 				{
 					String columnValue = rs.getString(i);
 					String columnName = rsmd.getColumnName(i);
-					System.out.println("columnValue " + columnValue);
-					System.out.println("columnName " + columnName);
 					if(columnName.equals("idOwner"))
 					{
 						System.out.println("equals idowner");
@@ -419,14 +399,10 @@ public class listen implements Runnable
 					}
 				}
 			}
-			System.out.println(list.size());
 			for(int i = 0; i < list.size(); i++)
 			{
-				System.out.println(list.get(i).idOwned);
-				System.out.println(list.get(i).list);
 				serverData.idToFriends.put(list.get(i).idOwned, list.get(i).list);
 			}
-			System.out.println(serverData.idToFriends.size());
 		}
 		catch(SQLException e)
 		{
@@ -440,7 +416,7 @@ public class listen implements Runnable
 	//
 	// adding new account to database with password
 	//
-	void addDatabase(String p_username, String p_password)
+	void addAccountDatabase(String p_username, String p_password, String p_idOwner)
 	{
 		try
 		{
@@ -448,6 +424,8 @@ public class listen implements Runnable
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 			Statement statement = conn.createStatement();
 			String query = "INSERT INTO Accounts " + "VALUES ('" + p_username + "', '" + p_password + "')"; 
+			statement.executeUpdate(query);
+			query = "Insert INTO Friends " + "VALUES ('" + p_idOwner + "')";
 			statement.executeUpdate(query);
 		}
 		catch(SQLException e)
@@ -458,5 +436,12 @@ public class listen implements Runnable
 		{
 			System.out.println("not found class");
 		}
+	}
+	//
+	//
+	//
+	void addFriendDatabase()
+	{
+
 	}
 }
