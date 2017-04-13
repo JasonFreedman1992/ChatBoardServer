@@ -414,10 +414,10 @@ public class listen implements Runnable
 						}
 					}
 				}
-				for(int i = 0; i < list.size(); i++)
-				{
-					serverData.idToFriends.put(list.get(i).idOwned, list.get(i).list);
-				}
+			}
+			for(int i = 0; i < list.size(); i++)
+			{
+				serverData.idToFriends.put(list.get(i).idOwned, list.get(i).list);
 			}
 		}
 		catch(SQLException e)
