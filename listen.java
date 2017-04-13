@@ -404,11 +404,13 @@ public class listen implements Runnable
 					System.out.println("columnName " + columnName);
 					if(columnName.equals("idOwner"))
 					{
+						System.out.println("equals idowner");
 						idOwned = columnValue;
 						list.add(new FriendList(idOwned));
 					}
 					else if(!columnName.startsWith("idOwner"))
 					{
+						System.out.println("doesnt start with idowner");
 						if(!columnValue.equals("x"))
 						{
 							idFriend = columnValue;
