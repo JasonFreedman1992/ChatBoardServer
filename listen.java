@@ -400,6 +400,8 @@ public class listen implements Runnable
 				{
 					String columnValue = rs.getString(i);
 					String columnName = rsmd.getColumnName(i);
+					System.out.println("columnValue " + columnValue);
+					System.out.println("columnName " + columnName);
 					if(columnName.equals("idOwner"))
 					{
 						idOwned = columnValue;
