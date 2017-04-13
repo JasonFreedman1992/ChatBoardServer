@@ -238,8 +238,8 @@ public class listen implements Runnable
 					else
 					{
 						serverData.userBase.put(username, password);
-						String s = Integer.toString(serverData.clientTotal+1);
-						addAccountDatabase(username, password, s);
+						String id = Integer.toString(serverData.clientTotal+1);
+						addAccountDatabase(username, password, id);
 						serverData.clientTotal++;
 					}
 				}
@@ -423,7 +423,7 @@ public class listen implements Runnable
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
-			String query = "INSERT INTO Accounts " + "VALUES ('" + p_username + "', '" + p_password + "')"; 
+			String query = "INSERT INTO Accounts " + "VALUES ('" + p_username + "', '" + p_password + "', '" + p_idOwner + "')"; 
 			Statement statement = conn.createStatement();
 			statement.executeUpdate(query);
 		}
