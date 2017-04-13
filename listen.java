@@ -424,6 +424,7 @@ public class listen implements Runnable
 			{
 				serverData.idToFriends.put(list.get(i).idOwned, list.get(i).list);
 			}
+			System.out.println(serverData.idToFriends.size());
 		}
 		catch(SQLException e)
 		{
