@@ -238,8 +238,8 @@ public class listen implements Runnable
 					else
 					{
 						serverData.userBase.put(username, password);
-						String idOwner = Integer.toString(serverData.clientTotal+1);
-						addAccountDatabase(username, password, idOwner);
+						String s = Integer.toString(serverData.clientTotal+1);
+						addAccountDatabase(username, password, s);
 						serverData.clientTotal++;
 					}
 				}
@@ -366,7 +366,7 @@ public class listen implements Runnable
 
 		try
 		{
-			//Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 			Statement statement = conn.createStatement();
 			String query = "SELECT * FROM Friends";
@@ -385,13 +385,13 @@ public class listen implements Runnable
 					String columnName = rsmd.getColumnName(i);
 					if(columnName.equals("idOwner"))
 					{
-						//System.out.println("equals idowner");
+						System.out.println("equals idowner");
 						idOwned = columnValue;
 						list.add(new FriendList(idOwned));
 					}
 					else if(!columnName.startsWith("idOwner"))
 					{
-						//System.out.println("doesnt start with idowner");
+						System.out.println("doesnt start with idowner");
 						if(!columnValue.equals("x"))
 						{
 							idFriend = columnValue;
@@ -409,6 +409,10 @@ public class listen implements Runnable
 		{
 
 		}
+		catch(ClassNotFoundException e)
+		{
+
+		}
 	}
 	//
 	// adding new account to database with password
@@ -417,28 +421,15 @@ public class listen implements Runnable
 	{
 		try
 		{
-			System.out.println("420");
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 			Statement statement = conn.createStatement();
-			System.out.println("424");
 			String query = "INSERT INTO Accounts " + "VALUES ('" + p_username + "', '" + p_password + "')"; 
-			System.out.println("426");
 			statement.executeUpdate(query);
-			System.out.println("428");
-
-			// System.out.println("made it 429");
-			// Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
-			// Statement statement1 = conn1.createStatement();
-			// System.out.println("made it 432");
-			// query = "Insert INTO Friends " + "VALUES ('" + p_idOwner + "')";
-			// statement1.executeUpdate(query);
-			// System.out.println("made it 435");
 		}
 		catch(SQLException e)
 		{
 			System.out.println("no connection");
-			e.printStackTrace();
 		}
 		catch(ClassNotFoundException e)
 		{
