@@ -422,6 +422,8 @@ public class listen implements Runnable
 			System.out.println(list.size());
 			for(int i = 0; i < list.size(); i++)
 			{
+				System.out.println(list.get(i).idOwned);
+				System.out.println(list.get(i).list);
 				serverData.idToFriends.put(list.get(i).idOwned, list.get(i).list);
 			}
 			System.out.println(serverData.idToFriends.size());
