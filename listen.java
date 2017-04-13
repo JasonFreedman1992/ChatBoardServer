@@ -315,6 +315,19 @@ public class listen implements Runnable
 		msgBuffer.rewind();
 	}
 	//
+	// sql mapping class
+	//
+	class FriendList
+	{
+		String idOwned = "";
+		public ArrayList<String> list = new ArrayList<String>();
+		FriendList(String p_idOwned)
+		{
+
+		}
+	}
+
+	//
 	// initial mapping of serverData hashmap to database
 	//
 	void mapDatabase()
@@ -379,6 +392,7 @@ public class listen implements Runnable
 			int columnsNumber = rsmd.getColumnCount();
 			String idOwned = "";
 			String idFriend = "";
+			ArrayList<FriendList> list = new ArrayList<FriendList>();
 			int counter = 0;
 			while(rs.next())
 			{
@@ -386,7 +400,23 @@ public class listen implements Runnable
 				{
 					String columnValue = rs.getString(i);
 					String columnName = rsmd.getColumnName(i);
-					if()
+					if(columnName.equals("idOwner"))
+					{
+						idOwned = columnValue;
+						list.add(new FriendList(idOwned));
+					}
+					else if(!columnName.startsWith("idOwner"))
+					{
+						if(!columnValue.equals("x"))
+						{
+							idFriend = columnValue;
+							list.get(list.size() - 1).list.add(idFriend);
+						}
+					}
+				}
+				for(int i = 0; i < list.size(); i++)
+				{
+					serverData.idToFriends.put(list.get(i).idOwned, list.get(i).list);
 				}
 			}
 		}

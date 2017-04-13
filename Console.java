@@ -102,6 +102,22 @@ public class Console implements Runnable
 						}
 					}
 				}
+
+				else if(command.startsWith("get=if"))
+				{
+					if(serverData.idToFriends.isEmpty())
+					{
+
+					}
+					else
+					{
+						for(String key : serverData.idToFriends.keySet())
+						{
+							System.out.println(key);
+							System.out.println(serverData.idToFriends.get(key).toString());
+						}
+					}
+				}
 			}
 			catch(InterruptedException e)
 			{
