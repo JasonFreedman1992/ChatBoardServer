@@ -85,9 +85,12 @@ public class listen implements Runnable
 				for(int i = 0; i < serverData.softUsers.size(); i++)
 				{
 					System.out.println(serverData.softUsers.get(i));
+					if(key.attachment().equals(serverData.softUsers.get(i).socket().toString()))
+					{
+						serverData.softUsers.remove(i);
+					}
 				}
-				SocketChannel ch = (SocketChannel) key.channel();
-				serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
+				//serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
 			}
 		}
 	}
