@@ -278,7 +278,7 @@ public class listen implements Runnable
 								{
 									if(serverData.onlineUsers.get(j).address.equals(key.attachment().toString()))
 									{
-										serverData.Boards.get(i).users.add(serverData.onlineUsers.get(j));
+										serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
 									}
 									else
 									{
