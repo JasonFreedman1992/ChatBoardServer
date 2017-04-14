@@ -73,7 +73,6 @@ public class listen implements Runnable
 					}
 					catch(CancelledKeyException e)
 					{
-						//e.printStackTrace();
 						System.out.println("Cancelled Key!, key.isWritable() exception!");
 					}					
 
@@ -81,7 +80,7 @@ public class listen implements Runnable
 			}
 			catch(IOException e)
 			{
-				System.out.println(" IOException, " + key.attachment() + " 49152 terminating, stack trace: " + e);
+				System.out.println(" IOException, " + key.attachment() + " terminating, stack trace: " + e);
 			}
 		}
 	}
