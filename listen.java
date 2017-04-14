@@ -151,7 +151,10 @@ public class listen implements Runnable
 		if(read < 0) // if user disconnects
 		{
 			msg = key.attachment() + " left the server.\n";
-			serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
+			if(serverData.softUsers.indexOf(ch) != -1)
+			{
+				serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
+			}
 			serverData.getSocket.remove(key.attachment().toString());
 			try
 			{
@@ -280,7 +283,7 @@ public class listen implements Runnable
 					msg = sb.toString();
 					if(serverData.Boards.isEmpty())
 					{
-						String reply = "No Boards!";
+						String reply = "Board Not Found";
 						msg(reply, ch);
 					}
 					else
