@@ -29,6 +29,7 @@ public class listen implements Runnable
 	//
 	// key can write, read, connect and accept
 	//
+	SelectionKey key;
 	public void run()
 	{
 		mapDatabase();
@@ -37,7 +38,6 @@ public class listen implements Runnable
 			try
 			{
 				Iterator<SelectionKey> iter;
-				SelectionKey key;
 				selector.select();
 				iter = selector.selectedKeys().iterator();
 				while(iter.hasNext())
@@ -82,6 +82,7 @@ public class listen implements Runnable
 			catch(IOException e)
 			{
 				System.out.println(" IOException, server of port 49152 terminating, stack trace: " + e);
+				serverData.softUsers.remove(serverData.softUsers.indexOf(key));
 			}
 		}
 	}
