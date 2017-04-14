@@ -160,7 +160,8 @@ public class listen implements Runnable
 		if(read < 0) // if user disconnects
 		{
 			msg = key.attachment() + " left the server.\n";
-			
+			serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
+			ch.close();
 			serverData.getSocket.remove(key.attachment().toString());
 			try
 			{
@@ -179,7 +180,6 @@ public class listen implements Runnable
 			{
 
 			}
-			serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
 			broadcast(msg);
 			ch.close();
 		}
