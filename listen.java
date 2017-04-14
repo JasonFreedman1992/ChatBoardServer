@@ -86,7 +86,8 @@ public class listen implements Runnable
 				{
 					System.out.println(serverData.softUsers.get(i));
 				}
-				serverData.softUsers.remove(serverData.softUsers.indexOf(key));
+				SocketChannel ch = (SocketChannel) key.channel();
+				serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
 			}
 		}
 	}
