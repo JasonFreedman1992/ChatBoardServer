@@ -82,14 +82,14 @@ public class listen implements Runnable
 			catch(IOException e)
 			{
 				System.out.println(" IOException, server of port 49152 terminating, stack trace: " + e);
-				for(int i = 0; i < serverData.softUsers.size(); i++)
-				{
-					System.out.println(serverData.softUsers.get(i));
-					if(key.attachment().equals(serverData.softUsers.get(i).socket().toString()))
-					{
-						serverData.softUsers.remove(i);
-					}
-				}
+				// for(int i = 0; i < serverData.softUsers.size(); i++)
+				// {
+				// 	System.out.println(serverData.softUsers.get(i));
+				// 	if(key.attachment().equals(serverData.softUsers.get(i).socket().toString()))
+				// 	{
+				// 		serverData.softUsers.remove(i);
+				// 	}
+				// }
 				//serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
 			}
 		}
@@ -208,21 +208,6 @@ public class listen implements Runnable
 							User user = new User(key.attachment().toString(), username, ch);
 							serverData.onlineUsers.add(user);
 							serverData.getSocket.put(key.attachment().toString(), ch);
-							// if(serverData.instances.isEmpty())
-							// {
-							// 	serverData.instances.add(new Instance(0));
-							// 	serverData.instanceTop++;
-							// }
-							// else if(!serverData.instances.isEmpty() && (serverData.getSocket.size() % 2 == 0))
-							// {
-							// 	serverData.instances.add(new Instance(serverData.instanceTop));
-							// 	serverData.instanceTop++;
-							// }
-							// else
-							// {
-
-							// }
-							// serverData.instances.get(0).addUser(user);
 						}
 						else 
 						{
