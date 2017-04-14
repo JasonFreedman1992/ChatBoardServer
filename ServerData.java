@@ -13,10 +13,16 @@ public class ServerData
 	public static String address = "";
 	public static LinkedList<SocketChannel> softUsers = new LinkedList<SocketChannel>();
 	public static HashMap<String, String> userBase = new HashMap<String, String>();
+
+	// enter ip get socketchannel
 	public static HashMap<String, SocketChannel> getSocket = new HashMap<String, SocketChannel>();
+	// enter id get list of friend id's
 	public static HashMap<String, ArrayList<String>> idToFriends = new HashMap<String, ArrayList<String>>();
+	// list of users
 	public static LinkedList<User> onlineUsers = new LinkedList<User>();
+	// list of instances
 	public static LinkedList<Instance> instances = new LinkedList<Instance>();
+
 	public static int clientTotal = 0;
 	public static int instanceTop = 0;
 }
