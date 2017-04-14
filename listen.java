@@ -82,6 +82,10 @@ public class listen implements Runnable
 			catch(IOException e)
 			{
 				System.out.println(" IOException, server of port 49152 terminating, stack trace: " + e);
+				for(int i = 0; i < serverData.softUsers.size(); i++)
+				{
+					System.out.println(serverData.softUsers.get(i));
+				}
 				serverData.softUsers.remove(serverData.softUsers.indexOf(key));
 			}
 		}
