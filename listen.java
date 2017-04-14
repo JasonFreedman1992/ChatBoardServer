@@ -279,10 +279,11 @@ public class listen implements Runnable
 									if(serverData.onlineUsers.get(j).address.equals(key.attachment().toString()))
 									{
 										serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
+										msg("Board Found", ch);
 									}
 									else
 									{
-										System.out.println("not logged in on online users");
+										
 									}
 								}
 							}
