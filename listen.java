@@ -153,7 +153,7 @@ public class listen implements Runnable
 			msg = key.attachment() + " left the server.\n";
 			try
 			{
-			serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
+			serverData.softUsers.remove(serverData.softUsers.indexOf(key));
 			}
 			catch(java.lang.IndexOutOfBoundsException e)
 			{
