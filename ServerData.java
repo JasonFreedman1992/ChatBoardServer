@@ -21,8 +21,8 @@ public class ServerData
 	// list of users
 	public static LinkedList<User> onlineUsers = new LinkedList<User>();
 	// list of instances
-	public static LinkedList<Instance> instances = new LinkedList<Instance>();
+	public static LinkedList<Board> Boards = new LinkedList<Board>();
 
 	public static int clientTotal = 0;
-	public static int instanceTop = 0;
+	public static int boardTop = 0;
 }

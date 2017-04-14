@@ -117,7 +117,7 @@ public class Console implements Runnable
 						}
 					}
 				}
-				else if(command.startsWith("add="))
+				//else if(command.startsWith("add="))
 			}
 			catch(InterruptedException e)
 			{

@@ -155,13 +155,13 @@ public class listen implements Runnable
 			serverData.getSocket.remove(key.attachment().toString());
 			try
 			{
-				for(int i = 0; i < serverData.instances.size(); i++)
+				for(int i = 0; i < serverData.Boards.size(); i++)
 				{
-					for(int j = 0; j < serverData.instances.get(i).top; j++)
+					for(int j = 0; j < serverData.Boards.get(i).top; j++)
 					{
-						if(serverData.instances.get(i).users.get(j).address.equals(key.attachment().toString()))
+						if(serverData.Boards.get(i).users.get(j).address.equals(key.attachment().toString()))
 						{
-							serverData.instances.get(i).users.remove(j);
+							serverData.Boards.get(i).users.remove(j);
 						}
 					}
 				}
@@ -198,21 +198,21 @@ public class listen implements Runnable
 							User user = new User(key.attachment().toString(), username, ch);
 							serverData.onlineUsers.add(user);
 							serverData.getSocket.put(key.attachment().toString(), ch);
-							if(serverData.instances.isEmpty())
-							{
-								serverData.instances.add(new Instance(0));
-								serverData.instanceTop++;
-							}
-							else if(!serverData.instances.isEmpty() && (serverData.getSocket.size() % 2 == 0))
-							{
-								serverData.instances.add(new Instance(serverData.instanceTop));
-								serverData.instanceTop++;
-							}
-							else
-							{
+							// if(serverData.instances.isEmpty())
+							// {
+							// 	serverData.instances.add(new Instance(0));
+							// 	serverData.instanceTop++;
+							// }
+							// else if(!serverData.instances.isEmpty() && (serverData.getSocket.size() % 2 == 0))
+							// {
+							// 	serverData.instances.add(new Instance(serverData.instanceTop));
+							// 	serverData.instanceTop++;
+							// }
+							// else
+							// {
 
-							}
-							serverData.instances.get(0).addUser(user);
+							// }
+							// serverData.instances.get(0).addUser(user);
 						}
 						else 
 						{
@@ -246,16 +246,65 @@ public class listen implements Runnable
 				{
 					msg = sb.toString();
 					System.out.println(msg);
-					for(int i = 0; i < serverData.instances.size(); i++)
+					for(int i = 0; i < serverData.Boards.size(); i++)
 					{
-						for(int j = 0; j < serverData.instances.get(i).users.size(); j++)
+						for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
 						{
-							if(key.attachment().toString().equals(serverData.instances.get(i).users.get(j).address))
+							if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
 							{
-								for(int x = 0; x < serverData.instances.get(i).users.size(); x++)
+								for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 								{
-									msg(msg, serverData.instances.get(i).users.get(x).socket);
+									msg(msg, serverData.Boards.get(i).users.get(x).socket);
 								}
+							}
+						}
+					}
+				}
+				else if(type.equals("cbrd"))
+				{
+					msg = sb.toString();
+					if(serverData.Boards.isEmpty())
+					{
+						serverData.Boards.add(new Board(0, msg));
+						serverData.boardTop++;
+					}
+					else
+					{
+						serverData.Boards.add(new Board(serverData.boardTop, msg));
+						serverData.boardTop++;
+					}
+
+				}
+				else if(type.equals("jbrd"))
+				{
+					msg = sb.toString();
+					if(serverData.Boards.isEmpty())
+					{
+						String reply = "No Boards!";
+						msg(reply, ch);
+					}
+					else
+					{
+						for(int i = 0; i < serverData.Boards.size(); i++)
+						{
+							if(serverData.Boards.get(i).name.equals(msg))
+							{
+								for(int j = 0; j < serverData.onlineUsers.size(); j++)
+								{
+									if(serverData.onlineUsers.get(j).address.equals(key.attachment().toString()))
+									{
+										serverData.Boards.get(i).users.add(serverData.onlineUsers.get(j));
+									}
+									else
+									{
+										System.out.println("not logged in on online users");
+									}
+								}
+							}
+							else
+							{
+								// board not found
+								System.out.println("Board not found");
 							}
 						}
 					}
