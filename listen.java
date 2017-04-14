@@ -283,7 +283,7 @@ public class listen implements Runnable
 									}
 									else
 									{
-										
+
 									}
 								}
 							}
@@ -294,6 +294,7 @@ public class listen implements Runnable
 							}
 						}
 					}
+					type = "";
 				}
 				else
 				{
