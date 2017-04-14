@@ -151,7 +151,14 @@ public class listen implements Runnable
 		if(read < 0) // if user disconnects
 		{
 			msg = key.attachment() + " left the server.\n";
+			try
+			{
 			serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
+			}
+			catch(java.lang.IndexOutOfBoundsException e)
+			{
+
+			}
 			serverData.getSocket.remove(key.attachment().toString());
 			try
 			{
