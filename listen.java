@@ -92,22 +92,7 @@ public class listen implements Runnable
 	//
 	void handleWrite() throws IOException
 	{
-		if(serverData.msgSent)
-		{
-			SocketChannel socket = serverData.getSocket.get(serverData.address);
-			ByteBuffer msgBuffer = ByteBuffer.wrap(serverData.msg.getBytes());
-			//System.out.println(serverData.msg);
-			try
-			{
-				socket.write(msgBuffer);
-			}
-			catch(NullPointerException e)
-			{
 
-			}
-			msgBuffer.rewind();
-			serverData.msgSent = false;
-		}
 	}
 
 	//
@@ -314,7 +299,7 @@ public class listen implements Runnable
 						}
 						else
 						{
-							
+
 						}
 						//imgBuffer = ByteBuffer.allocate(25600).put(bytes[i]);
 						// if(imgBuffer.remaining() == 25600)
