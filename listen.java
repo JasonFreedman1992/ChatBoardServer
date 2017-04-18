@@ -301,11 +301,11 @@ public class listen implements Runnable
 				}
 				else if(type.equals("img"))
 				{
-					//System.out.println(bytes);
+					System.out.println(bytes);
 				}
 				else
 				{
-					System.out.println("Type of packet not recognized.");
+					//System.out.println("Type of packet not recognized.");
 				}
 			}
 		}
