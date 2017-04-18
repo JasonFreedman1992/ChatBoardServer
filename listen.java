@@ -308,7 +308,14 @@ public class listen implements Runnable
 					{
 						System.out.println(bytes[i]);
 						System.out.println("imgbufferrem: " + imgBuffer.remaining());
-						imgBuffer.put(bytes[i]);
+						if(imgBuffer.remaining() != 0)
+						{
+							imgBuffer.put(bytes[i]);
+						}
+						else
+						{
+							
+						}
 						//imgBuffer = ByteBuffer.allocate(25600).put(bytes[i]);
 						// if(imgBuffer.remaining() == 25600)
 						// {
