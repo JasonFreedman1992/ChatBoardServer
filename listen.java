@@ -308,15 +308,16 @@ public class listen implements Runnable
 					{
 						System.out.println(bytes[i]);
 						System.out.println("imgbufferrem: " + imgBuffer.remaining());
+						imgBuffer.put(bytes[i]);
 						//imgBuffer = ByteBuffer.allocate(25600).put(bytes[i]);
-						if(imgBuffer.remaining() == 25600)
-						{
-							imgBuffer.put(bytes[i]);
-						}
-						else
-						{
-							imgBuffer.put(bytes[i]);
-						}
+						// if(imgBuffer.remaining() == 25600)
+						// {
+						// 	imgBuffer.put(bytes[i]);
+						// }
+						// else
+						// {
+						// 	imgBuffer.put(bytes[i]);
+						// }
 						//bb = ByteBuffer.allocate(300).put(bb).put(bb2);
 					}
 					for(int i = 0; i < serverData.Boards.size(); i++)
