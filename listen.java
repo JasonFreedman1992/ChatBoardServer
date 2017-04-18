@@ -307,7 +307,7 @@ public class listen implements Runnable
 					for(int i = 0; i < bytes.length; i++)
 					{
 						System.out.println(bytes[i]);
-						System.out.println("imgbufferlength: " + imgBuffer.position());
+						//System.out.println("imgbufferlength: " + imgBuffer.position());
 						imgBuffer = ByteBuffer.allocate(25600).put(bytes[i]);
 						// if(imgBuffer.position() == 0)
 						// {
@@ -319,20 +319,20 @@ public class listen implements Runnable
 						// }
 						//bb = ByteBuffer.allocate(300).put(bb).put(bb2);
 					}
-					// for(int i = 0; i < serverData.Boards.size(); i++)
-					// {
-					// 	for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
-					// 	{
-					// 		if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
-					// 		{
-					// 			for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-					// 			{
-					// 				img(imgBuffer, serverData.Boards.get(i).users.get(x).socket);
-					// 				msg("off", serverData.Boards.get(i).users.get(x).socket);
-					// 			}
-					// 		}
-					// 	}
-					// }
+					for(int i = 0; i < serverData.Boards.size(); i++)
+					{
+						for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
+						{
+							if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
+							{
+								for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+								{
+									img(imgBuffer, serverData.Boards.get(i).users.get(x).socket);
+									msg("off", serverData.Boards.get(i).users.get(x).socket);
+								}
+							}
+						}
+					}
 					//System.out.println("something");
 				}
 				else
