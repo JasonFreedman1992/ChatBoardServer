@@ -13,7 +13,7 @@ public class listen implements Runnable
 	public ServerData serverData = new ServerData();
 	public ServerSocketChannel initChannellisten;
 	public Selector selector = null;
-	public ByteBuffer buffer = ByteBuffer.allocate(256);
+	public ByteBuffer buffer = ByteBuffer.allocate(25600);
 	public ByteBuffer imgBuffer = ByteBuffer.allocate(25600);
 	String type = "";
 	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
