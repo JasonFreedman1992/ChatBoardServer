@@ -14,6 +14,7 @@ public class listen implements Runnable
 	public ServerSocketChannel initChannellisten;
 	public Selector selector = null;
 	public ByteBuffer buffer = ByteBuffer.allocate(256);
+	public ByteBuffer imgBuffer = ByteBuffer.allocate(25600);
 	String type = "";
 	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
 	StringBuilder imgbytes;
@@ -306,6 +307,21 @@ public class listen implements Runnable
 					for(int i = 0; i < bytes.length; i++)
 					{
 						System.out.println(bytes[i]);
+						imgBuffer = ByteBuffer.allocate(25600).put(imgBuffer).put(bytes[i]);
+						//bb = ByteBuffer.allocate(300).put(bb).put(bb2);
+					}
+					for(int i = 0; i < serverData.Boards.size(); i++)
+					{
+						for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
+						{
+							if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
+							{
+								for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+								{
+									//msg(msg, serverData.Boards.get(i).users.get(x).socket);
+								}
+							}
+						}
 					}
 					//System.out.println("something");
 				}
@@ -343,6 +359,8 @@ public class listen implements Runnable
 		sch.write(msgBuffer);
 		msgBuffer.rewind();
 	}
+
+	//public void img(byte[] p_bytes )
 
 	//
 	// sql mapping class
