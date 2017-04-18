@@ -302,8 +302,12 @@ public class listen implements Runnable
 				}
 				else if(type.equals("img"))
 				{
-					System.out.println(bytes);
-					System.out.println(bytes.length);
+					//System.out.println(bytes);
+					//System.out.println(bytes.length);
+					for(int i = 0; i < bytes.length; i++)
+					{
+						System.out.println(bytes[i]);
+					}
 					//System.out.println("something");
 				}
 				else
