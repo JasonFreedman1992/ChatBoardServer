@@ -14,7 +14,6 @@ public class listen implements Runnable
 	public ServerSocketChannel initChannellisten;
 	public Selector selector = null;
 	public ByteBuffer buffer = ByteBuffer.allocate(25600);
-	public ByteBuffer imgBuffer = ByteBuffer.allocate(25600);
 	String type = "";
 	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
 	StringBuilder imgbytes;
@@ -287,31 +286,24 @@ public class listen implements Runnable
 				}
 				else if(type.equals("img"))
 				{
+
 					//System.out.println(bytes);
 					//System.out.println(bytes.length);
-					for(int i = 0; i < bytes.length; i++)
-					{
-						System.out.println(bytes[i]);
-						System.out.println("imgbufferrem: " + imgBuffer.remaining());
-						if(imgBuffer.remaining() != 0)
-						{
-							imgBuffer.put(bytes[i]);
-						}
-						else
-						{
-
-						}
-						//imgBuffer = ByteBuffer.allocate(25600).put(bytes[i]);
-						// if(imgBuffer.remaining() == 25600)
-						// {
-						// 	imgBuffer.put(bytes[i]);
-						// }
-						// else
-						// {
-						// 	imgBuffer.put(bytes[i]);
-						// }
-						//bb = ByteBuffer.allocate(300).put(bb).put(bb2);
-					}
+					// for(int i = 0; i < bytes.length; i++)
+					// {
+					// 	System.out.println(bytes[i]);
+					// 	//imgBuffer = ByteBuffer.allocate(25600).put(bytes[i]);
+					// 	// if(imgBuffer.remaining() == 25600)
+					// 	// {
+					// 	// 	imgBuffer.put(bytes[i]);
+					// 	// }
+					// 	// else
+					// 	// {
+					// 	// 	imgBuffer.put(bytes[i]);
+					// 	// }
+					// 	//bb = ByteBuffer.allocate(300).put(bb).put(bb2);
+					// }
+					User lastUser = new User(",",",", null);
 					for(int i = 0; i < serverData.Boards.size(); i++)
 					{
 						for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
@@ -320,12 +312,13 @@ public class listen implements Runnable
 							{
 								for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 								{
-									img(imgBuffer, serverData.Boards.get(i).users.get(x).socket);
-									msg("off", serverData.Boards.get(i).users.get(x).socket);
+									img(buffer, serverData.Boards.get(i).users.get(x).socket);
+									lastUser = new User(serverData.Boards.get(i).users.get(x).username, serverData.Boards.get(i).users.get(x).address, serverData.Boards.get(i).users.get(x).socket);
 								}
 							}
 						}
 					}
+					msg("off", lastUser.socket);
 					//System.out.println("something");
 				}
 				else
