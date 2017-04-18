@@ -307,7 +307,7 @@ public class listen implements Runnable
 					for(int i = 0; i < bytes.length; i++)
 					{
 						System.out.println(bytes[i]);
-						//System.out.println("imgbufferlength: " + imgBuffer.position());
+						System.out.println("imgbufferpos: " + imgBuffer.position());
 						//imgBuffer = ByteBuffer.allocate(25600).put(bytes[i]);
 						if(imgBuffer.position() == 0)
 						{
