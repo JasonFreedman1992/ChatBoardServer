@@ -307,7 +307,8 @@ public class listen implements Runnable
 					for(int i = 0; i < bytes.length; i++)
 					{
 						System.out.println(bytes[i]);
-						//imgBuffer = ByteBuffer.allocate(25600).put(imgBuffer).put(bytes[i]);
+						System.out.println("imgbufferlength: " + imgBuffer.position());
+						imgBuffer = ByteBuffer.allocate(25600).put(imgBuffer).put(bytes[i]);
 						//bb = ByteBuffer.allocate(300).put(bb).put(bb2);
 					}
 					// for(int i = 0; i < serverData.Boards.size(); i++)
