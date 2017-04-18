@@ -163,7 +163,7 @@ public class listen implements Runnable
 		else // if msg received from ecosystem
 		{
 			//System.out.println(sb.length());
-			//System.out.println("currently parsing " + sb.toString() + " from " + key.attachment());
+			System.out.println("currently parsing " + sb.toString() + " from " + key.attachment());
 			if(sb.toString().startsWith(commandtag))
 			{
 				type = sb.toString().substring(4);
