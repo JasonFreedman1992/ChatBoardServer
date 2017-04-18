@@ -311,11 +311,11 @@ public class listen implements Runnable
 						//imgBuffer = ByteBuffer.allocate(25600).put(bytes[i]);
 						if(imgBuffer.remaining() == 25600)
 						{
-							imgBuffer = ByteBuffer.allocate(25600).put(bytes[i]);
+							imgBuffer.put(bytes[i]);
 						}
 						else
 						{
-							imgBuffer = ByteBuffer.allocate(25600).put(imgBuffer).put(bytes[i]);
+							imgBuffer.put(bytes[i]);
 						}
 						//bb = ByteBuffer.allocate(300).put(bb).put(bb2);
 					}
