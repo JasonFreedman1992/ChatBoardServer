@@ -309,7 +309,7 @@ public class listen implements Runnable
 						System.out.println(bytes[i]);
 						System.out.println("imgbufferpos: " + imgBuffer.position());
 						//imgBuffer = ByteBuffer.allocate(25600).put(bytes[i]);
-						if(imgBuffer.position() == 0)
+						if(imgBuffer.remaining() == 25600)
 						{
 							imgBuffer = ByteBuffer.allocate(25600).put(bytes[i]);
 						}
