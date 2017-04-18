@@ -175,6 +175,7 @@ public class listen implements Runnable
 		}
 		else // if msg received from ecosystem
 		{
+			System.out.println(sb.length());
 			System.out.println("currently parsing " + sb.toString() + " from " + key.attachment());
 			if(sb.toString().startsWith(commandtag))
 			{
@@ -295,6 +296,11 @@ public class listen implements Runnable
 						}
 					}
 					type = "";
+				}
+				else if(type.equals("img"))
+				{
+					msg = sb.toString();
+					System.out.println(msg);
 				}
 				else
 				{
