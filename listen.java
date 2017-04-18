@@ -318,7 +318,8 @@ public class listen implements Runnable
 							{
 								for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 								{
-									//msg(msg, serverData.Boards.get(i).users.get(x).socket);
+									img(imgBuffer, serverData.Boards.get(i).users.get(x).socket);
+									msg("off", serverData.Boards.get(i).users.get(x).socket);
 								}
 							}
 						}
@@ -360,7 +361,19 @@ public class listen implements Runnable
 		msgBuffer.rewind();
 	}
 
-	//public void img(byte[] p_bytes )
+	public void img(ByteBuffer p_imgBuffer, SocketChannel p_ch) throws IOException
+	{
+		msg("img", p_ch);
+		try
+		{
+			Thread.sleep(500);
+		}
+		catch(InterruptedException e)
+		{
+
+		}
+		p_ch.write(p_imgBuffer);
+	}
 
 	//
 	// sql mapping class

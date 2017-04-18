@@ -117,6 +117,10 @@ public class Console implements Runnable
 						}
 					}
 				}
+				else if(command.startsWith("sendIMG"))
+				{
+					
+				}
 				//else if(command.startsWith("add="))
 			}
 			catch(InterruptedException e)
