@@ -16,6 +16,8 @@ public class listen implements Runnable
 	public ByteBuffer buffer = ByteBuffer.allocate(256);
 	String type = "";
 	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
+	StringBuilder imgbytes;
+	byte[] bytes;
 
 	public listen() throws IOException
 	{
@@ -143,7 +145,7 @@ public class listen implements Runnable
 		{
 			sb = new StringBuilder();
 			buffer.flip();
-			byte[] bytes = new byte[buffer.limit()];
+			bytes = new byte[buffer.limit()];
 			buffer.get(bytes);
 			sb.append(new String(bytes));
 		}
@@ -299,8 +301,7 @@ public class listen implements Runnable
 				}
 				else if(type.equals("img"))
 				{
-					msg = sb.toString();
-					System.out.println(msg);
+					//System.out.println(bytes);
 				}
 				else
 				{
