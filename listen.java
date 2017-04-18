@@ -5,6 +5,7 @@ import java.nio.channels.*;
 import java.net.*;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import java.util.Arrays;
 
 
 public class listen implements Runnable
@@ -302,7 +303,7 @@ public class listen implements Runnable
 				else if(type.equals("img"))
 				{
 					System.out.println(bytes);
-					System.out.println(bytes.toString());
+					System.out.println(Arrays.asList(bytes));
 				}
 				else
 				{
