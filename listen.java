@@ -163,7 +163,7 @@ public class listen implements Runnable
 		else // if msg received from ecosystem
 		{
 			//System.out.println(sb.length());
-			System.out.println("currently parsing " + sb.toString() + " from " + key.attachment());
+			//System.out.println("currently parsing " + sb.toString() + " from " + key.attachment());
 			if(sb.toString().startsWith(commandtag))
 			{
 				type = sb.toString().substring(4);
@@ -287,6 +287,7 @@ public class listen implements Runnable
 				else if(type.equals("img"))
 				{
 					System.out.println("in img");
+
 					//System.out.println(bytes);
 					//System.out.println(bytes.length);
 					// for(int i = 0; i < bytes.length; i++)
@@ -330,7 +331,7 @@ public class listen implements Runnable
 				}
 			}
 		}
-		buffer.rewind();
+
 	}
 	
 	//
