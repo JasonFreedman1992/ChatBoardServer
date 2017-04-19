@@ -364,7 +364,8 @@ public class listen implements Runnable
 
 	public void img(ByteBuffer p_imgBuffer, SocketChannel p_ch) throws IOException
 	{
-		msg("img", p_ch);
+		String derp = "img";
+		msg(derp, p_ch);
 		// try
 		// {
 		// 	//Thread.sleep(500);
