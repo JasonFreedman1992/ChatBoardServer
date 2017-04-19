@@ -305,8 +305,8 @@ public class listen implements Runnable
 									msg(derp, serverData.Boards.get(i).users.get(x).socket);
 									try{Thread.sleep(1000);}catch(InterruptedException f){}
 									img(buffer, serverData.Boards.get(i).users.get(x).socket);
-									lastUser = new User(serverData.Boards.get(i).users.get(x).username, serverData.Boards.get(i).users.get(x).address, serverData.Boards.get(i).users.get(x).socket);
-									//msg("off", lastUser.socket);
+									//lastUser = new User(serverData.Boards.get(i).users.get(x).username, serverData.Boards.get(i).users.get(x).address, serverData.Boards.get(i).users.get(x).socket);
+									msg("off", serverData.Boards.get(i).users.get(x).socket);
 								}
 							}
 						}
@@ -352,6 +352,7 @@ public class listen implements Runnable
 
 	public void img(ByteBuffer p_imgBuffer, SocketChannel p_ch) throws IOException
 	{
+		System.out.println("sent img to " + p_ch.toString());
 		p_ch.write(p_imgBuffer);
 	}
 
