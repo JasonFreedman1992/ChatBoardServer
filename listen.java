@@ -312,6 +312,7 @@ public class listen implements Runnable
 							{
 								for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 								{
+									System.out.println("inside for loop");
 									img(buffer, serverData.Boards.get(i).users.get(x).socket);
 									lastUser = new User(serverData.Boards.get(i).users.get(x).username, serverData.Boards.get(i).users.get(x).address, serverData.Boards.get(i).users.get(x).socket);
 								}
