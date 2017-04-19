@@ -305,6 +305,7 @@ public class listen implements Runnable
 									msg(derp, serverData.Boards.get(i).users.get(x).socket);
 									System.out.println("inside for loop");
 									System.out.println("current size buf: " + buffer.remaining());
+									try{Thread.sleep(100);}catch(InterruptedException f){};
 									img(buffer, serverData.Boards.get(i).users.get(x).socket);
 									lastUser = new User(serverData.Boards.get(i).users.get(x).username, serverData.Boards.get(i).users.get(x).address, serverData.Boards.get(i).users.get(x).socket);
 									//msg("off", lastUser.socket);
