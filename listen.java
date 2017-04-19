@@ -120,7 +120,9 @@ public class listen implements Runnable
 		split[0] = "";
 		split[1] = "";
 		SocketChannel ch = (SocketChannel) key.channel();
+		System.out.println("before clear" + buffer.remaining());
 		buffer.clear();
+		System.out.println("after clear" + buffer.remaining());
 		int read = 0;
 		String commandtag = "/1z=";
 		String command = "";
@@ -286,25 +288,8 @@ public class listen implements Runnable
 					type = "";
 				}
 				else if(type.equals("img"))
-				{
+				{	
 					System.out.println("in img");
-
-					//System.out.println(bytes);
-					//System.out.println(bytes.length);
-					// for(int i = 0; i < bytes.length; i++)
-					// {
-					// 	System.out.println(bytes[i]);
-					// 	//imgBuffer = ByteBuffer.allocate(25600).put(bytes[i]);
-					// 	// if(imgBuffer.remaining() == 25600)
-					// 	// {
-					// 	// 	imgBuffer.put(bytes[i]);
-					// 	// }
-					// 	// else
-					// 	// {
-					// 	// 	imgBuffer.put(bytes[i]);
-					// 	// }
-					// 	//bb = ByteBuffer.allocate(300).put(bb).put(bb2);
-					// }
 					System.out.println("before loop size: " + buffer.remaining());
 					User lastUser = new User(",",",", null);
 					for(int i = 0; i < serverData.Boards.size(); i++)
