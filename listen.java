@@ -304,6 +304,7 @@ public class listen implements Runnable
 					// 	// }
 					// 	//bb = ByteBuffer.allocate(300).put(bb).put(bb2);
 					// }
+					System.out.println("before loop size: " + buffer.remaining());
 					User lastUser = new User(",",",", null);
 					for(int i = 0; i < serverData.Boards.size(); i++)
 					{
