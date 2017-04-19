@@ -314,9 +314,6 @@ public class listen implements Runnable
 									try{Thread.sleep(1000);}catch(InterruptedException f){}
 									img(buffer, serverData.Boards.get(i).users.get(x).socket);
 									try{Thread.sleep(1000);}catch(InterruptedException f){}
-									//lastUser = new User(serverData.Boards.get(i).users.get(x).username, serverData.Boards.get(i).users.get(x).address, serverData.Boards.get(i).users.get(x).socket);
-									msg("off", serverData.Boards.get(i).users.get(x).socket);
-									try{Thread.sleep(1000);}catch(InterruptedException f){}
 								}
 							}
 						}
