@@ -330,6 +330,7 @@ public class listen implements Runnable
 				}
 			}
 		}
+		buffer.rewind();
 	}
 	
 	//
