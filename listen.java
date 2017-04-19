@@ -316,6 +316,7 @@ public class listen implements Runnable
 									System.out.println("current size buf: " + buffer.remaining());
 									img(buffer, serverData.Boards.get(i).users.get(x).socket);
 									lastUser = new User(serverData.Boards.get(i).users.get(x).username, serverData.Boards.get(i).users.get(x).address, serverData.Boards.get(i).users.get(x).socket);
+									msg("off", lastUser.socket);
 								}
 							}
 						}
@@ -361,14 +362,14 @@ public class listen implements Runnable
 	public void img(ByteBuffer p_imgBuffer, SocketChannel p_ch) throws IOException
 	{
 		msg("img", p_ch);
-		try
-		{
-			Thread.sleep(500);
-		}
-		catch(InterruptedException e)
-		{
+		// try
+		// {
+		// 	//Thread.sleep(500);
+		// }
+		// catch(InterruptedException e)
+		// {
 
-		}
+		// }
 		p_ch.write(p_imgBuffer);
 	}
 
