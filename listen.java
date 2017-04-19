@@ -318,7 +318,7 @@ public class listen implements Runnable
 									System.out.println("current size buf: " + buffer.remaining());
 									img(buffer, serverData.Boards.get(i).users.get(x).socket);
 									lastUser = new User(serverData.Boards.get(i).users.get(x).username, serverData.Boards.get(i).users.get(x).address, serverData.Boards.get(i).users.get(x).socket);
-									msg("off", lastUser.socket);
+									//msg("off", lastUser.socket);
 								}
 							}
 						}
