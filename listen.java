@@ -318,7 +318,7 @@ public class listen implements Runnable
 							}
 						}
 					}
-					msg("off", lastUser.socket);
+					//msg("off", lastUser.socket);
 					//System.out.println("something");
 				}
 				else
