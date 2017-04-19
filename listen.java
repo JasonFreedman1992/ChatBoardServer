@@ -301,6 +301,8 @@ public class listen implements Runnable
 							{
 								for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 								{
+									String derp = "img";
+									msg(derp, serverData.Boards.get(i).users.get(x).socket);
 									System.out.println("inside for loop");
 									System.out.println("current size buf: " + buffer.remaining());
 									img(buffer, serverData.Boards.get(i).users.get(x).socket);
@@ -351,16 +353,6 @@ public class listen implements Runnable
 
 	public void img(ByteBuffer p_imgBuffer, SocketChannel p_ch) throws IOException
 	{
-		String derp = "img";
-		msg(derp, p_ch);
-		// try
-		// {
-		// 	//Thread.sleep(500);
-		// }
-		// catch(InterruptedException e)
-		// {
-
-		// }
 		p_ch.write(p_imgBuffer);
 	}
 
