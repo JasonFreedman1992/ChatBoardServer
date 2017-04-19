@@ -167,6 +167,7 @@ public class listen implements Runnable
 			if(sb.toString().startsWith(commandtag))
 			{
 				type = sb.toString().substring(4);
+				buffer.clear();
 			}
 			else if(!sb.toString().startsWith(commandtag))
 			{
