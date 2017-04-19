@@ -131,7 +131,7 @@ public class listen implements Runnable
 		while((read = ch.read(buffer)) > 0)
 		{
 			sb = new StringBuilder();
-			buffer.flip();
+			//buffer.flip();
 			bytes = new byte[buffer.limit()];
 			buffer.get(bytes);
 			sb.append(new String(bytes));
