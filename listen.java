@@ -147,12 +147,20 @@ public class listen implements Runnable
 			{
 				for(int i = 0; i < serverData.Boards.size(); i++)
 				{
-					for(int j = 0; j < serverData.Boards.get(i).top; j++)
+					for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
 					{
 						if(serverData.Boards.get(i).users.get(j).address.equals(key.attachment().toString()))
 						{
 							serverData.Boards.get(i).users.remove(j);
 						}
+					}
+				}
+
+				for(int i = 0; i < serverData.onlineUsers.size(); i++)
+				{
+					if(key.attachment().toString().equals(serverData.onlineUsers.get(i).address))
+					{
+						serverData.onlineUsers.remove(i);
 					}
 				}
 			}
@@ -303,8 +311,9 @@ public class listen implements Runnable
 								{
 									String derp = "img";
 									msg(derp, serverData.Boards.get(i).users.get(x).socket);
-									try{Thread.sleep(200);}catch(InterruptedException f){}
+									try{Thread.sleep(1000);}catch(InterruptedException f){}
 									img(buffer, serverData.Boards.get(i).users.get(x).socket);
+									try{Thread.sleep(1000);}catch(InterruptedException f){}
 									//lastUser = new User(serverData.Boards.get(i).users.get(x).username, serverData.Boards.get(i).users.get(x).address, serverData.Boards.get(i).users.get(x).socket);
 									msg("off", serverData.Boards.get(i).users.get(x).socket);
 									try{Thread.sleep(1000);}catch(InterruptedException f){}
