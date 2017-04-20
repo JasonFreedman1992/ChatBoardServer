@@ -312,9 +312,6 @@ public class listen implements Runnable
 				}
 				else if(type.equals("img"))
 				{	
-					System.out.println("in img");
-					System.out.println("before loop size: " + buffer.remaining());
-					User lastUser = new User(",",",", null);
 					for(int i = 0; i < serverData.Boards.size(); i++)
 					{
 						for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
@@ -324,20 +321,21 @@ public class listen implements Runnable
 								for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 								{
 									String derp = "img";
-									msg(derp, serverData.Boards.get(i).users.get(x).socket);
-									try{Thread.sleep(1000);}catch(InterruptedException f){}
-									img(buffer, serverData.Boards.get(i).users.get(x).socket);
-									try{Thread.sleep(1000);}catch(InterruptedException f){}
+									if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
+									{
+										msg(derp, serverData.Boards.get(i).users.get(x).socket);
+										try{Thread.sleep(1000);}catch(InterruptedException f){}
+										img(buffer, serverData.Boards.get(i).users.get(x).socket);
+										try{Thread.sleep(1000);}catch(InterruptedException f){}
+									}
 								}
 							}
 						}
 					}
-					//msg("off", lastUser.socket);
-					//System.out.println("something");
 				}
 				else
 				{
-					//System.out.println("Type of packet not recognized.");
+
 				}
 			}
 		}
