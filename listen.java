@@ -324,9 +324,9 @@ public class listen implements Runnable
 									if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
 									{
 										msg(derp, serverData.Boards.get(i).users.get(x).socket);
-										try{Thread.sleep(1000);}catch(InterruptedException f){}
+										//try{Thread.sleep(1000);}catch(InterruptedException f){}
 										img(buffer, serverData.Boards.get(i).users.get(x).socket);
-										try{Thread.sleep(1000);}catch(InterruptedException f){}
+										//try{Thread.sleep(1000);}catch(InterruptedException f){}
 									}
 								}
 							}
