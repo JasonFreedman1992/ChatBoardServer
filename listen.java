@@ -145,17 +145,27 @@ public class listen implements Runnable
 			serverData.getSocket.remove(key.attachment().toString());
 			try
 			{
-				for(int i = 0; i < serverData.Boards.size(); i++)
+				// for(int i = 0; i < serverData.Boards.size(); i++)
+				// {
+				// 	for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
+				// 	{
+				// 		if(serverData.Boards.get(i).users.get(j).address.equals(key.attachment().toString()))
+				// 		{
+				// 			serverData.Boards.get(i).users.remove(j);
+				// 		}
+				// 	}
+				// }
+
+				for(int j = 0; j < serverData.Boards.size(); j++)
 				{
-					for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
+					for(int x = 0; x < serverData.Boards.get(j).users.size(); x++)
 					{
-						if(serverData.Boards.get(i).users.get(j).address.equals(key.attachment().toString()))
+						if(!serverData.getSocket.containsKey(serverData.Boards.get(j).users.get(x).address))
 						{
-							serverData.Boards.get(i).users.remove(j);
+							serverData.Boards.get(j).users.remove(x);
 						}
 					}
 				}
-
 				for(int i = 0; i < serverData.onlineUsers.size(); i++)
 				{
 					if(key.attachment().toString().equals(serverData.onlineUsers.get(i).address))
@@ -163,6 +173,10 @@ public class listen implements Runnable
 						serverData.onlineUsers.remove(i);
 					}
 				}
+				// if(serverData.onlineUsers.get(i).address
+				// {
+				// 	serverData.onlineUsers.remove(i);
+					// }
 			}
 			catch(Exception e)
 			{
