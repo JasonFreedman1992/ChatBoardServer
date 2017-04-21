@@ -171,14 +171,14 @@ public class listen implements Runnable
 		}
 		else // if msg received from ecosystem
 		{
+			msg = sb.toString();
+			System.out.println("Parsing " + msg);
 			if(sb.toString().startsWith(commandtag))
 			{
 				type = sb.toString().substring(4);
 			}
 			else if(!sb.toString().startsWith(commandtag))
 			{
-				msg = sb.toString();
-				System.out.println(msg);
 				if(type.equals("login"))
 				{
 					msg = sb.toString();
