@@ -284,7 +284,11 @@ public class listen implements Runnable
 					if(serverData.Boards.isEmpty())
 					{
 						String reply = "Board Not Found";
-						msg(reply, ch);
+						StringBuilder s = new StringBuilder();
+						s.append(serverData.responseCommand);
+						s.append(reply);
+						String s1 = s.toString();
+						msg(s1, ch);
 					}
 					else
 					{
@@ -297,9 +301,12 @@ public class listen implements Runnable
 									if(serverData.onlineUsers.get(j).address.equals(key.attachment().toString()))
 									{	
 										// found board
+										StringBuilder s = new StringBuilder();
+										s.append(serverData.responseCommand);
+										s.append("Board Found");
+										String s0 = s.toString();
+										msg(s0, ch);
 										serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
-										msg(serverData.responseCommand, ch);
-										msg("Board Found", ch);
 									}
 									else
 									{
@@ -366,26 +373,7 @@ public class listen implements Runnable
 			}
 		}
 	}
-					// for(int i = 0; i < serverData.Boards.size(); i++)
-					// {
-					// 	for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
-					// 	{
-					// 		if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
-					// 		{
-					// 			for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-					// 			{
-					// 				String derp = "img";
-					// 				if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
-					// 				{
-					// 					msg(derp, serverData.Boards.get(i).users.get(x).socket);
-					// 					try{Thread.sleep(1000);}catch(InterruptedException f){}
-					// 					img(buffer, serverData.Boards.get(i).users.get(x).socket);
-					// 					try{Thread.sleep(1000);}catch(InterruptedException f){}
-					// 				}
-					// 			}
-					// 		}
-					// 	}
-					// }
+
 	public void msg(String p_msg, SocketChannel p_ch) throws IOException
 	{
 		String msg = p_msg;
