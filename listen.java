@@ -13,7 +13,7 @@ public class listen implements Runnable
 	public ServerData serverData = new ServerData();
 	public ServerSocketChannel initChannellisten;
 	public Selector selector = null;
-	public ByteBuffer buffer = ByteBuffer.allocate(25600);
+	public ByteBuffer buffer = ByteBuffer.allocate(51200);
 	String type = "";
 	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
 	StringBuilder imgbytes;
@@ -138,7 +138,7 @@ public class listen implements Runnable
 			buffer.flip();
 			sb.append(new String(bytes));
 		}
-		if(read < 0) // if user disconnects
+		if(read < 0) // if user disconnects, also filters people out of boards, getsockets hashmap
 		{
 			msg = key.attachment() + " left the server.\n";
 			serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
@@ -327,28 +327,24 @@ public class listen implements Runnable
 				}
 				else if(type.startsWith("img"))
 				{	
-					System.out.println("Buffer remaining :" + buffer.remaining());
-					System.out.println("Buffer position  :" + buffer.position());
-					// for(int i = 0; i < serverData.Boards.size(); i++)
-					// {
-					// 	for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
-					// 	{
-					// 		if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
-					// 		{
-					// 			for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-					// 			{
-					// 				String derp = "img";
-					// 				if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
-					// 				{
-					// 					msg(derp, serverData.Boards.get(i).users.get(x).socket);
-					// 					try{Thread.sleep(1000);}catch(InterruptedException f){}
-					// 					img(buffer, serverData.Boards.get(i).users.get(x).socket);
-					// 					try{Thread.sleep(1000);}catch(InterruptedException f){}
-					// 				}
-					// 			}
-					// 		}
-					// 	}
-					// }
+					for(int i = 0; i < serverData.Boards.size(); i++)
+					{
+						for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
+						{
+							if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
+							{
+								for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+								{
+									if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
+									{
+										String s0 = sb.toString();
+										msg(s0, serverData.Boards.get(i).users.get(x).socket);
+									}
+								}
+							}
+						}
+					}
+
 				}
 				else
 				{
@@ -357,7 +353,7 @@ public class listen implements Runnable
 			}
 			else
 			{
-
+				// packet did not start with command tag
 			}
 		}
 	}
