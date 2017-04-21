@@ -188,25 +188,34 @@ public class listen implements Runnable
 						compPassword = serverData.userBase.get(username);
 						if(compPassword.equals(password))
 						{
+							// build complete message
 							StringBuilder s = new StringBuilder();
 							s.append(serverData.responseCommand);
 							s.append("Password matches the Username.");
 							String s0 = s.toString();
 							msg(s0, ch);
+							// add user to online users and socket to channel mapping
 							User user = new User(key.attachment().toString(), username, ch);
 							serverData.onlineUsers.add(user);
 							serverData.getSocket.put(key.attachment().toString(), ch);
 						}
 						else 
 						{
-							msg(serverData.responseCommand, ch);
-							msg("Password doesnt match the Username.", ch);
+							// build complete message
+							StringBuilder s = new StringBuilder();
+							s.append(serverData.responseCommand);
+							s.append("Password doesnt match the Username.");
+							String s0 = s.toString();
+							msg(s0, ch);
 						}
 					}
 					else
 					{
-						msg(serverData.responseCommand, ch);
-						msg("Username not found.", ch);
+						StringBuilder s = new StringBuilder();
+						s.append(serverData.responseCommand);
+						s.append("Username not found.");
+						String s0 = s.toString();
+						msg(s0, ch);
 					}
 				}
 				else if(type.equals("create"))
@@ -217,8 +226,11 @@ public class listen implements Runnable
 					String password = split[1];
 					if(serverData.userBase.containsKey(username))
 					{
-						msg(serverData.responseCommand, ch);
-						msg("Username already exists.", ch);
+						StringBuilder s = new StringBuilder();
+						s.append(serverData.responseCommand);
+						s.append("Username already exists.");
+						String s0 = s.toString();
+						msg(s0, ch);
 					}
 					else
 					{
@@ -240,8 +252,12 @@ public class listen implements Runnable
 							{
 								for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 								{
-									msg(serverData.msgCommand, ch);
-									msg(msg, serverData.Boards.get(i).users.get(x).socket);
+									StringBuilder s = new StringBuilder();
+									s.append(serverData.msgCommand);
+									s.append("=/");
+									s.append(msg);
+									String s0 = s.toString();
+									msg(s0, serverData.Boards.get(i).users.get(x).socket);
 								}
 							}
 						}
@@ -502,6 +518,9 @@ public class listen implements Runnable
 	}
 	//
 	// adding new account to database with password
+	// also adds blank list of 10 friends with each
+	// user who makes an account, signed with an x
+	//
 	//
 	void addAccountDatabase(String p_username, String p_password, String p_idOwner)
 	{
