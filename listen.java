@@ -122,6 +122,7 @@ public class listen implements Runnable
 		SocketChannel ch = (SocketChannel) key.channel();
 		System.out.println("before clear" + buffer.remaining());
 		buffer.clear();
+		buffer.rewind();
 		System.out.println("after clear" + buffer.remaining());
 		int read = 0;
 		String commandtag = "/1z=";
