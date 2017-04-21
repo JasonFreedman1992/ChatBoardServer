@@ -176,10 +176,11 @@ public class listen implements Runnable
 				{
 					byte s = buffer.get(i);
 					arr[i] = s;
+					buffer.rewind();
 
 				}
 				String l = new String(arr, "UTF-8");
-				System.out.println(l);
+				System.out.println("l = " + l);
 			}
 			if(msg.startsWith(commandtag))
 			{
