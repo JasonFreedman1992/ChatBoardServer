@@ -31,4 +31,6 @@ public class ServerData
 
 	public static byte[] imgArray = new byte[51200];
 	public static int imgSize;
+
+	public static boolean ready = false;
 }

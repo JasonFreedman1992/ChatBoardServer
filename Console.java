@@ -117,9 +117,12 @@ public class Console implements Runnable
 						}
 					}
 				}
-				else if(command.startsWith("sendIMG"))
+				else if(command.startsWith("ready"))
 				{
-					
+					if(!serverData.ready)
+					serverData.ready = true;
+					else if(serverData.ready)
+					serverData.ready = false;
 				}
 				//else if(command.startsWith("add="))
 			}
