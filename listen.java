@@ -135,7 +135,7 @@ public class listen implements Runnable
 			buffer.flip();
 			bytes = new byte[buffer.limit()];
 			buffer.get(bytes);
-			buffer.flip();
+			buffer.clear();
 			sb.append(new String(bytes));
 		}
 		if(read < 0) // if user disconnects, also filters people out of boards, getsockets hashmap
