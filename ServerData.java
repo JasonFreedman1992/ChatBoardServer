@@ -29,6 +29,6 @@ public class ServerData
 	public static int clientTotal = 0;
 	public static int boardTop = 0;
 
-	public static byte[] imgArray = new byte[25600];
+	public static byte[] imgArray = new byte[51200];
 	public static int imgSize;
 }
