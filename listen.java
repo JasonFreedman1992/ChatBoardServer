@@ -145,17 +145,6 @@ public class listen implements Runnable
 			serverData.getSocket.remove(key.attachment().toString());
 			try
 			{
-				// for(int i = 0; i < serverData.Boards.size(); i++)
-				// {
-				// 	for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
-				// 	{
-				// 		if(serverData.Boards.get(i).users.get(j).address.equals(key.attachment().toString()))
-				// 		{
-				// 			serverData.Boards.get(i).users.remove(j);
-				// 		}
-				// 	}
-				// }
-
 				for(int j = 0; j < serverData.Boards.size(); j++)
 				{
 					for(int x = 0; x < serverData.Boards.get(j).users.size(); x++)
@@ -173,26 +162,17 @@ public class listen implements Runnable
 						serverData.onlineUsers.remove(i);
 					}
 				}
-				// if(serverData.onlineUsers.get(i).address
-				// {
-				// 	serverData.onlineUsers.remove(i);
-					// }
 			}
 			catch(Exception e)
 			{
 
 			}
-			broadcast(msg);
-			ch.close();
 		}
 		else // if msg received from ecosystem
 		{
-			//System.out.println(sb.length());
-			//System.out.println("currently parsing " + sb.toString() + " from " + key.attachment());
 			if(sb.toString().startsWith(commandtag))
 			{
 				type = sb.toString().substring(4);
-				buffer.clear();
 			}
 			else if(!sb.toString().startsWith(commandtag))
 			{
@@ -208,6 +188,7 @@ public class listen implements Runnable
 						compPassword = serverData.userBase.get(username);
 						if(compPassword.equals(password))
 						{
+							msg(serverData.responseCommand, ch);
 							msg("Password matches the Username.", ch);
 							User user = new User(key.attachment().toString(), username, ch);
 							serverData.onlineUsers.add(user);
@@ -215,12 +196,14 @@ public class listen implements Runnable
 						}
 						else 
 						{
+							msg(serverData.responseCommand, ch);
 							msg("Password doesnt match the Username.", ch);
 						}
 					}
 					else
 					{
-						broadcast("Username not found.");
+						msg(serverData.responseCommand, ch);
+						msg("Username not found.", ch);
 					}
 				}
 				else if(type.equals("create"))
@@ -231,7 +214,8 @@ public class listen implements Runnable
 					String password = split[1];
 					if(serverData.userBase.containsKey(username))
 					{
-						broadcast("Username already exists.");
+						msg(serverData.responseCommand, ch);
+						msg("Username already exists.", ch);
 					}
 					else
 					{
@@ -253,6 +237,7 @@ public class listen implements Runnable
 							{
 								for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 								{
+									msg(serverData.msgCommand, ch);
 									msg(msg, serverData.Boards.get(i).users.get(x).socket);
 								}
 							}
@@ -291,8 +276,10 @@ public class listen implements Runnable
 								for(int j = 0; j < serverData.onlineUsers.size(); j++)
 								{
 									if(serverData.onlineUsers.get(j).address.equals(key.attachment().toString()))
-									{
+									{	
+										// found board
 										serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
+										msg(serverData.responseCommand, ch);
 										msg("Board Found", ch);
 									}
 									else
@@ -304,7 +291,6 @@ public class listen implements Runnable
 							else
 							{
 								// board not found
-								System.out.println("Board not found");
 							}
 						}
 					}
@@ -312,26 +298,28 @@ public class listen implements Runnable
 				}
 				else if(type.equals("img"))
 				{	
-					for(int i = 0; i < serverData.Boards.size(); i++)
-					{
-						for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
-						{
-							if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
-							{
-								for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-								{
-									String derp = "img";
-									if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
-									{
-										msg(derp, serverData.Boards.get(i).users.get(x).socket);
-										try{Thread.sleep(1000);}catch(InterruptedException f){}
-										img(buffer, serverData.Boards.get(i).users.get(x).socket);
-										try{Thread.sleep(1000);}catch(InterruptedException f){}
-									}
-								}
-							}
-						}
-					}
+					System.out.println("Buffer remaining :" + buffer.remaining());
+					System.out.println("Buffer position  :" + buffer.position());
+					// for(int i = 0; i < serverData.Boards.size(); i++)
+					// {
+					// 	for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
+					// 	{
+					// 		if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
+					// 		{
+					// 			for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+					// 			{
+					// 				String derp = "img";
+					// 				if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
+					// 				{
+					// 					msg(derp, serverData.Boards.get(i).users.get(x).socket);
+					// 					try{Thread.sleep(1000);}catch(InterruptedException f){}
+					// 					img(buffer, serverData.Boards.get(i).users.get(x).socket);
+					// 					try{Thread.sleep(1000);}catch(InterruptedException f){}
+					// 				}
+					// 			}
+					// 		}
+					// 	}
+					// }
 				}
 				else
 				{
@@ -359,7 +347,26 @@ public class listen implements Runnable
 			}
 		}
 	}
-
+					// for(int i = 0; i < serverData.Boards.size(); i++)
+					// {
+					// 	for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
+					// 	{
+					// 		if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
+					// 		{
+					// 			for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+					// 			{
+					// 				String derp = "img";
+					// 				if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
+					// 				{
+					// 					msg(derp, serverData.Boards.get(i).users.get(x).socket);
+					// 					try{Thread.sleep(1000);}catch(InterruptedException f){}
+					// 					img(buffer, serverData.Boards.get(i).users.get(x).socket);
+					// 					try{Thread.sleep(1000);}catch(InterruptedException f){}
+					// 				}
+					// 			}
+					// 		}
+					// 	}
+					// }
 	public void msg(String p_msg, SocketChannel p_ch) throws IOException
 	{
 		String msg = p_msg;
@@ -371,7 +378,6 @@ public class listen implements Runnable
 
 	public void img(ByteBuffer p_imgBuffer, SocketChannel p_ch) throws IOException
 	{
-		System.out.println("sent img to " + p_ch.toString());
 		p_ch.write(p_imgBuffer);
 	}
 

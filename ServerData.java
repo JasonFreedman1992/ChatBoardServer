@@ -5,6 +5,9 @@ import java.util.HashMap;
 
 public class ServerData
 {
+	public final String msgCommand = "/1z=msg";
+	public final String imgCommand = "/1z=img";
+	public final String responseCommand = "/1z=resp";
 	//
 	// users only connected by ip and not user/password in softUsers
 	//

@@ -8,8 +8,6 @@ public class Server
 		Thread initConsoleThread = new Thread();
 		Thread initFilterThread = new Thread();
 
-		ServerData serverData = new ServerData();
-
 		listen initMaster = new listen();
 		initMasterThread = new Thread(initMaster);
 		initMasterThread.start();
