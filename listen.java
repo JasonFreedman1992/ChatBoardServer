@@ -173,15 +173,12 @@ public class listen implements Runnable
 		{
 			msg = sb.toString();
 			System.out.println("Parsing " + msg);
-			if(sb.toString().startsWith(commandtag))
+			if(msg.startsWith(commandtag))
 			{
-				type = sb.toString().substring(4);
-			}
-			else if(!sb.toString().startsWith(commandtag))
-			{
-				if(type.equals("login"))
+				type = msg.substring(4);
+				if(type.startsWith("login"))
 				{
-					msg = sb.toString();
+					msg = type.substring(5);
 					split = msg.split("=", -1);
 					String username = split[0];
 					String password = split[1];
@@ -221,9 +218,9 @@ public class listen implements Runnable
 						msg(s0, ch);
 					}
 				}
-				else if(type.equals("create"))
+				else if(type.startsWith("create"))
 				{
-					msg = sb.toString();
+					msg = type.substring(6);
 					split = msg.split("=", -1);
 					String username = split[0];
 					String password = split[1];
@@ -243,9 +240,9 @@ public class listen implements Runnable
 						serverData.clientTotal++;
 					}
 				}
-				else if(type.equals("msg"))
+				else if(type.startsWith("msg"))
 				{
-					msg = sb.toString();
+					msg = type.substring(3);
 					System.out.println(msg);
 					for(int i = 0; i < serverData.Boards.size(); i++)
 					{
@@ -265,9 +262,9 @@ public class listen implements Runnable
 						}
 					}
 				}
-				else if(type.equals("cbrd"))
+				else if(type.startsWith("cbrd"))
 				{
-					msg = sb.toString();
+					msg = type.substring(4);
 					if(serverData.Boards.isEmpty())
 					{
 						serverData.Boards.add(new Board(0, msg));
@@ -280,9 +277,9 @@ public class listen implements Runnable
 					}
 
 				}
-				else if(type.equals("jbrd"))
+				else if(type.startsWith("jbrd"))
 				{
-					msg = sb.toString();
+					msg = type.substring(4);
 					if(serverData.Boards.isEmpty())
 					{
 						String reply = "Board Not Found";
@@ -324,7 +321,7 @@ public class listen implements Runnable
 					}
 					type = "";
 				}
-				else if(type.equals("img"))
+				else if(type.startsWith("img"))
 				{	
 					System.out.println("Buffer remaining :" + buffer.remaining());
 					System.out.println("Buffer position  :" + buffer.position());
@@ -353,6 +350,10 @@ public class listen implements Runnable
 				{
 
 				}
+			}
+			else
+			{
+
 			}
 		}
 	}
