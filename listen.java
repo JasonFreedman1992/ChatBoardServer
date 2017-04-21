@@ -247,6 +247,8 @@ public class listen implements Runnable
 				{
 					msg = type.substring(3);
 					System.out.println(msg);
+					int z = Character.getNumericValue(msg.charAt(0));
+					System.out.println(z);
 					for(int i = 0; i < serverData.Boards.size(); i++)
 					{
 						for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
