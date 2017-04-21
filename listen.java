@@ -188,8 +188,11 @@ public class listen implements Runnable
 						compPassword = serverData.userBase.get(username);
 						if(compPassword.equals(password))
 						{
-							msg(serverData.responseCommand, ch);
-							msg("Password matches the Username.", ch);
+							StringBuilder s = new StringBuilder();
+							s.append(serverData.responseCommand);
+							s.append("Password matches the Username.");
+							String s0 = s.toString();
+							msg(s0, ch);
 							User user = new User(key.attachment().toString(), username, ch);
 							serverData.onlineUsers.add(user);
 							serverData.getSocket.put(key.attachment().toString(), ch);
