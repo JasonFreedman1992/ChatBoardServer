@@ -177,6 +177,8 @@ public class listen implements Runnable
 			}
 			else if(!sb.toString().startsWith(commandtag))
 			{
+				msg = sb.toString();
+				System.out.println(msg);
 				if(type.equals("login"))
 				{
 					msg = sb.toString();
