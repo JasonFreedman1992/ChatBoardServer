@@ -249,19 +249,13 @@ public class listen implements Runnable
 					System.out.println(msg);
 					int i = Character.getNumericValue(msg.charAt(0));
 					System.out.println(i);
-					for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
+					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 					{
-						//if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
-						//{
-							for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-							{
-								StringBuilder s = new StringBuilder();
-								s.append(serverData.msgCommand);
-								s.append(msg);
-								String s0 = s.toString();
-								msg(s0, serverData.Boards.get(i).users.get(x).socket);
-							}
-						//}
+						StringBuilder s = new StringBuilder();
+						s.append(serverData.msgCommand);
+						s.append(msg);
+						String s0 = s.toString();
+						msg(s0, serverData.Boards.get(i).users.get(x).socket);
 					}
 				}
 				else if(type.startsWith("cbrd"))
