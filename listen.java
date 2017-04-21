@@ -176,6 +176,7 @@ public class listen implements Runnable
 			if(msg.startsWith(commandtag))
 			{
 				type = msg.substring(4);
+				System.out.println(type);
 				if(type.startsWith("login"))
 				{
 					msg = type.substring(5);
@@ -183,6 +184,7 @@ public class listen implements Runnable
 					String username = split[0];
 					String password = split[1];
 					String compPassword = "";
+					System.out.println(msg);
 					if(serverData.userBase.containsKey(username))
 					{
 						compPassword = serverData.userBase.get(username);
@@ -224,6 +226,7 @@ public class listen implements Runnable
 					split = msg.split("=", -1);
 					String username = split[0];
 					String password = split[1];
+					System.out.println(msg);
 					if(serverData.userBase.containsKey(username))
 					{
 						StringBuilder s = new StringBuilder();
@@ -265,6 +268,7 @@ public class listen implements Runnable
 				else if(type.startsWith("cbrd"))
 				{
 					msg = type.substring(4);
+					System.out.println(msg);
 					if(serverData.Boards.isEmpty())
 					{
 						serverData.Boards.add(new Board(0, msg));
@@ -280,6 +284,7 @@ public class listen implements Runnable
 				else if(type.startsWith("jbrd"))
 				{
 					msg = type.substring(4);
+					System.out.println(msg);
 					if(serverData.Boards.isEmpty())
 					{
 						String reply = "Board Not Found";
@@ -319,7 +324,6 @@ public class listen implements Runnable
 							}
 						}
 					}
-					type = "";
 				}
 				else if(type.startsWith("img"))
 				{	
