@@ -120,10 +120,10 @@ public class listen implements Runnable
 		split[0] = "";
 		split[1] = "";
 		SocketChannel ch = (SocketChannel) key.channel();
-		System.out.println("before clear" + buffer.remaining());
+		//System.out.println("before clear" + buffer.remaining());
 		buffer.clear();
 		buffer.rewind();
-		System.out.println("after clear" + buffer.remaining());
+		//System.out.println("after clear" + buffer.remaining());
 		int read = 0;
 		String commandtag = "/1z=";
 		String command = "";
@@ -355,11 +355,10 @@ public class listen implements Runnable
 				}
 			}
 		}
-
 	}
 	
 	//
-	// broadcast
+	// old broadcast method
 	//
 	void broadcast(String msg) throws IOException
 	{
