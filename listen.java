@@ -255,7 +255,6 @@ public class listen implements Runnable
 								{
 									StringBuilder s = new StringBuilder();
 									s.append(serverData.msgCommand);
-									s.append("=/");
 									s.append(msg);
 									String s0 = s.toString();
 									msg(s0, serverData.Boards.get(i).users.get(x).socket);
