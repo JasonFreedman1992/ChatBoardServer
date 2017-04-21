@@ -174,6 +174,7 @@ public class listen implements Runnable
 				byte[] arr = new byte[10];
 				for(int i = 0; i < 10; i++)
 				{
+					buffer.flip();
 					byte s = buffer.get(i);
 					arr[i] = s;
 					buffer.rewind();
