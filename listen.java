@@ -173,6 +173,9 @@ public class listen implements Runnable
 		{
 			msg = sb.toString();
 			System.out.println("Parsing " + msg);
+			System.out.println("end Parse");
+			System.out.println("end Parse");
+			System.out.println("end Parse");
 			if(msg.startsWith(commandtag))
 			{
 				type = msg.substring(4);
@@ -318,6 +321,7 @@ public class listen implements Runnable
 						}
 					}
 				}
+
 				else if(type.startsWith("img"))
 				{	
 					msg = type.substring(3);
