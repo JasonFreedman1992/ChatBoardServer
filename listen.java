@@ -321,7 +321,7 @@ public class listen implements Runnable
 				else if(type.startsWith("img"))
 				{	
 					msg = type.substring(3);
-					System.out.println(msg);
+					System.out.println("in img " + msg);
 					int i = Character.getNumericValue(msg.charAt(0));
 					System.out.println(i);
 					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
