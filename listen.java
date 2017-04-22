@@ -173,21 +173,6 @@ public class listen implements Runnable
 		{
 			msg = sb.toString();
 			System.out.println("Parsing " + msg);
-			if(serverData.ready == true)
-			{
-				byte[] arr = new byte[10];
-				for(int i = 0; i < 10; i++)
-				{
-					//buffer.flip();
-					byte s = buffer.get(i);
-					System.out.println(s);
-					arr[i] = s;
-					buffer.rewind();
-
-				}
-				String l = new String(arr, "UTF-8");
-				System.out.println("l = " + l);
-			}
 			if(msg.startsWith(commandtag))
 			{
 				type = msg.substring(4);
