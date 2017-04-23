@@ -342,13 +342,11 @@ public class listen implements Runnable
 					System.out.println(i);
 					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 					{
-						serverData.Boards.get(i).users.get(x).socket.write(buffer);
-						buffer.rewind();
-						// if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
-						// {
-						// 	serverData.Boards.get(i).users.get(x).socket.write(buffer);
-						// 	buffer.rewind();
-						// }
+						if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
+						{
+							serverData.Boards.get(i).users.get(x).socket.write(buffer);
+							buffer.rewind();
+						}
 					}
 
 					// for(int i = 0; i < serverData.Boards.size(); i++)
