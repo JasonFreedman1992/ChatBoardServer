@@ -246,21 +246,6 @@ public class listen implements Runnable
 						serverData.clientTotal++;
 					}
 				}
-				else if(type.startsWith("msg"))
-				{
-					msg = type.substring(3);
-					System.out.println(msg);
-					int i = Character.getNumericValue(msg.charAt(0));
-					System.out.println(i);
-					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-					{
-						StringBuilder s = new StringBuilder();
-						s.append(serverData.msgCommand);
-						s.append(msg);
-						String s0 = s.toString();
-						msg(s0, serverData.Boards.get(i).users.get(x).socket);
-					}
-				}
 				else if(type.startsWith("cbrd"))
 				{
 					msg = type.substring(4);
@@ -321,20 +306,49 @@ public class listen implements Runnable
 						}
 					}
 				}
-
-				else if(type.startsWith("img"))
-				{	
+				else if(type.startsWith("msg"))
+				{
 					msg = type.substring(3);
-					System.out.println("in img ");
+					System.out.println(msg);
 					int i = Character.getNumericValue(msg.charAt(0));
 					System.out.println(i);
 					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 					{
-						if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
-						{
-							serverData.Boards.get(i).users.get(x).socket.write(buffer);
-							buffer.rewind();
-						}
+						StringBuilder s = new StringBuilder();
+						s.append(serverData.msgCommand);
+						s.append(msg);
+						String s0 = s.toString();
+						msg(s0, serverData.Boards.get(i).users.get(x).socket);
+					}
+				}
+				else if(type.startsWith("img"))
+				{	
+					// msg = type.substring(3);
+					// int i = Character.getNumericValue(msg.charAt(0));
+					// System.out.println(i);
+					// String[] split1 = new String[2];
+					// split1[0] = "";
+					// split1[1] = "";
+					// split1 = msg.split("=/", -1);
+					// String dest = split1[0];
+					// String tobeSplit = split1[1];
+					// String[] split2 = new String[2];
+					// split2[0] = "";
+					// split2[1] = "";
+					// split2 = tobeSplit.split("=", -1);
+
+					msg = type.substring(3);
+					int i = Character.getNumericValue(msg.charAt(0));
+					System.out.println(i);
+					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+					{
+						serverData.Boards.get(i).users.get(x).socket.write(buffer);
+						buffer.rewind();
+						// if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
+						// {
+						// 	serverData.Boards.get(i).users.get(x).socket.write(buffer);
+						// 	buffer.rewind();
+						// }
 					}
 
 					// for(int i = 0; i < serverData.Boards.size(); i++)
@@ -393,11 +407,6 @@ public class listen implements Runnable
 		SocketChannel sch = p_ch;
 		sch.write(msgBuffer);
 		msgBuffer.rewind();
-	}
-
-	public void img(ByteBuffer p_imgBuffer, SocketChannel p_ch) throws IOException
-	{
-		p_ch.write(p_imgBuffer);
 	}
 
 	//
