@@ -173,9 +173,6 @@ public class listen implements Runnable
 		{
 			msg = sb.toString();
 			System.out.println("Parsing " + msg);
-			System.out.println("end Parse");
-			System.out.println("end Parse");
-			System.out.println("end Parse");
 			if(msg.startsWith(commandtag))
 			{
 				type = msg.substring(4);
@@ -292,6 +289,16 @@ public class listen implements Runnable
 										String s0 = s.toString();
 										msg(s0, ch);
 										serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
+										StringBuilder s1 = new StringBuilder();
+										s1.append(serverData.responseCommand);
+										s1.append("$f");
+										s1.append(serverData.onlineUsers.get(j).username);
+										String s2 = s1.toString();
+
+										for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+										{
+											msg(s2 , serverData.Boards.get(i).users.get(x).socket);
+										}
 									}
 									else
 									{
@@ -323,20 +330,6 @@ public class listen implements Runnable
 				}
 				else if(type.startsWith("img"))
 				{	
-					// msg = type.substring(3);
-					// int i = Character.getNumericValue(msg.charAt(0));
-					// System.out.println(i);
-					// String[] split1 = new String[2];
-					// split1[0] = "";
-					// split1[1] = "";
-					// split1 = msg.split("=/", -1);
-					// String dest = split1[0];
-					// String tobeSplit = split1[1];
-					// String[] split2 = new String[2];
-					// split2[0] = "";
-					// split2[1] = "";
-					// split2 = tobeSplit.split("=", -1);
-
 					msg = type.substring(3);
 					int i = Character.getNumericValue(msg.charAt(0));
 					System.out.println(i);
@@ -348,24 +341,6 @@ public class listen implements Runnable
 							buffer.rewind();
 						}
 					}
-
-					// for(int i = 0; i < serverData.Boards.size(); i++)
-					// {
-					// 	for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
-					// 	{
-					// 		if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
-					// 		{
-					// 			for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-					// 			{
-					// 				if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
-					// 				{
-					// 					// String s0 = sb.toString();
-					// 					// msg(s0, serverData.Boards.get(i).users.get(x).socket);
-					// 				}
-					// 			}
-					// 		}
-					// 	}
-					// }
 				}
 				else
 				{
