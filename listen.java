@@ -292,13 +292,13 @@ public class listen implements Runnable
 										StringBuilder s1 = new StringBuilder();
 										s1.append(serverData.responseCommand);
 										s1.append("$f");
-										s1.append(serverData.onlineUsers.get(j).username);
-										String s2 = s1.toString();
-
 										for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 										{
-											msg(s2 , serverData.Boards.get(i).users.get(x).socket);
+											s1.append("=/");
+											s1.append(serverData.Boards.get(i).users.get(x).username);
 										}
+										String s2 = s1.toString();
+										msg(s2, ch);
 									}
 									else
 									{
