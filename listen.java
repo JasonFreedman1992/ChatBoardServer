@@ -289,15 +289,15 @@ public class listen implements Runnable
 										String s0 = s.toString();
 										msg(s0, ch);
 										serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
-										StringBuilder s1 = new StringBuilder();
-										s1.append(serverData.responseCommand);
-										s1.append("$f");
 										try
 										{
 
 
 											for(int y = 0; y < serverData.Boards.get(i).users.size(); y++)
 											{
+												StringBuilder s1 = new StringBuilder();
+												s1.append(serverData.responseCommand);
+												s1.append("$f");
 												for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 												{
 													s1.append("=/");
