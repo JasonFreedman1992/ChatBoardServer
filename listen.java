@@ -131,10 +131,6 @@ public class listen implements Runnable
 			buffer.flip();
 			bytes = new byte[buffer.limit()];
 			buffer.get(bytes);
-			System.out.println(bytes[0]);
-			System.out.println(bytes[1]);
-			System.out.println(bytes[2]);
-			System.out.println(bytes[3]);
 			buffer.rewind();
 			sb.append(new String(bytes));
 		}
