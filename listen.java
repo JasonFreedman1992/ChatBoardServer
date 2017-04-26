@@ -289,13 +289,33 @@ public class listen implements Runnable
 										String s0 = s.toString();
 										msg(s0, ch);
 										serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
+
 										StringBuilder s1 = new StringBuilder();
+										StringBuilder s3 = new StringBuilder();
+										s3.append(serverData.responseCommand);
+										s3.append("$i");
+										s3.append(serverData.Boards.get(i).name);
+										s3.append("=/");
+										String s4 = String.valueOf(serverData.Boards.get(i).ID);
+										s3.append(s4);
+										s4 = s3.toString();
+										try
+										{
+											Thread.sleep(100);
+											msg(s4, ch);
+										}
+										catch(InterruptedException f)
+										{
+
+										}
+
 										s1.append(serverData.responseCommand);
 										s1.append("$f");
 										for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 										{
 											s1.append("=/");
 											s1.append(serverData.Boards.get(i).users.get(x).username);
+
 										}
 										String s2 = s1.toString();
 										try
@@ -310,16 +330,6 @@ public class listen implements Runnable
 										{
 
 										}
-										// try
-										// {
-										// 	Thread.sleep(100);
-
-										// }
-										// catch(InterruptedException f)
-										// {
-
-										// }
-										// msg(s2, ch);
 									}
 									else
 									{
