@@ -302,6 +302,31 @@ public class listen implements Runnable
 							serverData.Boards.get(i).users.remove(j);
 						}
 					}
+					//
+					//
+					//
+					StringBuilder s1 = new StringBuilder();
+					s1.append(serverData.responseCommand);
+					s1.append("$f");
+					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+					{
+						s1.append("=/");
+						s1.append(serverData.Boards.get(i).users.get(x).username);
+
+					}
+					String s2 = s1.toString();
+					try
+					{
+						for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+						{
+							Thread.sleep(100);
+							msg(s2, serverData.Boards.get(i).users.get(x).socket);
+						}
+					}
+					catch(InterruptedException f)
+					{
+
+					}
 				}
 				else if(type.startsWith("cbrd"))
 				{
