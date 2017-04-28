@@ -202,73 +202,6 @@ public class listen implements Runnable
 						}
 					}
 				}
-				else if(type.startsWith("login"))
-				{
-					msg = type.substring(5);
-					
-					split = msg.split("=", -1);
-					String username = split[0];
-					String password = split[1];
-					String compPassword = "";
-					System.out.println(msg);
-					if(serverData.userBase.containsKey(username))
-					{
-						compPassword = serverData.userBase.get(username);
-						if(compPassword.equals(password))
-						{
-							// build complete message
-							StringBuilder s = new StringBuilder();
-							s.append(serverData.responseCommand);
-							s.append("Password matches the Username.");
-							String s0 = s.toString();
-							msg(s0, ch);
-							// add user to online users and socket to channel mapping
-							User user = new User(key.attachment().toString(), username, ch);
-							serverData.onlineUsers.add(user);
-							serverData.getSocket.put(key.attachment().toString(), ch);
-						}
-						else 
-						{
-							// build complete message
-							StringBuilder s = new StringBuilder();
-							s.append(serverData.responseCommand);
-							s.append("Password doesnt match the Username.");
-							String s0 = s.toString();
-							msg(s0, ch);
-						}
-					}
-					else
-					{
-						StringBuilder s = new StringBuilder();
-						s.append(serverData.responseCommand);
-						s.append("Username not found.");
-						String s0 = s.toString();
-						msg(s0, ch);
-					}
-				}
-				else if(type.startsWith("create"))
-				{
-					msg = type.substring(6);
-					split = msg.split("=", -1);
-					String username = split[0];
-					String password = split[1];
-					System.out.println(msg);
-					if(serverData.userBase.containsKey(username))
-					{
-						StringBuilder s = new StringBuilder();
-						s.append(serverData.responseCommand);
-						s.append("Username already exists.");
-						String s0 = s.toString();
-						msg(s0, ch);
-					}
-					else
-					{
-						serverData.userBase.put(username, password);
-						String id = Integer.toString(serverData.clientTotal);
-						addAccountDatabase(username, password, id);
-						serverData.clientTotal++;
-					}
-				}
 				else if(type.startsWith("cbrd"))
 				{
 					msg = type.substring(4);
@@ -372,6 +305,73 @@ public class listen implements Runnable
 								// board not found
 							}
 						}
+					}
+				}
+				else if(type.startsWith("login"))
+				{
+					msg = type.substring(5);
+					
+					split = msg.split("=", -1);
+					String username = split[0];
+					String password = split[1];
+					String compPassword = "";
+					System.out.println(msg);
+					if(serverData.userBase.containsKey(username))
+					{
+						compPassword = serverData.userBase.get(username);
+						if(compPassword.equals(password))
+						{
+							// build complete message
+							StringBuilder s = new StringBuilder();
+							s.append(serverData.responseCommand);
+							s.append("Password matches the Username.");
+							String s0 = s.toString();
+							msg(s0, ch);
+							// add user to online users and socket to channel mapping
+							User user = new User(key.attachment().toString(), username, ch);
+							serverData.onlineUsers.add(user);
+							serverData.getSocket.put(key.attachment().toString(), ch);
+						}
+						else 
+						{
+							// build complete message
+							StringBuilder s = new StringBuilder();
+							s.append(serverData.responseCommand);
+							s.append("Password doesnt match the Username.");
+							String s0 = s.toString();
+							msg(s0, ch);
+						}
+					}
+					else
+					{
+						StringBuilder s = new StringBuilder();
+						s.append(serverData.responseCommand);
+						s.append("Username not found.");
+						String s0 = s.toString();
+						msg(s0, ch);
+					}
+				}
+				else if(type.startsWith("create"))
+				{
+					msg = type.substring(6);
+					split = msg.split("=", -1);
+					String username = split[0];
+					String password = split[1];
+					System.out.println(msg);
+					if(serverData.userBase.containsKey(username))
+					{
+						StringBuilder s = new StringBuilder();
+						s.append(serverData.responseCommand);
+						s.append("Username already exists.");
+						String s0 = s.toString();
+						msg(s0, ch);
+					}
+					else
+					{
+						serverData.userBase.put(username, password);
+						String id = Integer.toString(serverData.clientTotal);
+						addAccountDatabase(username, password, id);
+						serverData.clientTotal++;
 					}
 				}
 				else
