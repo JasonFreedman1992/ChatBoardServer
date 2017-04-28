@@ -309,7 +309,7 @@ public class listen implements Runnable
 					//System.out.println(msg);
 					if(serverData.Boards.isEmpty())
 					{
-						serverData.Boards.add(new Board(String.valueOf(0), msg));
+						serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), msg));
 						serverData.boardTop++;
 					}
 					else

@@ -7,7 +7,7 @@ public class Board
 	String name;
 	String password;
 	String userAdmin;
-	String ID;
+	String ID = "";
 	public Board(String p_id, String p_name)
 	{
 		ID = p_id;
