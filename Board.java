@@ -7,8 +7,8 @@ public class Board
 	String name;
 	String password;
 	String userAdmin;
-	int ID;
-	public Board(int p_id, String p_name)
+	String ID;
+	public Board(String p_id, String p_name)
 	{
 		ID = p_id;
 		name = p_name;

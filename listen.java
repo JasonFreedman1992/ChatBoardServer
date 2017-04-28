@@ -173,9 +173,39 @@ public class listen implements Runnable
 			{
 				type = msg.substring(4);
 				System.out.println(type);
-				if(type.startsWith("login"))
+				if(type.startsWith("msg"))
+				{
+					msg = type.substring(3);
+					System.out.println(msg);
+					int i = Character.getNumericValue(msg.charAt(0));
+					System.out.println(i);
+					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+					{
+						StringBuilder s = new StringBuilder();
+						s.append(serverData.msgCommand);
+						s.append(msg);
+						String s0 = s.toString();
+						msg(s0, serverData.Boards.get(i).users.get(x).socket);
+					}
+				}
+				else if(type.startsWith("img"))
+				{	
+					msg = type.substring(3);
+					int i = Character.getNumericValue(msg.charAt(0));
+					System.out.println(i);
+					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+					{
+						if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
+						{
+							serverData.Boards.get(i).users.get(x).socket.write(buffer);
+							buffer.rewind();
+						}
+					}
+				}
+				else if(type.startsWith("login"))
 				{
 					msg = type.substring(5);
+					
 					split = msg.split("=", -1);
 					String username = split[0];
 					String password = split[1];
@@ -245,12 +275,12 @@ public class listen implements Runnable
 					System.out.println(msg);
 					if(serverData.Boards.isEmpty())
 					{
-						serverData.Boards.add(new Board(0, msg));
+						serverData.Boards.add(new Board(String.valueOf(0), msg));
 						serverData.boardTop++;
 					}
 					else
 					{
-						serverData.Boards.add(new Board(serverData.boardTop, msg));
+						serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), msg));
 						serverData.boardTop++;
 					}
 
@@ -285,14 +315,16 @@ public class listen implements Runnable
 										String s0 = s.toString();
 										msg(s0, ch);
 										serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
-
+										//
+										// send board info
+										//
 										StringBuilder s1 = new StringBuilder();
 										StringBuilder s3 = new StringBuilder();
 										s3.append(serverData.responseCommand);
 										s3.append("$i");
 										s3.append(serverData.Boards.get(i).name);
 										s3.append("=/");
-										String s4 = String.valueOf(serverData.Boards.get(i).ID);
+										String s4 = serverData.Boards.get(i).ID;
 										s3.append(s4);
 										s4 = s3.toString();
 										try
@@ -304,7 +336,9 @@ public class listen implements Runnable
 										{
 
 										}
-
+										//
+										// refresh board members list
+										//
 										s1.append(serverData.responseCommand);
 										s1.append("$f");
 										for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
@@ -337,35 +371,6 @@ public class listen implements Runnable
 							{
 								// board not found
 							}
-						}
-					}
-				}
-				else if(type.startsWith("msg"))
-				{
-					msg = type.substring(3);
-					System.out.println(msg);
-					int i = Character.getNumericValue(msg.charAt(0));
-					System.out.println(i);
-					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-					{
-						StringBuilder s = new StringBuilder();
-						s.append(serverData.msgCommand);
-						s.append(msg);
-						String s0 = s.toString();
-						msg(s0, serverData.Boards.get(i).users.get(x).socket);
-					}
-				}
-				else if(type.startsWith("img"))
-				{	
-					msg = type.substring(3);
-					int i = Character.getNumericValue(msg.charAt(0));
-					System.out.println(i);
-					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-					{
-						if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
-						{
-							serverData.Boards.get(i).users.get(x).socket.write(buffer);
-							buffer.rewind();
 						}
 					}
 				}
