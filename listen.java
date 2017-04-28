@@ -172,13 +172,13 @@ public class listen implements Runnable
 			if(msg.startsWith(commandtag))
 			{
 				type = msg.substring(4);
-				System.out.println(type);
+				//System.out.println(type);
 				if(type.startsWith("msg"))
 				{
 					msg = type.substring(3);
-					System.out.println(msg);
+					//System.out.println(msg);
 					int i = Character.getNumericValue(msg.charAt(0));
-					System.out.println(i);
+					//System.out.println(i);
 					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 					{
 						StringBuilder s = new StringBuilder();
@@ -192,7 +192,7 @@ public class listen implements Runnable
 				{	
 					msg = type.substring(3);
 					int i = Character.getNumericValue(msg.charAt(0));
-					System.out.println(i);
+					//System.out.println(i);
 					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 					{
 						if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
@@ -202,26 +202,10 @@ public class listen implements Runnable
 						}
 					}
 				}
-				else if(type.startsWith("cbrd"))
-				{
-					msg = type.substring(4);
-					System.out.println(msg);
-					if(serverData.Boards.isEmpty())
-					{
-						serverData.Boards.add(new Board(String.valueOf(0), msg));
-						serverData.boardTop++;
-					}
-					else
-					{
-						serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), msg));
-						serverData.boardTop++;
-					}
-
-				}
 				else if(type.startsWith("jbrd"))
 				{
 					msg = type.substring(4);
-					System.out.println(msg);
+					//System.out.println(msg);
 					if(serverData.Boards.isEmpty())
 					{
 						String reply = "Board Not Found";
@@ -307,6 +291,34 @@ public class listen implements Runnable
 						}
 					}
 				}
+				else if(type.startsWith("quit"))
+				{
+					msg = type.substring(4);
+					int i = Character.getNumericValue(msg.charAt(0));
+					for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
+					{
+						if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
+						{
+							serverData.Boards.get(i).users.remove(j);
+						}
+					}
+				}
+				else if(type.startsWith("cbrd"))
+				{
+					msg = type.substring(4);
+					//System.out.println(msg);
+					if(serverData.Boards.isEmpty())
+					{
+						serverData.Boards.add(new Board(String.valueOf(0), msg));
+						serverData.boardTop++;
+					}
+					else
+					{
+						serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), msg));
+						serverData.boardTop++;
+					}
+
+				}
 				else if(type.startsWith("login"))
 				{
 					msg = type.substring(5);
@@ -315,7 +327,7 @@ public class listen implements Runnable
 					String username = split[0];
 					String password = split[1];
 					String compPassword = "";
-					System.out.println(msg);
+					//System.out.println(msg);
 					if(serverData.userBase.containsKey(username))
 					{
 						compPassword = serverData.userBase.get(username);
@@ -357,7 +369,7 @@ public class listen implements Runnable
 					split = msg.split("=", -1);
 					String username = split[0];
 					String password = split[1];
-					System.out.println(msg);
+					//System.out.println(msg);
 					if(serverData.userBase.containsKey(username))
 					{
 						StringBuilder s = new StringBuilder();
