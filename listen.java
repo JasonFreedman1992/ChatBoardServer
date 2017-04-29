@@ -146,31 +146,9 @@ public class listen implements Runnable
 				{
 					for(int x = 0; x < serverData.Boards.get(j).users.size(); x++)
 					{
-						if(!serverData.getSocket.containsKey(serverData.Boards.get(j).users.get(x).address))
+						if(key.attachment().toString().equals(serverData.Boards.get(j).users.get(x).address))
 						{
 							serverData.Boards.get(j).users.remove(x);
-							// StringBuilder s1 = new StringBuilder();
-							// s1.append(serverData.responseCommand);
-							// s1.append("$f");
-							// for(int y = 0; y < serverData.Boards.get(j).users.size(); y++)
-							// {
-							// 	s1.append("=/");
-							// 	s1.append(serverData.Boards.get(j).users.get(y).username);
-
-							// }
-							// String s2 = s1.toString();
-							// try
-							// {
-							// 	for(int z = 0; z < serverData.Boards.get(j).users.size(); z++)
-							// 	{
-							// 		Thread.sleep(100);
-							// 		msg(s2, serverData.Boards.get(j).users.get(z).socket);
-							// 	}
-							// }
-							// catch(InterruptedException f)
-							// {
-
-							// }
 						}
 					}
 				}
