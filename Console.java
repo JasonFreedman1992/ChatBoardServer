@@ -5,6 +5,7 @@ public class Console implements Runnable
 	Scanner Console = new Scanner(System.in);
 	ServerData serverData = new ServerData();
 	String[] split = new String[2];
+
 	Console()
 	{
 
@@ -123,6 +124,14 @@ public class Console implements Runnable
 					serverData.ready = true;
 					else if(serverData.ready)
 					serverData.ready = false;
+				}
+				else if(command.startsWith("get=iptous"))
+				{
+					for(String key : serverData.ipToUsername.keySet())
+					{
+						System.out.println(key);
+						System.out.println(serverData.ipToUsername.get(key).toString());
+					}
 				}
 				//else if(command.startsWith("add="))
 			}
