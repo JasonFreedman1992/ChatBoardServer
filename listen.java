@@ -173,22 +173,7 @@ public class listen implements Runnable
 			{
 				type = msg.substring(4);
 				//System.out.println(type);
-				if(type.startsWith("msg"))
-				{
-					msg = type.substring(3);
-					//System.out.println(msg);
-					int i = Character.getNumericValue(msg.charAt(0));
-					//System.out.println(i);
-					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-					{
-						StringBuilder s = new StringBuilder();
-						s.append(serverData.msgCommand);
-						s.append(msg);
-						String s0 = s.toString();
-						msg(s0, serverData.Boards.get(i).users.get(x).socket);
-					}
-				}
-				else if(type.startsWith("img"))
+				if(type.startsWith("img"))
 				{	
 					msg = type.substring(3);
 					int i = Character.getNumericValue(msg.charAt(0));
@@ -200,6 +185,23 @@ public class listen implements Runnable
 							serverData.Boards.get(i).users.get(x).socket.write(buffer);
 							buffer.rewind();
 						}
+					}
+				}
+				else if(type.startsWith("msg"))
+				{
+					msg = type.substring(3);
+					//System.out.println(msg);
+					int i = Character.getNumericValue(msg.charAt(0));
+					//System.out.println(i);
+					msg = msg.substring(1);
+					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+					{
+						StringBuilder s = new StringBuilder();
+						s.append(serverData.msgCommand);
+						s.append(serverData.ipToUsername.get(key.attachment().toString()));
+						s.append(msg);
+						String s0 = s.toString();
+						msg(s0, serverData.Boards.get(i).users.get(x).socket);
 					}
 				}
 				else if(type.startsWith("jbrd"))
