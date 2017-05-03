@@ -178,10 +178,15 @@ public class listen implements Runnable
 					msg = type.substring(3);
 					int i = Character.getNumericValue(msg.charAt(0));
 					//System.out.println(i);
+					msg = msg.substring(1);
+
 					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 					{
 						if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
 						{
+							StringBuilder s = new StringBuilder();
+							s.append(buffer);
+							System.out.println(s.toString());
 							serverData.Boards.get(i).users.get(x).socket.write(buffer);
 							buffer.rewind();
 						}
