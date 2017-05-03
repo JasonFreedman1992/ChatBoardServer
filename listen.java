@@ -368,6 +368,7 @@ public class listen implements Runnable
 							User user = new User(key.attachment().toString(), username, ch);
 							serverData.onlineUsers.add(user);
 							serverData.getSocket.put(key.attachment().toString(), ch);
+							serverData.ipToUsername.put(key.attachment().toString(), username);
 						}
 						else 
 						{
