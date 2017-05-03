@@ -185,10 +185,12 @@ public class listen implements Runnable
 						if(!serverData.Boards.get(i).users.get(x).address.equals(key.attachment().toString()))
 						{
 							StringBuilder s = new StringBuilder();
-							s.append(buffer);
-							System.out.println(s.toString());
-							serverData.Boards.get(i).users.get(x).socket.write(buffer);
-							buffer.rewind();
+							s.append(serverData.imgCommand);
+							s.append(serverData.ipToUsername.get(key.attachment().toString()));
+							s.append(msg);
+							String s1 = s.toString();
+							msg(s1, serverData.Boards.get(i).users.get(x).socket);
+							//buffer.rewind();
 						}
 					}
 				}
