@@ -364,27 +364,38 @@ public class listen implements Runnable
 					//System.out.println(msg);
 					if(serverData.userBase.containsKey(username))
 					{
-						compPassword = serverData.userBase.get(username);
-						if(compPassword.equals(password))
+						if(!serverData.onlineUsers.contains(username))
 						{
-							// build complete message
-							StringBuilder s = new StringBuilder();
-							s.append(serverData.responseCommand);
-							s.append("Password matches the Username.");
-							String s0 = s.toString();
-							msg(s0, ch);
-							// add user to online users and socket to channel mapping
-							User user = new User(key.attachment().toString(), username, ch);
-							serverData.onlineUsers.add(user);
-							serverData.getSocket.put(key.attachment().toString(), ch);
-							serverData.ipToUsername.put(key.attachment().toString(), username);
+							compPassword = serverData.userBase.get(username);
+							if(compPassword.equals(password))
+							{
+								// build complete message
+								StringBuilder s = new StringBuilder();
+								s.append(serverData.responseCommand);
+								s.append("Password matches the Username.");
+								String s0 = s.toString();
+								msg(s0, ch);
+								// add user to online users and socket to channel mapping
+								User user = new User(key.attachment().toString(), username, ch);
+								serverData.onlineUsers.add(user);
+								serverData.getSocket.put(key.attachment().toString(), ch);
+								serverData.ipToUsername.put(key.attachment().toString(), username);
+							}
+							else 
+							{
+								// build complete message
+								StringBuilder s = new StringBuilder();
+								s.append(serverData.responseCommand);
+								s.append("Password doesnt match the Username.");
+								String s0 = s.toString();
+								msg(s0, ch);
+							}
 						}
-						else 
+						else
 						{
-							// build complete message
 							StringBuilder s = new StringBuilder();
 							s.append(serverData.responseCommand);
-							s.append("Password doesnt match the Username.");
+							s.append("User Online");
 							String s0 = s.toString();
 							msg(s0, ch);
 						}
