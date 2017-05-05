@@ -549,8 +549,8 @@ public class listen implements Runnable
 					if(counter == 3)
 					{
 						serverData.userBase.put(username, password);
-						serverData.idToUsername.put(username, id);
-						serverData.usernameToID.put(id, username);
+						serverData.idToUsername.put(id, username);
+						serverData.usernameToID.put(username, id);
 						counter = 0;
 					}
 				}
