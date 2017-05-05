@@ -501,6 +501,7 @@ public class listen implements Runnable
 			int columnsNumber = rsmd.getColumnCount();
 			String username = "";
 			String password = "";
+			String id = "";
 			int counter = 0;
 			while(rs.next())
 			{
@@ -514,13 +515,19 @@ public class listen implements Runnable
 						serverData.clientTotal++;
 						username = columnValue;
 					}
-					else if(columnName.equals("password"))
+					if(columnName.equals("password"))
 					{
 						password = columnValue;
 					}
-					if(counter == 2)
+					if(columnName.equals("id"))
+					{
+						id = columnValue;
+					}
+					if(counter == 3)
 					{
 						serverData.userBase.put(username, password);
+						serverData.idToUsername.put(username, id);
+						serverData.usernameToID.put(id, username);
 						counter = 0;
 					}
 				}
@@ -540,6 +547,12 @@ public class listen implements Runnable
 			System.out.println("not found class");
 		}
 
+		//
+		// map the friends data
+		//
+		//
+		// possibly use sql query RETURN IF NOT NULL
+		//
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
@@ -551,7 +564,7 @@ public class listen implements Runnable
 			int columnsNumber = rsmd.getColumnCount();
 			String idOwned = "";
 			String idFriend = "";
-			ArrayList<FriendList> list = new ArrayList<FriendList>();
+			ArrayList<FriendList> friendList = new ArrayList<FriendList>();
 			int counter = 0;
 			while(rs.next())
 			{
@@ -562,21 +575,21 @@ public class listen implements Runnable
 					if(columnName.equals("idOwner"))
 					{
 						idOwned = columnValue;
-						list.add(new FriendList(idOwned));
+						friendList.add(new FriendList(idOwned));
 					}
 					else if(!columnName.startsWith("idOwner"))
 					{
 						if(!columnValue.equals("x"))
 						{
 							idFriend = columnValue;
-							list.get(list.size() - 1).list.add(idFriend);
+							friendList.get(friendList.size() - 1).list.add(idFriend);
 						}
 					}
 				}
 			}
-			for(int i = 0; i < list.size(); i++)
+			for(int i = 0; i < friendList.size(); i++)
 			{
-				serverData.idToFriends.put(list.get(i).idOwned, list.get(i).list);
+				serverData.idToFriends.put(friendList.get(i).idOwned, friendList.get(i).list);
 			}
 		}
 		catch(SQLException e)
@@ -604,6 +617,9 @@ public class listen implements Runnable
 			Statement statement = conn.createStatement();
 			statement.executeUpdate(query);
 
+			//
+			// add to friends database
+			//
 			Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 			Statement statement1 = conn1.createStatement();
 			query = "Insert INTO Friends " + "VALUES ('" + p_idOwner + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "')";

@@ -3,6 +3,7 @@ public class User
 	public java.nio.channels.SocketChannel socket;
 	public String address;
 	public String username;
+	public String ID;
 
 	User(String p_address, String p_username, java.nio.channels.SocketChannel p_socket)
 	{

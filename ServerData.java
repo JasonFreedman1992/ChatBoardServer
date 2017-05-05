@@ -21,6 +21,9 @@ public class ServerData
 	public static HashMap<String, SocketChannel> getSocket = new HashMap<String, SocketChannel>();
 	// enter id get list of friend id's
 	public static HashMap<String, ArrayList<String>> idToFriends = new HashMap<String, ArrayList<String>>();
+	//
+	public static HashMap<String, String> idToUsername = new HashMap<String, String>();
+	public static HashMap<String, String> usernameToID = new HashMap<String, String>();
 	// list of users
 	public static LinkedList<User> onlineUsers = new LinkedList<User>();
 	// list of instances
