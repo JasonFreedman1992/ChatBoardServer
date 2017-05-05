@@ -24,11 +24,12 @@ public class ServerData
 	//
 	public static HashMap<String, String> idToUsername = new HashMap<String, String>();
 	public static HashMap<String, String> usernameToID = new HashMap<String, String>();
+	public static HashMap<String, String> ipToUsername = new HashMap<String, String>();
+	public static HashMap<String, String> usernameToIP = new HashMap<String, String>();
 	// list of users
 	public static LinkedList<User> onlineUsers = new LinkedList<User>();
 	// list of instances
 	public static LinkedList<Board> Boards = new LinkedList<Board>();
-	public static HashMap<String, String> ipToUsername = new HashMap<String, String>();
 	public static int clientTotal = 0;
 	public static int boardTop = 0;
 

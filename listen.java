@@ -398,6 +398,8 @@ public class listen implements Runnable
 								serverData.onlineUsers.add(user);
 								serverData.getSocket.put(key.attachment().toString(), ch);
 								serverData.ipToUsername.put(key.attachment().toString(), username);
+								serverData.usernameToIP.put(username, key.attachment().toString());
+								sendFriendOnlineNotification();
 							}
 							else 
 							{
@@ -687,7 +689,7 @@ public class listen implements Runnable
 	//
 	void sendFriendOnlineNotification()
 	{
-
+		//for(int i = 0; )
 	}
 
 	//
