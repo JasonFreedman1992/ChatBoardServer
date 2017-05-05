@@ -173,6 +173,9 @@ public class listen implements Runnable
 			{
 				type = msg.substring(4);
 				//System.out.println(type);
+				//
+				// image request
+				//
 				if(type.startsWith("img"))
 				{	
 					msg = type.substring(3);
@@ -194,6 +197,9 @@ public class listen implements Runnable
 						}
 					}
 				}
+				//
+				// msg request
+				//
 				else if(type.startsWith("msg"))
 				{
 					msg = type.substring(3);
@@ -211,6 +217,9 @@ public class listen implements Runnable
 						msg(s0, serverData.Boards.get(i).users.get(x).socket);
 					}
 				}
+				//
+				// join board request
+				//
 				else if(type.startsWith("jbrd"))
 				{
 					msg = type.substring(4);
@@ -300,6 +309,9 @@ public class listen implements Runnable
 						}
 					}
 				}
+				//
+				// quit request
+				//
 				else if(type.startsWith("quit"))
 				{
 					msg = type.substring(4);
@@ -337,6 +349,9 @@ public class listen implements Runnable
 
 					}
 				}
+				//
+				// create board request
+				//
 				else if(type.startsWith("cbrd"))
 				{
 					msg = type.substring(4);
@@ -353,6 +368,9 @@ public class listen implements Runnable
 					}
 
 				}
+				//
+				// login request
+				//
 				else if(type.startsWith("login"))
 				{
 					msg = type.substring(5);
@@ -369,21 +387,21 @@ public class listen implements Runnable
 							compPassword = serverData.userBase.get(username);
 							if(compPassword.equals(password))
 							{
-								// build complete message
+								// successfull login
 								StringBuilder s = new StringBuilder();
 								s.append(serverData.responseCommand);
 								s.append("Password matches the Username.");
 								String s0 = s.toString();
 								msg(s0, ch);
 								// add user to online users and socket to channel mapping
-								User user = new User(key.attachment().toString(), username, ch);
+								User user = new User(key.attachment().toString(), username, ch, serverData.usernameToID.get(username));
 								serverData.onlineUsers.add(user);
 								serverData.getSocket.put(key.attachment().toString(), ch);
 								serverData.ipToUsername.put(key.attachment().toString(), username);
 							}
 							else 
 							{
-								// build complete message
+								// error response: Password doesnt match
 								StringBuilder s = new StringBuilder();
 								s.append(serverData.responseCommand);
 								s.append("Password doesnt match the Username.");
@@ -393,6 +411,7 @@ public class listen implements Runnable
 						}
 						else
 						{
+							// error response: User Online
 							StringBuilder s = new StringBuilder();
 							s.append(serverData.responseCommand);
 							s.append("User Online");
@@ -402,6 +421,7 @@ public class listen implements Runnable
 					}
 					else
 					{
+						// error response: Username not Found
 						StringBuilder s = new StringBuilder();
 						s.append(serverData.responseCommand);
 						s.append("Username not found.");
@@ -409,6 +429,9 @@ public class listen implements Runnable
 						msg(s0, ch);
 					}
 				}
+				//
+				// create request
+				//
 				else if(type.startsWith("create"))
 				{
 					msg = type.substring(6);
@@ -634,10 +657,43 @@ public class listen implements Runnable
 			System.out.println("not found class");
 		}
 	}
+
 	//
 	//
 	//
 	void addFriendDatabase()
+	{
+
+	}
+
+	//
+	//
+	//
+	void subFriendDatabase()
+	{
+
+	}
+
+	//
+	//
+	//
+	void blockFriendDatabase()
+	{
+
+	}
+
+	//
+	//
+	//
+	void sendFriendOnlineNotification()
+	{
+
+	}
+
+	//
+	//
+	//
+	void sendBoardOnlineNotification()
 	{
 
 	}

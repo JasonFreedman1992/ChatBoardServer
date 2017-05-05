@@ -133,6 +133,13 @@ public class Console implements Runnable
 						System.out.println(serverData.ipToUsername.get(key).toString());
 					}
 				}
+				else if(command.startsWith("get=friends"))
+				{
+					for(int i = 0; i < serverData.onlineUsers.size(); i++)
+					{
+						System.out.println(serverData.onlineUsers.get(i).id);
+					}
+				}
 				//else if(command.startsWith("add="))
 			}
 			catch(InterruptedException e)
