@@ -527,8 +527,8 @@ public class listen implements Runnable
 			}
 			for(String key : serverData.userBase.keySet())
 			{
-				//System.out.println(key);
-				//System.out.println(serverData.userBase.get(key));
+				System.out.println(key);
+				System.out.println(serverData.userBase.get(key));
 			}
 		}
 		catch(SQLException e)
