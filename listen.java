@@ -330,11 +330,14 @@ public class listen implements Runnable
 				{
 					msg = type.substring(4);
 					int i = Character.getNumericValue(msg.charAt(0));
-					for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
+					if(!serverData.Boards.isEmpty())
 					{
-						if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
+						for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
 						{
-							serverData.Boards.get(i).users.remove(j);
+							if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
+							{
+								serverData.Boards.get(i).users.remove(j);
+							}
 						}
 					}
 					//
