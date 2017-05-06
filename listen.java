@@ -346,19 +346,25 @@ public class listen implements Runnable
 					StringBuilder s1 = new StringBuilder();
 					s1.append(serverData.responseCommand);
 					s1.append("$f");
-					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+					if(!serverData.Boards.isEmpty())
 					{
-						s1.append("=/");
-						s1.append(serverData.Boards.get(i).users.get(x).username);
+						for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+						{
+							s1.append("=/");
+							s1.append(serverData.Boards.get(i).users.get(x).username);
 
+						}
 					}
 					String s2 = s1.toString();
 					try
 					{
-						for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+						if(!serverData.Boards.isEmpty())
 						{
-							Thread.sleep(100);
-							msg(s2, serverData.Boards.get(i).users.get(x).socket);
+							for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+							{
+								Thread.sleep(100);
+								msg(s2, serverData.Boards.get(i).users.get(x).socket);
+							}
 						}
 					}
 					catch(InterruptedException f)
