@@ -839,7 +839,7 @@ public class listen implements Runnable
 		{
 			StringBuilder s = new StringBuilder();
 			s.append(serverData.responseCommand);
-			s.append("$bc");
+			s.append("$x");
 			s.append(p_boardName);
 			String boardOffline = s.toString();
 			for(int i = 0; i < serverData.onlineUsers.size(); i++)
