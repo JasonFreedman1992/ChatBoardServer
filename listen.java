@@ -316,57 +316,40 @@ public class listen implements Runnable
 				//
 				else if(type.startsWith("quit"))
 				{
-					if(!serverData.Boards.isEmpty())
+					msg = type.substring(4);
+					int i = Character.getNumericValue(msg.charAt(0));
+					for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
 					{
-						for(int j = 0; j < serverData.Boards.size(); j++)
+						if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
 						{
-							if(serverData.Boards.get(j).users.isEmpty())
-							{
-								//pass boardname
-								sendBoardOfflineNotification(serverData.Boards.get(j).name);
-								serverData.Boards.remove(j);
-								serverData.boardTop--;
-								break;
-							}
+							serverData.Boards.get(i).users.remove(j);
 						}
 					}
-					if(!serverData.Boards.isEmpty())
+					//
+					// make this change to only one piece of data sent
+					//
+					StringBuilder s1 = new StringBuilder();
+					s1.append(serverData.responseCommand);
+					s1.append("$f");
+					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 					{
-						msg = type.substring(4);
-						int i = Character.getNumericValue(msg.charAt(0));
-						for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
-						{
-							if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
-							{
-								serverData.Boards.get(i).users.remove(j);
-							}
-						}
-						//
-						// make this change to only one piece of data sent
-						//
-						StringBuilder s1 = new StringBuilder();
-						s1.append(serverData.responseCommand);
-						s1.append("$f");
+						s1.append("=/");
+						s1.append(serverData.Boards.get(i).users.get(x).username);
+
+					}
+					String s2 = s1.toString();
+					try
+					{
 						for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 						{
-							s1.append("=/");
-							s1.append(serverData.Boards.get(i).users.get(x).username);
-
+							Thread.sleep(100);
+							msg(s2, serverData.Boards.get(i).users.get(x).socket);
 						}
-						String s2 = s1.toString();
-						try
-						{
-							for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-							{
-								Thread.sleep(100);
-								msg(s2, serverData.Boards.get(i).users.get(x).socket);
-							}
-						}
-						catch(InterruptedException f)
-						{
-
-						}						
 					}
+					catch(InterruptedException f)
+					{
+
+					}						
 
 				}
 				//
