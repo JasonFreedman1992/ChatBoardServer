@@ -46,14 +46,6 @@ public class listen implements Runnable
 				{
 					key = iter.next();
 					iter.remove();
-					for(int i = 0; i < serverData.Boards.size(); i++)
-					{
-						if(serverData.Boards.get(i).users.isEmpty())
-						{
-							sendBoardOfflineNotification(serverData.Boards.get(i).name);
-							serverData.Boards.remove(i);
-						}	
-					}
 					if(key.isAcceptable())
 					{
 						handleAccept(key);
@@ -65,6 +57,14 @@ public class listen implements Runnable
 					if(key.isReadable())
 					{
 						handleRead(key);
+						for(int i = 0; i < serverData.Boards.size(); i++)
+						{
+							if(serverData.Boards.get(i).users.isEmpty())
+							{
+								sendBoardOfflineNotification(serverData.Boards.get(i).name);
+								serverData.Boards.remove(i);
+							}	
+						}
 					}
 					else
 					{
