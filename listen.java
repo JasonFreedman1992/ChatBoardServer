@@ -159,6 +159,18 @@ public class listen implements Runnable
 						serverData.onlineUsers.remove(i);
 					}
 				}
+				if(!serverData.Boards.isEmpty())
+				{
+					for(int i = 0; i < serverData.Boards.size(); i++)
+					{
+						if(serverData.Boards.get(i).users.isEmpty())
+						{
+							//pass boardname
+							sendBoardOfflineNotification(serverData.Boards.get(i).name);
+							serverData.Boards.remove(i);
+						}
+					}
+				}
 			}
 			catch(Exception e)
 			{
@@ -753,6 +765,14 @@ public class listen implements Runnable
 	//
 	//
 	//
+	void sendFriendOfflineNotification()
+	{
+
+	}
+
+	//
+	//
+	//
 	void sendBoards(SocketChannel p_ch)
 	{
 		try
@@ -775,18 +795,47 @@ public class listen implements Runnable
 		}
 		catch(IOException f)
 		{
-			
+
 		}
 		// catch(IOException f)
 		// {
 
 		// }
 	}
+
 	//
 	//
 	//
-	void sendBoardOnlineNotification()
+	void sendBoardOnlineNotification(String p_boardName)
 	{
 
+	}
+
+	//
+	//
+	//
+	void sendBoardOfflineNotification(String p_boardName)
+	{
+		try
+		{
+			StringBuilder s = new StringBuilder();
+			s.append(serverData.responseCommand);
+			s.append("$bc");
+			s.append(p_boardName);
+			String boardOffline = s.toString();
+			for(int i = 0; i < serverData.onlineUsers.size(); i++)
+			{
+				Thread.sleep(100);
+				msg(boardOffline, serverData.onlineUsers.get(i).socket);
+			}
+		}
+		catch(InterruptedException f)
+		{
+
+		}
+		catch(IOException e)
+		{
+
+		}
 	}
 }
