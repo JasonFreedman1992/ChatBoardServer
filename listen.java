@@ -63,6 +63,7 @@ public class listen implements Runnable
 							{
 								sendBoardOfflineNotification(serverData.Boards.get(i).name);
 								serverData.Boards.remove(i);
+								serverData.boardTop--;
 							}	
 						}
 					}
