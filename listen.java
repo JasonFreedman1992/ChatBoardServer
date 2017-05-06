@@ -488,7 +488,7 @@ public class listen implements Runnable
 				{
 					for(int i = 0; i < serverData.Boards.size(); i++)
 					{
-						if(serverData.Boards.get(i).users.isEmpty())
+						if(serverData.Boards.get(i).users.isEmpty() && serverData.Boards.get(i).firstLeave)
 						{
 							sendBoardOfflineNotification(serverData.Boards.get(i).name);
 							serverData.Boards.remove(i);
