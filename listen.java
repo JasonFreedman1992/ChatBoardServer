@@ -381,7 +381,6 @@ public class listen implements Runnable
 				else if(type.startsWith("cbrd"))
 				{
 					msg = type.substring(4);
-					//System.out.println(msg);
 					if(serverData.Boards.isEmpty())
 					{
 						serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), msg));
@@ -489,6 +488,14 @@ public class listen implements Runnable
 				{
 
 				}
+				for(int i = 0; i < serverData.Boards.size(); i++)
+				{
+					if(serverData.Boards.get(i).users.isEmpty())
+					{
+						sendBoardOfflineNotification(serverData.Boards.get(i).name);
+						serverData.Boards.remove(i);
+					}
+				}	
 			}
 			else
 			{
