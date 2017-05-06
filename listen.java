@@ -159,18 +159,6 @@ public class listen implements Runnable
 						serverData.onlineUsers.remove(i);
 					}
 				}
-				if(!serverData.Boards.isEmpty())
-				{
-					for(int i = 0; i < serverData.Boards.size(); i++)
-					{
-						if(serverData.Boards.get(i).users.isEmpty())
-						{
-							//pass boardname
-							sendBoardOfflineNotification(serverData.Boards.get(i).name);
-							serverData.Boards.remove(i);
-						}
-					}
-				}
 			}
 			catch(Exception e)
 			{
@@ -340,8 +328,20 @@ public class listen implements Runnable
 							}
 						}
 					}
+					if(!serverData.Boards.isEmpty())
+					{
+						for(int j = 0; j < serverData.Boards.size(); j++)
+						{
+							if(serverData.Boards.get(j).users.isEmpty())
+							{
+								//pass boardname
+								sendBoardOfflineNotification(serverData.Boards.get(j).name);
+								serverData.Boards.remove(j);
+							}
+						}
+					}
 					//
-					//
+					// make this change to only one piece of data sent
 					//
 					StringBuilder s1 = new StringBuilder();
 					s1.append(serverData.responseCommand);
