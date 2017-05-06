@@ -318,14 +318,11 @@ public class listen implements Runnable
 				{
 					msg = type.substring(4);
 					int i = Character.getNumericValue(msg.charAt(0));
-					if(!serverData.Boards.isEmpty())
+					for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
 					{
-						for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
+						if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
 						{
-							if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
-							{
-								serverData.Boards.get(i).users.remove(j);
-							}
+							serverData.Boards.get(i).users.remove(j);
 						}
 					}
 					//
@@ -334,30 +331,36 @@ public class listen implements Runnable
 					StringBuilder s1 = new StringBuilder();
 					s1.append(serverData.responseCommand);
 					s1.append("$f");
-					if(!serverData.Boards.isEmpty())
+					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 					{
-						for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-						{
-							s1.append("=/");
-							s1.append(serverData.Boards.get(i).users.get(x).username);
+						s1.append("=/");
+						s1.append(serverData.Boards.get(i).users.get(x).username);
 
-						}
 					}
 					String s2 = s1.toString();
 					try
 					{
-						if(!serverData.Boards.isEmpty())
+						for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 						{
-							for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-							{
-								Thread.sleep(100);
-								msg(s2, serverData.Boards.get(i).users.get(x).socket);
-							}
+							Thread.sleep(100);
+							msg(s2, serverData.Boards.get(i).users.get(x).socket);
 						}
 					}
 					catch(InterruptedException f)
 					{
 
+					}
+					if(!serverData.Boards.isEmpty())
+					{
+						for(int j = 0; j < serverData.Boards.size(); j++)
+						{
+							if(serverData.Boards.get(j).users.isEmpty())
+							{
+								//pass boardname
+								sendBoardOfflineNotification(serverData.Boards.get(j).name);
+								serverData.Boards.remove(j);
+							}
+						}
 					}
 				}
 				//
