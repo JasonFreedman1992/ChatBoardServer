@@ -361,11 +361,11 @@ public class listen implements Runnable
 					{
 
 					}
-					if(serverData.Boards.get(i).users.isEmpty())
-					{
-						sendBoardOfflineNotification(serverData.Boards.get(i).name);
-						serverData.Boards.remove(i);
-					}						
+					// if(serverData.Boards.get(i).users.isEmpty())
+					// {
+					// 	sendBoardOfflineNotification(serverData.Boards.get(i).name);
+					// 	serverData.Boards.remove(i);
+					// }						
 				}
 				//
 				// create board request
