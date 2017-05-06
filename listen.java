@@ -360,8 +360,11 @@ public class listen implements Runnable
 					catch(InterruptedException f)
 					{
 
+					}
+					if(serverData.Boards.get(i).users.isEmpty())
+					{
+						sendBoardOfflineNotification(serverData.Boards.get(i).name);
 					}						
-
 				}
 				//
 				// create board request
