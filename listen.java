@@ -244,6 +244,8 @@ public class listen implements Runnable
 									if(serverData.onlineUsers.get(j).address.equals(key.attachment().toString()))
 									{	
 										// found board
+										// add user to board
+										//
 										StringBuilder s = new StringBuilder();
 										s.append(serverData.responseCommand);
 										s.append("Board Found");
@@ -399,6 +401,7 @@ public class listen implements Runnable
 								serverData.getSocket.put(key.attachment().toString(), ch);
 								serverData.ipToUsername.put(key.attachment().toString(), username);
 								serverData.usernameToIP.put(username, key.attachment().toString());
+								sendFriends(username,ch);
 								sendFriendOnlineNotification();
 							}
 							else 
@@ -687,9 +690,59 @@ public class listen implements Runnable
 	//
 	//
 	//
+	void sendFriends(String p_username, SocketChannel p_ch)
+	{
+		try
+		{
+			Thread.sleep(100);
+			ArrayList list = serverData.idToFriends.get(serverData.usernameToID.get(p_username));
+			StringBuilder s = new StringBuilder();
+			s.append(serverData.responseCommand);
+			s.append("$o");
+			for(int i = 0; i < list.size(); i++)
+			{
+				boolean foundOnline = false;
+				for(int j = 0; j < serverData.onlineUsers.size(); j++)
+				{
+					if(list.get(i).equals(serverData.onlineUsers.get(j).id))
+					{
+						s.append("=/");
+						s.append("1");
+						s.append(serverData.idToUsername.get(list.get(i)));
+						foundOnline = true;
+					}
+				}
+				if(!foundOnline)
+				{
+					s.append("=/");
+					s.append("0");
+					s.append(serverData.idToUsername.get(list.get(i)));
+				}
+			}
+			System.out.println(s.toString());
+			//msg( , p_ch)
+		}
+		catch(InterruptedException e)
+		{
+
+		}
+	}
+
+	//
+	//
+	//
 	void sendFriendOnlineNotification()
 	{
+		try
+		{
+			Thread.sleep(100);
+		}
+		catch(InterruptedException e)
+		{
+
+		}
 		//for(int i = 0; )
+
 	}
 
 	//
