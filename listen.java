@@ -328,18 +328,6 @@ public class listen implements Runnable
 							}
 						}
 					}
-					if(!serverData.Boards.isEmpty())
-					{
-						for(int j = 0; j < serverData.Boards.size(); j++)
-						{
-							if(serverData.Boards.get(j).users.isEmpty())
-							{
-								//pass boardname
-								sendBoardOfflineNotification(serverData.Boards.get(j).name);
-								serverData.Boards.remove(j);
-							}
-						}
-					}
 					//
 					// make this change to only one piece of data sent
 					//
