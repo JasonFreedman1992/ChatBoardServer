@@ -402,6 +402,7 @@ public class listen implements Runnable
 								serverData.ipToUsername.put(key.attachment().toString(), username);
 								serverData.usernameToIP.put(username, key.attachment().toString());
 								sendFriends(username,ch);
+								sendBoards(ch);
 								sendFriendOnlineNotification();
 							}
 							else 
@@ -728,7 +729,7 @@ public class listen implements Runnable
 		}
 		catch(IOException f)
 		{
-			
+
 		}
 	}
 
@@ -749,6 +750,38 @@ public class listen implements Runnable
 
 	}
 
+	//
+	//
+	//
+	void sendBoards(SocketChannel p_ch)
+	{
+		try
+		{
+			Thread.sleep(100);
+			StringBuilder s = new StringBuilder();
+			s.append(serverData.responseCommand);
+			s.append("$b");
+			for(int i = 0; i < serverData.Boards.size(); i++)
+			{
+				s.append("=/");
+				s.append(serverData.Boards.get(i).name);
+			}
+			String boardsList = s.toString();
+			msg(boardsList, p_ch);
+		}
+		catch(InterruptedException e)
+		{
+
+		}
+		catch(IOException f)
+		{
+			
+		}
+		// catch(IOException f)
+		// {
+
+		// }
+	}
 	//
 	//
 	//
