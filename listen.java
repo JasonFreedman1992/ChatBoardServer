@@ -325,6 +325,8 @@ public class listen implements Runnable
 								//pass boardname
 								sendBoardOfflineNotification(serverData.Boards.get(j).name);
 								serverData.Boards.remove(j);
+								serverData.boardTop--;
+								break;
 							}
 						}
 					}
