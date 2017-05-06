@@ -241,6 +241,7 @@ public class listen implements Runnable
 							{
 								for(int j = 0; j < serverData.onlineUsers.size(); j++)
 								{
+									System.out.println("244");
 									if(serverData.onlineUsers.get(j).address.equals(key.attachment().toString()))
 									{	
 										// found board
