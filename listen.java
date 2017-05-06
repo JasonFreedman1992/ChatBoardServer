@@ -305,11 +305,16 @@ public class listen implements Runnable
 									}
 								}
 							}
-							else
-							{
-								// board not found
-							}
 						}
+						//
+						// Board not found
+						// 
+						String reply = "Board Not Found";
+						StringBuilder s = new StringBuilder();
+						s.append(serverData.responseCommand);
+						s.append(reply);
+						String s1 = s.toString();
+						msg(s1, ch);
 					}
 				}
 				//
