@@ -57,15 +57,15 @@ public class listen implements Runnable
 					if(key.isReadable())
 					{
 						handleRead(key);
-						for(int i = 0; i < serverData.Boards.size(); i++)
-						{
-							if(serverData.Boards.get(i).users.isEmpty())
-							{
-								sendBoardOfflineNotification(serverData.Boards.get(i).name);
-								serverData.Boards.remove(i);
-								serverData.boardTop--;
-							}	
-						}
+						// for(int i = 0; i < serverData.Boards.size(); i++)
+						// {
+						// 	if(serverData.Boards.get(i).users.isEmpty())
+						// 	{
+						// 		sendBoardOfflineNotification(serverData.Boards.get(i).name);
+						// 		serverData.Boards.remove(i);
+						// 		serverData.boardTop--;
+						// 	}	
+						// }
 					}
 					else
 					{
