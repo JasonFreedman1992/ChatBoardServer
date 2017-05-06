@@ -422,7 +422,7 @@ public class listen implements Runnable
 								serverData.usernameToIP.put(username, key.attachment().toString());
 								sendFriends(username,ch);
 								sendBoards(ch);
-								sendFriendOnlineNotification();
+								sendFriendOnlineNotification(username);
 							}
 							else 
 							{
@@ -767,15 +767,35 @@ public class listen implements Runnable
 	//
 	//
 	//
-	void sendFriendOnlineNotification()
+	void sendFriendOnlineNotification(String p_username)
 	{
 		try
 		{
 			Thread.sleep(100);
+			StringBuilder s = new StringBuilder();
+			s.append(serverData.responseCommand);
+			s.append("$l");
+			s.append(p_username);
+			String friendOnline = s.toString();
+			String id = serverData.usernameToID.get(p_username);
+			for(int i = 0; i < serverData.idToFriends.get(id).size(); i++)
+			{
+				for(int j = 0; j < serverData.onlineUsers.size(); j++)
+				{
+					if(serverData.idToFriends.get(id).get(i).equals(serverData.onlineUsers.get(j).id))
+					{
+						msg(friendOnline, serverData.onlineUsers.get(j).socket);
+					}
+				}
+			}
 		}
 		catch(InterruptedException e)
 		{
 
+		}
+		catch(IOException f)
+		{
+			
 		}
 		//for(int i = 0; )
 
@@ -786,7 +806,14 @@ public class listen implements Runnable
 	//
 	void sendFriendOfflineNotification()
 	{
+		try
+		{
+			Thread.sleep(100);
+		}
+		catch(InterruptedException e)
+		{
 
+		}
 	}
 
 	//
