@@ -1,5 +1,6 @@
 public class Board
 {
+	public boolean firstLeave = false;
 	public int top = 0;
 	java.util.LinkedList<User> users = new java.util.LinkedList<User>();
 	boolean pub;

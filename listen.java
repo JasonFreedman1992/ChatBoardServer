@@ -341,6 +341,7 @@ public class listen implements Runnable
 					{
 						if(key.attachment().toString().equals(serverData.Boards.get(i).users.get(j).address))
 						{
+							serverData.Boards.get(i).firstLeave = true;
 							serverData.Boards.get(i).users.remove(j);
 						}
 					}
@@ -369,11 +370,11 @@ public class listen implements Runnable
 					{
 
 					}
-					// if(serverData.Boards.get(i).users.isEmpty())
-					// {
-					// 	sendBoardOfflineNotification(serverData.Boards.get(i).name);
-					// 	serverData.Boards.remove(i);
-					// }						
+					if(serverData.Boards.get(i).users.isEmpty() && serverData.Boards.get(i).firstLeave)
+					{
+						sendBoardOfflineNotification(serverData.Boards.get(i).name);
+						serverData.Boards.remove(i);
+					}						
 				}
 				//
 				// create board request
@@ -488,14 +489,14 @@ public class listen implements Runnable
 				{
 
 				}
-				for(int i = 0; i < serverData.Boards.size(); i++)
-				{
-					if(serverData.Boards.get(i).users.isEmpty())
-					{
-						sendBoardOfflineNotification(serverData.Boards.get(i).name);
-						serverData.Boards.remove(i);
-					}
-				}	
+				// for(int i = 0; i < serverData.Boards.size(); i++)
+				// {
+				// 	if(serverData.Boards.get(i).users.isEmpty())
+				// 	{
+				// 		sendBoardOfflineNotification(serverData.Boards.get(i).name);
+				// 		serverData.Boards.remove(i);
+				// 	}
+				// }	
 			}
 			else
 			{
