@@ -719,12 +719,16 @@ public class listen implements Runnable
 					s.append(serverData.idToUsername.get(list.get(i)));
 				}
 			}
-			System.out.println(s.toString());
-			//msg( , p_ch)
+			String friendsList = s.toString();
+			msg(friendsList,p_ch);
 		}
 		catch(InterruptedException e)
 		{
 
+		}
+		catch(IOException f)
+		{
+			
 		}
 	}
 
