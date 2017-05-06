@@ -387,7 +387,7 @@ public class listen implements Runnable
 						serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), msg));
 						serverData.boardTop++;
 					}
-
+					sendBoardOnlineNotification(msg);
 				}
 				//
 				// login request
@@ -827,7 +827,27 @@ public class listen implements Runnable
 	//
 	void sendBoardOnlineNotification(String p_boardName)
 	{
+		try
+		{
+			StringBuilder s = new StringBuilder();
+			s.append(serverData.responseCommand);
+			s.append("$n");
+			s.append(p_boardName);
+			String boardOnline = s.toString();
+			for(int i = 0; i < serverData.onlineUsers.size(); i++)
+			{
+				Thread.sleep(100);
+				msg(boardOnline, serverData.onlineUsers.get(i).socket);
+			}
+		}
+		catch(InterruptedException f)
+		{
 
+		}
+		catch(IOException e)
+		{
+
+		}
 	}
 
 	//
