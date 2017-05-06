@@ -235,10 +235,12 @@ public class listen implements Runnable
 					}
 					else
 					{
+						boolean boardFound = false;
 						for(int i = 0; i < serverData.Boards.size(); i++)
 						{
 							if(serverData.Boards.get(i).name.equals(msg))
 							{
+								boardFound = true;
 								for(int j = 0; j < serverData.onlineUsers.size(); j++)
 								{
 									System.out.println("244");
@@ -309,12 +311,15 @@ public class listen implements Runnable
 						//
 						// Board not found
 						// 
-						String reply = "Board Not Found";
-						StringBuilder s = new StringBuilder();
-						s.append(serverData.responseCommand);
-						s.append(reply);
-						String s1 = s.toString();
-						msg(s1, ch);
+						if(!boardFound)
+						{
+							String reply = "Board Not Found";
+							StringBuilder s = new StringBuilder();
+							s.append(serverData.responseCommand);
+							s.append(reply);
+							String s1 = s.toString();
+							msg(s1, ch);
+						}
 					}
 				}
 				//
