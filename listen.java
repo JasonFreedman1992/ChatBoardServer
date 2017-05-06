@@ -145,6 +145,7 @@ public class listen implements Runnable
 		if(read < 0) // if user disconnects, also filters people out of boards, getsockets hashmap
 		{
 			msg = key.attachment() + " left the server.\n";
+			sendFriendOfflineNotification(serverData.ipToUsername.get(key.attachment()));
 			serverData.softUsers.remove(serverData.softUsers.indexOf(ch));
 			ch.close();
 			serverData.getSocket.remove(key.attachment().toString());
@@ -795,7 +796,7 @@ public class listen implements Runnable
 		}
 		catch(IOException f)
 		{
-			
+
 		}
 		//for(int i = 0; )
 
@@ -804,15 +805,36 @@ public class listen implements Runnable
 	//
 	//
 	//
-	void sendFriendOfflineNotification()
+	void sendFriendOfflineNotification(String p_username)
 	{
 		try
 		{
 			Thread.sleep(100);
+			StringBuilder s = new StringBuilder();
+			s.append(serverData.responseCommand);
+			s.append("$e");
+			s.append(p_username);
+			String friendOffline = s.toString();
+			String id = serverData.usernameToID.get(p_username);
+			for(int i = 0; i < serverData.idToFriends.get(id).size(); i++)
+			{
+				for(int j = 0; j < serverData.onlineUsers.size(); j++)
+				{
+					if(serverData.idToFriends.get(id).get(i).equals(serverData.onlineUsers.get(j).id))
+					{
+						msg(friendOffline, serverData.onlineUsers.get(j).socket);
+					}
+				}
+			}
+
 		}
 		catch(InterruptedException e)
 		{
 
+		}
+		catch(IOException f)
+		{
+			
 		}
 	}
 
