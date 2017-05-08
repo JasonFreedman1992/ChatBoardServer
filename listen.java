@@ -677,6 +677,9 @@ public class listen implements Runnable
 			String query = "INSERT INTO Accounts " + "VALUES ('" + p_username + "', '" + p_password + "', '" + p_idOwner + "')"; 
 			Statement statement = conn.createStatement();
 			statement.executeUpdate(query);
+			serverData.userBase.put(p_username, p_password);
+			serverData.idToUsername.put(p_idOwner, p_username);
+			serverData.usernameToID.put(p_username, p_idOwner);
 
 			//
 			// add to friends database
@@ -685,6 +688,8 @@ public class listen implements Runnable
 			Statement statement1 = conn1.createStatement();
 			query = "Insert INTO Friends " + "VALUES ('" + p_idOwner + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "', '" + "x" + "')";
 			statement1.executeUpdate(query);
+			ArrayList<String> friendList = new ArrayList<String>();
+			serverData.idToFriends.put(p_idOwner, friendList);
 		}
 		catch(SQLException e)
 		{
