@@ -816,17 +816,19 @@ public class listen implements Runnable
 			s.append(p_username);
 			String friendOffline = s.toString();
 			String id = serverData.usernameToID.get(p_username);
-			for(int i = 0; i < serverData.idToFriends.get(id).size(); i++)
+			if(!serverData.idToFriends.isEmpty())
 			{
-				for(int j = 0; j < serverData.onlineUsers.size(); j++)
+				for(int i = 0; i < serverData.idToFriends.get(id).size(); i++)
 				{
-					if(serverData.idToFriends.get(id).get(i).equals(serverData.onlineUsers.get(j).id))
+					for(int j = 0; j < serverData.onlineUsers.size(); j++)
 					{
-						msg(friendOffline, serverData.onlineUsers.get(j).socket);
+						if(serverData.idToFriends.get(id).get(i).equals(serverData.onlineUsers.get(j).id))
+						{
+							msg(friendOffline, serverData.onlineUsers.get(j).socket);
+						}
 					}
 				}
 			}
-
 		}
 		catch(InterruptedException e)
 		{
