@@ -729,6 +729,17 @@ public class listen implements Runnable
 		{
 			Thread.sleep(100);
 			ArrayList list = serverData.idToFriends.get(serverData.usernameToID.get(p_username));
+			//
+			//
+			//
+
+			for(String key : serverData.idToFriends.keySet())
+			{
+				System.out.println(key);
+				//System.out.println(serverData.userBase.get(key));
+			}
+
+
 			StringBuilder s = new StringBuilder();
 			s.append(serverData.responseCommand);
 			s.append("$o");
