@@ -720,6 +720,7 @@ public class listen implements Runnable
 			Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 			Statement statement1 = conn1.createStatement();
 			String query = "Insert INTO Friends " + "VALUES ('" + p_idOwner + "', '" + p_idFriend + "')";
+			System.out.println("query: " + query);
 			statement1.executeUpdate(query);
 			ArrayList<String> list = serverData.idToFriends.get(p_idOwner);
 			list.add(p_idFriend);
