@@ -843,6 +843,40 @@ public class listen implements Runnable
 					}
 				}
 			}
+			// for(int i = 0; i < serverData.idToFriends.get(id).size(); i++)
+			// {
+			// 	String friendCheckingID = serverData.idToFriends.get(id).get(i);
+			// 	for(int j = 0; j < serverData.idToFriends.get(friendCheckingID).size(); j++)
+			// 	{
+
+			// 	}
+			// }
+
+			for(String key : serverData.userBase.keySet())
+			{
+				if(!key.equals(p_username))
+				{
+					String idCheck = serverData.usernameToID.get(key);
+					ArrayList<String> list = new ArrayList<String>();
+					list = serverData.idToFriends.get(idCheck);
+					for(int j = 0; j < list.size(); j++)
+					{
+						if(list.get(j).equals(id))
+						{
+							for(int x = 0; x < serverData.onlineUsers.size(); x++)
+							{
+								if(key.equals(serverData.onlineUsers.get(x).username))
+								{
+									msg(friendOnline, serverData.onlineUsers.get(x).socket);
+								}
+							}
+						}
+					}
+				}
+			}
+
+
+			//for(int i = 0; i < serverData.)
 		}
 		catch(InterruptedException e)
 		{
