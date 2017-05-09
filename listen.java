@@ -843,7 +843,7 @@ public class listen implements Runnable
 			// 		}
 			// 	}
 			// }
-			
+
 			for(String key : serverData.userBase.keySet())
 			{
 				if(!key.equals(p_username))
@@ -866,9 +866,6 @@ public class listen implements Runnable
 					}
 				}
 			}
-
-
-			//for(int i = 0; i < serverData.)
 		}
 		catch(InterruptedException e)
 		{
@@ -878,8 +875,6 @@ public class listen implements Runnable
 		{
 
 		}
-		//for(int i = 0; )
-
 	}
 
 	//
@@ -896,15 +891,37 @@ public class listen implements Runnable
 			s.append(p_username);
 			String friendOffline = s.toString();
 			String id = serverData.usernameToID.get(p_username);
-			if(!serverData.idToFriends.isEmpty())
+			// if(!serverData.idToFriends.isEmpty())
+			// {
+			// 	for(int i = 0; i < serverData.idToFriends.get(id).size(); i++)
+			// 	{
+			// 		for(int j = 0; j < serverData.onlineUsers.size(); j++)
+			// 		{
+			// 			if(serverData.idToFriends.get(id).get(i).equals(serverData.onlineUsers.get(j).id))
+			// 			{
+			// 				msg(friendOffline, serverData.onlineUsers.get(j).socket);
+			// 			}
+			// 		}
+			// 	}
+			// }
+			for(String key : serverData.userBase.keySet())
 			{
-				for(int i = 0; i < serverData.idToFriends.get(id).size(); i++)
+				if(!key.equals(p_username))
 				{
-					for(int j = 0; j < serverData.onlineUsers.size(); j++)
+					String idCheck = serverData.usernameToID.get(key);
+					ArrayList<String> list = new ArrayList<String>();
+					list = serverData.idToFriends.get(idCheck);
+					for(int j = 0; j < list.size(); j++)
 					{
-						if(serverData.idToFriends.get(id).get(i).equals(serverData.onlineUsers.get(j).id))
+						if(list.get(j).equals(id))
 						{
-							msg(friendOffline, serverData.onlineUsers.get(j).socket);
+							for(int x = 0; x < serverData.onlineUsers.size(); x++)
+							{
+								if(key.equals(serverData.onlineUsers.get(x).username))
+								{
+									msg(friendOffline, serverData.onlineUsers.get(x).socket);
+								}
+							}
 						}
 					}
 				}
