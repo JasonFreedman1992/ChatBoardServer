@@ -481,6 +481,15 @@ public class listen implements Runnable
 						serverData.clientTotal++;
 					}
 				}
+				else if(type.startsWith("addf"))
+				{
+					msg = type.substring(4);
+					String username = serverData.ipToUsername.get(key.attachment());
+					String idOwner = serverData.usernameToID.get(username);
+
+					String idFriend = serverData.usernameToID.get(msg);
+					addFriendDatabase(idOwner, idFriend);
+				}
 				else
 				{
 
@@ -704,9 +713,22 @@ public class listen implements Runnable
 	//
 	//
 	//
-	void addFriendDatabase()
+	void addFriendDatabase(String p_idOwner, String p_idFriend)
 	{
+		try
+		{
+			Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
+			Statement statement1 = conn1.createStatement();
+			String query = "Insert INTO Friends " + "VALUES ('" + p_idOwner + "', '" + p_idFriend + "')";
+			statement1.executeUpdate(query);
+			ArrayList<String> list = serverData.idToFriends.get(p_idOwner);
+			list.add(p_idFriend);
+			serverData.idToFriends.put(p_idOwner, list);
+		}
+		catch(Exception e)
+		{
 
+		}
 	}
 
 	//
