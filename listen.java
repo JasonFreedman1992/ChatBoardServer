@@ -484,11 +484,14 @@ public class listen implements Runnable
 				else if(type.startsWith("addf"))
 				{
 					msg = type.substring(4);
-					String username = serverData.ipToUsername.get(key.attachment());
-					String idOwner = serverData.usernameToID.get(username);
+					if(serverData.userBase.containsKey(msg))
+					{
+						String username = serverData.ipToUsername.get(key.attachment());
+						String idOwner = serverData.usernameToID.get(username);
 
-					String idFriend = serverData.usernameToID.get(msg);
-					addFriendDatabase(idOwner, idFriend);
+						String idFriend = serverData.usernameToID.get(msg);
+						addFriendDatabase(idOwner, idFriend);
+					}
 				}
 				else
 				{
@@ -725,12 +728,14 @@ public class listen implements Runnable
 				System.out.println("list : " + list.get(i));
 			}
 			System.out.println("new listsize : " + list.size());
+			int friendListSize = list.size();
 			//
 			//
 			// execute query
 			Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 			Statement statement1 = conn1.createStatement();
-			String query = "Insert INTO Friends " + "VALUES ('" + p_idFriend + "') WHERE idOwner='" + p_idOwner +  "';";
+			//String query = "Insert INTO Friends " + "VALUES ('" + p_idOwner + "', '" + "x" + "')";
+			String query = "Insert INTO Friends " + "( id" + friendListSize + ")" + " VALUES ('" + p_idFriend + "')";
 			System.out.println("query: " + query);
 			statement1.executeUpdate(query);
 
