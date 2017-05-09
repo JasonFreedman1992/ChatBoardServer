@@ -724,6 +724,10 @@ public class listen implements Runnable
 			statement1.executeUpdate(query);
 			ArrayList<String> list = serverData.idToFriends.get(p_idOwner);
 			list.add(p_idFriend);
+			for(int i = 0; i < list.size(); i++)
+			{
+				System.out.println("list : " + list.get(i));
+			}
 			serverData.idToFriends.put(p_idOwner, list);
 		}
 		catch(Exception e)
