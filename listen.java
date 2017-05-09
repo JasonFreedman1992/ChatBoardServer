@@ -738,8 +738,11 @@ public class listen implements Runnable
 			String query = "UPDATE Friends " + "SET id" + friendListSize + " = " + p_idFriend + " WHERE idOwner='" + p_idOwner + "'";
 			System.out.println("query: " + query);
 			statement1.executeUpdate(query);
-
 			serverData.idToFriends.put(p_idOwner, list);
+			String sendFriend = serverData.idToUsername.get(p_idOwner);
+			String ip = serverData.usernameToIP.get(sendFriend);
+			SocketChannel socket = serverData.getSocket.get(ip);
+			sendFriends(sendFriend, socket);
 		}
 		catch(Exception e)
 		{
@@ -833,17 +836,6 @@ public class listen implements Runnable
 			s.append(p_username);
 			String friendOnline = s.toString();
 			String id = serverData.usernameToID.get(p_username);
-			// for(int i = 0; i < serverData.idToFriends.get(id).size(); i++)
-			// {
-			// 	for(int j = 0; j < serverData.onlineUsers.size(); j++)
-			// 	{
-			// 		if(serverData.idToFriends.get(id).get(i).equals(serverData.onlineUsers.get(j).id))
-			// 		{
-			// 			msg(friendOnline, serverData.onlineUsers.get(j).socket);
-			// 		}
-			// 	}
-			// }
-
 			for(String key : serverData.userBase.keySet())
 			{
 				if(!key.equals(p_username))
@@ -891,19 +883,6 @@ public class listen implements Runnable
 			s.append(p_username);
 			String friendOffline = s.toString();
 			String id = serverData.usernameToID.get(p_username);
-			// if(!serverData.idToFriends.isEmpty())
-			// {
-			// 	for(int i = 0; i < serverData.idToFriends.get(id).size(); i++)
-			// 	{
-			// 		for(int j = 0; j < serverData.onlineUsers.size(); j++)
-			// 		{
-			// 			if(serverData.idToFriends.get(id).get(i).equals(serverData.onlineUsers.get(j).id))
-			// 			{
-			// 				msg(friendOffline, serverData.onlineUsers.get(j).socket);
-			// 			}
-			// 		}
-			// 	}
-			// }
 			for(String key : serverData.userBase.keySet())
 			{
 				if(!key.equals(p_username))
