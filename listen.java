@@ -252,7 +252,6 @@ public class listen implements Runnable
 								boardFound = true;
 								for(int j = 0; j < serverData.onlineUsers.size(); j++)
 								{
-									System.out.println("244");
 									if(serverData.onlineUsers.get(j).address.equals(key.attachment().toString()))
 									{	
 										// found board
@@ -491,6 +490,25 @@ public class listen implements Runnable
 
 						String idFriend = serverData.usernameToID.get(msg);
 						addFriendDatabase(idOwner, idFriend);
+					}
+				}
+				else if(type.startsWith("addb"))
+				{
+					msg = type.substring(4);
+					for(int i = 0; i < serverData.Boards.size(); i++)
+					{
+						for(int j = 0; j < serverData.Boards.get(i).users.size(); j++)
+						{
+							if(serverData.Boards.get(i).users.get(j).equals(msg))
+							{
+								String ip = serverData.usernameToIP.get(msg);
+								SocketChannel socket = serverData.getSocket.get(ip);
+								StringBuilder s = new StringBuilder();
+								s.append(serverData.responseCommand);
+								s.append("$j");
+								s.append(serverData.Boards.get(i).name);
+							}
+						}
 					}
 				}
 				else
