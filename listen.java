@@ -504,7 +504,19 @@ public class listen implements Runnable
 							StringBuilder s = new StringBuilder();
 							s.append(serverData.responseCommand);
 							s.append("$j");
-							s.append(serverData.Boards.get(i).name);
+							String board = serverData.ipToUsername.get(key.attachment().toString());
+							for(int x = 0; x < serverData.Boards.size(); x++)
+							{
+								for(int y = 0; y < serverData.Boards.get(x).users.size(); y++)
+								{
+									if(serverData.Boards.get(x).users.get(y).username.equals(board))
+									{
+										board = serverData.Boards.get(x).name;
+									}
+								}
+							}
+							s.append(board);
+							//s.append(serverData.Boards.get(i).name);
 							msg(s.toString(), socket);
 						}
 					}
