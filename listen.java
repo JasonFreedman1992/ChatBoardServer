@@ -505,6 +505,7 @@ public class listen implements Runnable
 							s.append(serverData.responseCommand);
 							s.append("$j");
 							String board = serverData.ipToUsername.get(key.attachment().toString());
+							String boardFrom = serverData.ipToUsername.get(key.attachment().toString());
 							for(int x = 0; x < serverData.Boards.size(); x++)
 							{
 								for(int y = 0; y < serverData.Boards.get(x).users.size(); y++)
@@ -516,6 +517,8 @@ public class listen implements Runnable
 								}
 							}
 							s.append(board);
+							s.append("=/");
+							s.append(boardFrom);
 							//s.append(serverData.Boards.get(i).name);
 							msg(s.toString(), socket);
 						}
