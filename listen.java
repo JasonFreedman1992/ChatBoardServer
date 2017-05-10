@@ -524,6 +524,11 @@ public class listen implements Runnable
 						}
 					}
 				}
+				else if(type.startsWith("subf"))
+				{
+					msg = msg.substring(4);
+
+				}
 				else
 				{
 
@@ -784,17 +789,35 @@ public class listen implements Runnable
 	//
 	//
 	//
-	void subFriendDatabase()
+	void subFriendDatabase(String p_idOwner, String p_idFriend)
 	{
+		try
+		{
+			ArrayList<String> list = serverData.idToFriends.get(p_idOwner);
+			int position = 0;
+			for(int i = 0; i < list.size(); i++)
+			{
+				if(list.get(i).equals(p_idFriend))
+				{
+					// id position + 1 because of array to sql database difference
+					position = i + 1;
+					serverData.idToFriends.get(p_idOwner).remove(i);
+				}
+			}
+			Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
+			Statement statement1 = conn1.createStatement();
+			String query = "UPDATE Friends SET id" + position + "='x' WHERE idOwner='" + p_idOwner + "'";
+			statement1.executeUpdate(query);
+			String sendFriend = serverData.idToUsername.get(p_idOwner);
+			String ip = serverData.usernameToIP.get(sendFriend);
+			SocketChannel socket = serverData.getSocket.get(ip);
+			sendFriends(sendFriend, socket);
 
-	}
+		}
+		catch(Exception e)
+		{
 
-	//
-	//
-	//
-	void blockFriendDatabase()
-	{
-
+		}
 	}
 
 	//
