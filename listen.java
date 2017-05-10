@@ -810,27 +810,35 @@ public class listen implements Runnable
 			Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 			Statement statement1 = conn1.createStatement();
 			String query = "UPDATE Friends SET id" + position + "='x' WHERE idOwner='" + p_idOwner + "'";
+			System.out.println(query);
 			statement1.executeUpdate(query);
 			String sendFriend = serverData.idToUsername.get(p_idOwner);
 			String ip = serverData.usernameToIP.get(sendFriend);
 			SocketChannel socket = serverData.getSocket.get(ip);
 			sendFriends(sendFriend, socket);
-			if(position - 1 != list.size())
-			{
-				System.out.println("in position");
-				int size = serverData.idToFriends.get(p_idOwner).size();
-				// int position
-				// slide everything down -1 from position<-->size
-				for(int i = position; i <= size; i++)
-				{
-					Connection conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
-					Statement statement2 = conn2.createStatement();
-					String query1 = "UPDATE Friends SET id" + i + " ='" + serverData.idToFriends.get(p_idOwner).get(i+1) + "' WHERE idOwner='" + p_idOwner + "'";
-					statement2.executeUpdate(query);
-					System.out.println("inside thingy");
-				}
-				//String query = "UPDATE Friends SET id" +
-			}
+
+			//Statement statement2 = conn1.createStatement();
+			//String query2 = ""
+
+
+
+			//statement2.executeUpdate(query);
+			// if(position - 1 != list.size())
+			// {
+			// 	System.out.println("in position");
+			// 	int size = serverData.idToFriends.get(p_idOwner).size();
+			// 	// int position
+			// 	// slide everything down -1 from position<-->size
+			// 	for(int i = position; i <= size; i++)
+			// 	{
+			// 		Connection conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
+			// 		Statement statement2 = conn2.createStatement();
+			// 		String query1 = "UPDATE Friends SET id" + i + " ='" + serverData.idToFriends.get(p_idOwner).get(i+1) + "' WHERE idOwner='" + p_idOwner + "'";
+			// 		statement2.executeUpdate(query);
+			// 		System.out.println("inside thingy");
+			// 	}
+			// 	//String query = "UPDATE Friends SET id" +
+			// }
 
 		}
 		catch(Exception e)
