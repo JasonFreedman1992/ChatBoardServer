@@ -822,6 +822,7 @@ public class listen implements Runnable
 
 			System.out.println("Old List size: " + oldListSize);
 			System.out.println("New List Size: " + newListSize);
+			System.out.println("Position: " + position);
 			//Statement statement2 = conn1.createStatement();
 			//String query2 = ""
 
