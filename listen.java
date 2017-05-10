@@ -598,6 +598,9 @@ public class listen implements Runnable
 	}
 
 	//
+	// remember to go thorugh and close all sql queries
+	//
+	//
 	// initial mapping of serverData hashmap to database
 	//
 	void mapDatabase()
@@ -823,6 +826,19 @@ public class listen implements Runnable
 			System.out.println("Old List size: " + oldListSize);
 			System.out.println("New List Size: " + newListSize);
 			System.out.println("Position: " + position);
+
+			for(int i = position; i <= oldListSize; i++)
+			{
+				String friendIdToMove = serverData.idToFriends.get(p_idOwner).get(position-1);
+				query = "UPDATE Friends SET id" + position + "='" + friendIdToMove + "' WHERE idOwner='" + p_idOwner + "'";
+				statement1.execute(query);
+				position++;
+				if(i==oldListSize)
+				{
+					query = "UPDATE Friends SET id" + position + "='x' WHERE idOwner='" + p_idOwner + "'";
+					statement1.execute(query);
+				}
+			}
 			//Statement statement2 = conn1.createStatement();
 			//String query2 = ""
 
