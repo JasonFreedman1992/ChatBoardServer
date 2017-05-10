@@ -821,7 +821,7 @@ public class listen implements Runnable
 				int size = serverData.idToFriends.get(p_idOwner).size();
 				// int position
 				// slide everything down -1 from position<-->size
-				for(int i = position - 1; i <= size; i++)
+				for(int i = position; i <= size; i++)
 				{
 					Connection conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 					Statement statement2 = conn2.createStatement();
