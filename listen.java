@@ -822,7 +822,7 @@ public class listen implements Runnable
 				// int position
 				// slide everything down -1 from position<-->size
 				Statement statement2 = conn1.createStatement();
-				for(int i = position; i <= size; i++)
+				for(int i = position - 1; i <= size; i++)
 				{
 					if(i+1 < serverData.idToFriends.get(p_idOwner).size())
 					{
