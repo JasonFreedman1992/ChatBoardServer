@@ -797,6 +797,8 @@ public class listen implements Runnable
 		try
 		{
 			ArrayList<String> list = serverData.idToFriends.get(p_idOwner);
+			int oldListSize = list.size();
+			int newListSize = 0;
 			int position = 0;
 			for(int i = 0; i < list.size(); i++)
 			{
@@ -805,6 +807,7 @@ public class listen implements Runnable
 					// id position + 1 because of array to sql database difference
 					position = i + 1;
 					serverData.idToFriends.get(p_idOwner).remove(i);
+					newListSize = serverData.idToFriends.get(p_idOwner).size();
 				}
 			}
 			Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
@@ -817,6 +820,8 @@ public class listen implements Runnable
 			SocketChannel socket = serverData.getSocket.get(ip);
 			sendFriends(sendFriend, socket);
 
+			System.out.println("Old List size: " + oldListSize);
+			System.out.println("New List Size: " + newListSize);
 			//Statement statement2 = conn1.createStatement();
 			//String query2 = ""
 
