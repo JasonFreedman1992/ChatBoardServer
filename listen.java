@@ -828,6 +828,7 @@ public class listen implements Runnable
 					{
 						query = "UPDATE Friends SET id" + i + " ='" + serverData.idToFriends.get(p_idOwner).get(i+1) + "' WHERE idOwner='" + p_idOwner + "'";
 						statement1.execute(query);
+						System.out.println("inside thingy");
 
 					}
 				}
