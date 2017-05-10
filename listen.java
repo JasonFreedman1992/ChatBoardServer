@@ -833,7 +833,7 @@ public class listen implements Runnable
 				query = "UPDATE Friends SET id" + position + "='" + friendIdToMove + "' WHERE idOwner='" + p_idOwner + "'";
 				statement1.execute(query);
 				
-				if(i==oldListSize)
+				if(position==oldListSize)
 				{
 					query = "UPDATE Friends SET id" + position + "='x' WHERE idOwner='" + p_idOwner + "'";
 					statement1.execute(query);
