@@ -824,7 +824,7 @@ public class listen implements Runnable
 				Statement statement2 = conn1.createStatement();
 				for(int i = position - 1; i <= size; i++)
 				{
-					if(i+1 < serverData.idToFriends.get(p_idOwner).size())
+					if(i < serverData.idToFriends.get(p_idOwner).size())
 					{
 						query = "UPDATE Friends SET id" + i + " ='" + serverData.idToFriends.get(p_idOwner).get(i+1) + "' WHERE idOwner='" + p_idOwner + "'";
 						statement1.execute(query);
