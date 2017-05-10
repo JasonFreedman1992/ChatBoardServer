@@ -815,6 +815,23 @@ public class listen implements Runnable
 			String ip = serverData.usernameToIP.get(sendFriend);
 			SocketChannel socket = serverData.getSocket.get(ip);
 			sendFriends(sendFriend, socket);
+			if(position != 1 && position != list.size())
+			{
+				int size = serverData.idToFriends.get(p_idOwner).size();
+				// int position
+				// slide everything down -1 from position<-->size
+				Statement statement2 = conn1.createStatement();
+				for(int i = position; i <= size; i++)
+				{
+					if(i+1 < serverData.idToFriends.get(p_idOwner).size())
+					{
+						query = "UPDATE Friends SET id" + i + " ='" + serverData.idToFriends.get(p_idOwner).get(i+1) + "' WHERE idOwner='" + p_idOwner + "'";
+						statement1.execute(query);
+						 
+					}
+				}
+				//String query = "UPDATE Friends SET id" +
+			}
 
 		}
 		catch(Exception e)
