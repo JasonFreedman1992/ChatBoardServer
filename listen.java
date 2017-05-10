@@ -526,7 +526,7 @@ public class listen implements Runnable
 				}
 				else if(type.startsWith("subf"))
 				{
-					msg = msg.substring(4);
+					msg = type.substring(4);
 					String username = serverData.ipToUsername.get(key.attachment().toString());
 					String idOwner = serverData.usernameToID.get(username);
 					String idFriend = serverData.usernameToID.get(msg);
