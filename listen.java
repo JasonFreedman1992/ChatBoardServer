@@ -815,7 +815,7 @@ public class listen implements Runnable
 			String ip = serverData.usernameToIP.get(sendFriend);
 			SocketChannel socket = serverData.getSocket.get(ip);
 			sendFriends(sendFriend, socket);
-			if(position != list.size())
+			if(position - 1 != list.size())
 			{
 				System.out.println("in position");
 				int size = serverData.idToFriends.get(p_idOwner).size();
