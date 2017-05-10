@@ -776,7 +776,6 @@ public class listen implements Runnable
 			// execute query
 			Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 			Statement statement1 = conn1.createStatement();
-			//String query = "Insert INTO Friends " + "VALUES ('" + p_idOwner + "', '" + "x" + "')";
 			String query = "UPDATE Friends " + "SET id" + friendListSize + " = " + p_idFriend + " WHERE idOwner='" + p_idOwner + "'";
 			System.out.println("query: " + query);
 			statement1.executeUpdate(query);
@@ -816,27 +815,18 @@ public class listen implements Runnable
 			Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 			Statement statement1 = conn1.createStatement();
 			String query = "UPDATE Friends SET id" + position + "='x' WHERE idOwner='" + p_idOwner + "'";
-			System.out.println(query);
 			statement1.executeUpdate(query);
 			String sendFriend = serverData.idToUsername.get(p_idOwner);
 			String ip = serverData.usernameToIP.get(sendFriend);
 			SocketChannel socket = serverData.getSocket.get(ip);
 			sendFriends(sendFriend, socket);
 
-			System.out.println("Old List size: " + oldListSize);
-			System.out.println("New List Size: " + newListSize);
-			System.out.println("Position: " + position);
+			// System.out.println("Old List size: " + oldListSize);
+			// System.out.println("New List Size: " + newListSize);
+			// System.out.println("Position: " + position);
 
 			for(int i = position; i <= oldListSize; i++)
 			{
-				// String friendIdToMove = serverData.idToFriends.get(p_idOwner).get(position-1);
-				// query = "UPDATE Friends SET id" + position + "='" + friendIdToMove + "' WHERE idOwner='" + p_idOwner + "'";
-				// statement1.execute(query);
-				// System.out.println("position: " + position);
-				// System.out.println("oldListSize : " + oldListSize);
-				System.out.println("i : " + i);
-				System.out.println("position: " + position);
-				System.out.println("oldListSize : " + oldListSize);
 				if(position==oldListSize)
 				{
 					query = "UPDATE Friends SET id" + position + "='x' WHERE idOwner='" + p_idOwner + "'";
@@ -850,29 +840,6 @@ public class listen implements Runnable
 					position++;
 				}
 			}
-			//Statement statement2 = conn1.createStatement();
-			//String query2 = ""
-
-
-
-			//statement2.executeUpdate(query);
-			// if(position - 1 != list.size())
-			// {
-			// 	System.out.println("in position");
-			// 	int size = serverData.idToFriends.get(p_idOwner).size();
-			// 	// int position
-			// 	// slide everything down -1 from position<-->size
-			// 	for(int i = position; i <= size; i++)
-			// 	{
-			// 		Connection conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
-			// 		Statement statement2 = conn2.createStatement();
-			// 		String query1 = "UPDATE Friends SET id" + i + " ='" + serverData.idToFriends.get(p_idOwner).get(i+1) + "' WHERE idOwner='" + p_idOwner + "'";
-			// 		statement2.executeUpdate(query);
-			// 		System.out.println("inside thingy");
-			// 	}
-			// 	//String query = "UPDATE Friends SET id" +
-			// }
-
 		}
 		catch(Exception e)
 		{
@@ -881,7 +848,7 @@ public class listen implements Runnable
 	}
 
 	//
-	//
+	// send list of online and offline friends to user 
 	//
 	void sendFriends(String p_username, SocketChannel p_ch)
 	{
@@ -937,7 +904,7 @@ public class listen implements Runnable
 	}
 
 	//
-	//
+	// send notification to everyone who has user added that user has come online
 	//
 	void sendFriendOnlineNotification(String p_username)
 	{
@@ -984,7 +951,7 @@ public class listen implements Runnable
 	}
 
 	//
-	//
+	// send notification to everyone who has user added that user has gone offline
 	//
 	void sendFriendOfflineNotification(String p_username)
 	{
@@ -1031,7 +998,7 @@ public class listen implements Runnable
 	}
 
 	//
-	//
+	// updated list of Boards send to user
 	//
 	void sendBoards(SocketChannel p_ch)
 	{
@@ -1064,7 +1031,7 @@ public class listen implements Runnable
 	}
 
 	//
-	//
+	// send new Board that comes online to users
 	//
 	void sendBoardOnlineNotification(String p_boardName)
 	{
@@ -1092,7 +1059,7 @@ public class listen implements Runnable
 	}
 
 	//
-	//
+	// sends Board Disconnect when Board becomes empty
 	//
 	void sendBoardOfflineNotification(String p_boardName)
 	{
