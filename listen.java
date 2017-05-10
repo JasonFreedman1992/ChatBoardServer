@@ -832,12 +832,13 @@ public class listen implements Runnable
 				String friendIdToMove = serverData.idToFriends.get(p_idOwner).get(position-1);
 				query = "UPDATE Friends SET id" + position + "='" + friendIdToMove + "' WHERE idOwner='" + p_idOwner + "'";
 				statement1.execute(query);
-				position++;
+				
 				if(i==oldListSize)
 				{
 					query = "UPDATE Friends SET id" + position + "='x' WHERE idOwner='" + p_idOwner + "'";
 					statement1.execute(query);
 				}
+				position++;
 			}
 			//Statement statement2 = conn1.createStatement();
 			//String query2 = ""
