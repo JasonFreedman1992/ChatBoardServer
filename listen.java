@@ -1004,7 +1004,7 @@ public class listen implements Runnable
 	{
 		try
 		{
-			Thread.sleep(100);
+			Thread.sleep(125);
 			StringBuilder s = new StringBuilder();
 			s.append(serverData.responseCommand);
 			s.append("$b");
@@ -1015,6 +1015,7 @@ public class listen implements Runnable
 			}
 			String boardsList = s.toString();
 			msg(boardsList, p_ch);
+
 		}
 		catch(InterruptedException e)
 		{
