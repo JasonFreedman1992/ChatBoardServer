@@ -563,6 +563,7 @@ public class listen implements Runnable
 				{
 					if(!type.contains("=/")) // if create board request is public
 					{
+						System.out.println("inside =/");
 						msg = type.substring(4);
 						if(serverData.Boards.isEmpty())
 						{
@@ -578,6 +579,7 @@ public class listen implements Runnable
 					}
 					else // if create board request is private
 					{
+						System.out.println("not inside =/");
 						msg = type.substring(4);
 						String[] split1 = new String[2];
 						split1[0] = "";
