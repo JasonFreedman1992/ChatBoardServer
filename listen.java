@@ -228,6 +228,7 @@ public class listen implements Runnable
 						//System.out.println(msg);
 						if(serverData.Boards.isEmpty())
 						{
+							System.out.println("line: 231");
 							String reply = "Board Not Found";
 							StringBuilder s = new StringBuilder();
 							s.append(serverData.responseCommand);
@@ -328,6 +329,7 @@ public class listen implements Runnable
 							// 
 							if(!boardFound)
 							{
+								System.out.println("this one : 332");
 								String reply = "Board Not Found";
 								StringBuilder s = new StringBuilder();
 								s.append(serverData.responseCommand);
@@ -348,6 +350,7 @@ public class listen implements Runnable
 						String boardPass = split[1];
 						if(serverData.Boards.isEmpty())
 						{
+							System.out.println("this one : 353");
 							String reply = "Board Not Found";
 							StringBuilder s = new StringBuilder();
 							s.append(serverData.responseCommand);
@@ -505,6 +508,7 @@ public class listen implements Runnable
 							// 
 							if(!boardFound)
 							{
+								System.out.println("this one : 511");
 								String reply = "Board Not Found";
 								StringBuilder s = new StringBuilder();
 								s.append(serverData.responseCommand);
@@ -599,7 +603,7 @@ public class listen implements Runnable
 							serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), boardName, false, boardPass));
 							serverData.boardTop++;
 						}
-						sendBoardOnlineNotification(msg);
+						sendBoardOnlineNotification(boardName);
 					}
 				}
 				//
