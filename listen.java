@@ -581,13 +581,14 @@ public class listen implements Runnable
 					{
 						System.out.println("not inside =/");
 						msg = type.substring(4);
+						System.out.println("msg after substring" + msg);
 						String[] split1 = new String[2];
 						split1[0] = "";
 						split1[1] = "";
 						split1 = msg.split("=/", -1);
 						String boardName = split1[0];
 						String boardPass = split1[1];
-
+						System.out.println("Boardname: " + boardName + "\nBoardPass: " + boardPass);
 						if(serverData.Boards.isEmpty())
 						{
 							serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), boardName, false, boardPass));
