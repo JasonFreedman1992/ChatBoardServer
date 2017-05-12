@@ -585,8 +585,8 @@ public class listen implements Runnable
 						split1[0] = "";
 						split1[1] = "";
 						split1 = msg.split("=/", -1);
-						String boardName = split[0];
-						String boardPass = split[1];
+						String boardName = split1[0];
+						String boardPass = split1[1];
 
 						if(serverData.Boards.isEmpty())
 						{
