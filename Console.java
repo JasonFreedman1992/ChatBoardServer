@@ -4,7 +4,6 @@ public class Console implements Runnable
 {
 	Scanner Console = new Scanner(System.in);
 	ServerData serverData = new ServerData();
-	String[] split = new String[2];
 
 	Console()
 	{
@@ -18,19 +17,8 @@ public class Console implements Runnable
 			try
 			{
 				Thread.sleep(1000);
-				split[0] = "";
-				split[1] = "";
 				String command = Console.nextLine();
-				//System.out.println("echo : " + command);
-				if(command.startsWith("getuser="))
-				{
-					String value;
-					split = command.split("=");
-					value = split[1];
-					//
-					System.out.println("Password for " + value + ": " + serverData.userBase.get(value));
-				}
-				else if(command.startsWith("get=su"))
+				if(command.startsWith("get=su"))
 				{
 					if(serverData.softUsers.isEmpty())
 					{
@@ -58,16 +46,6 @@ public class Console implements Runnable
 							System.out.println(serverData.getSocket.get(key).toString());
 						}
 					}
-				}
-				else if(command.startsWith("send"))
-				{
-					String value;
-					String[] value1;
-					value = command.substring(4);
-					value1 = value.split("=", -1);
-					serverData.msg = value1[0];
-					serverData.address = value1[1];
-					serverData.msgSent = true;
 				}
 				else if(command.startsWith("get=ou"))
 				{
@@ -118,13 +96,6 @@ public class Console implements Runnable
 							System.out.println(serverData.idToFriends.get(key).toString());
 						}
 					}
-				}
-				else if(command.startsWith("ready"))
-				{
-					if(!serverData.ready)
-					serverData.ready = true;
-					else if(serverData.ready)
-					serverData.ready = false;
 				}
 				else if(command.startsWith("get=iptous"))
 				{

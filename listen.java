@@ -172,7 +172,6 @@ public class listen implements Runnable
 			if(msg.startsWith(commandtag))
 			{
 				type = msg.substring(4);
-				//System.out.println(type);
 				//
 				// image request
 				//
@@ -180,7 +179,6 @@ public class listen implements Runnable
 				{	
 					msg = type.substring(3);
 					int i = Character.getNumericValue(msg.charAt(0));
-					//System.out.println(i);
 					msg = msg.substring(1);
 
 					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
@@ -203,9 +201,7 @@ public class listen implements Runnable
 				else if(type.startsWith("msg"))
 				{
 					msg = type.substring(3);
-					//System.out.println(msg);
 					int i = Character.getNumericValue(msg.charAt(0));
-					//System.out.println(i);
 					msg = msg.substring(1);
 					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
 					{
@@ -225,10 +221,8 @@ public class listen implements Runnable
 					if(!msg.contains("=/")) // if joining public board
 					{
 						msg = type.substring(4);
-						//System.out.println(msg);
 						if(serverData.Boards.isEmpty())
 						{
-							System.out.println("line: 231");
 							String reply = "Board Not Found";
 							StringBuilder s = new StringBuilder();
 							s.append(serverData.responseCommand);
@@ -329,7 +323,6 @@ public class listen implements Runnable
 							// 
 							if(!boardFound)
 							{
-								System.out.println("this one : 332");
 								String reply = "Board Not Found";
 								StringBuilder s = new StringBuilder();
 								s.append(serverData.responseCommand);
@@ -350,7 +343,6 @@ public class listen implements Runnable
 						String boardPass = split1[1];
 						if(serverData.Boards.isEmpty())
 						{
-							System.out.println("this one : 353");
 							String reply = "Board Not Found";
 							StringBuilder s = new StringBuilder();
 							s.append(serverData.responseCommand);
@@ -508,7 +500,6 @@ public class listen implements Runnable
 							// 
 							if(!boardFound)
 							{
-								System.out.println("this one : 511");
 								String reply = "Board Not Found";
 								StringBuilder s = new StringBuilder();
 								s.append(serverData.responseCommand);
@@ -567,7 +558,6 @@ public class listen implements Runnable
 				{
 					if(!type.contains("=/")) // if create board request is public
 					{
-						System.out.println("inside =/");
 						msg = type.substring(4);
 						if(serverData.Boards.isEmpty())
 						{
@@ -583,16 +573,13 @@ public class listen implements Runnable
 					}
 					else // if create board request is private
 					{
-						System.out.println("not inside =/");
 						msg = type.substring(4);
-						System.out.println("msg after substring" + msg);
 						String[] split1 = new String[2];
 						split1[0] = "";
 						split1[1] = "";
 						split1 = msg.split("=/", -1);
 						String boardName = split1[0];
 						String boardPass = split1[1];
-						System.out.println("Boardname: " + boardName + "\nBoardPass: " + boardPass);
 						if(serverData.Boards.isEmpty())
 						{
 							serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), boardName, false, boardPass));
@@ -617,7 +604,6 @@ public class listen implements Runnable
 					String username = split[0];
 					String password = split[1];
 					String compPassword = "";
-					//System.out.println(msg);
 					if(serverData.userBase.containsKey(username))
 					{
 						if(!serverData.onlineUsers.contains(username))
@@ -680,7 +666,6 @@ public class listen implements Runnable
 					split = msg.split("=", -1);
 					String username = split[0];
 					String password = split[1];
-					//System.out.println(msg);
 					if(serverData.userBase.containsKey(username))
 					{
 						StringBuilder s = new StringBuilder();
@@ -736,7 +721,6 @@ public class listen implements Runnable
 							s.append(board);
 							s.append("=/");
 							s.append(boardFrom);
-							//s.append(serverData.Boards.get(i).name);
 							msg(s.toString(), socket);
 						}
 					}
@@ -768,7 +752,6 @@ public class listen implements Runnable
 			}
 			else
 			{
-				// packet did not start with command tag
 			}
 		}
 		buffer.clear();
@@ -779,7 +762,6 @@ public class listen implements Runnable
 	//
 	void broadcast(String msg) throws IOException
 	{
-		System.out.println(msg);
 		ByteBuffer msgBuffer = ByteBuffer.wrap(msg.getBytes());
 		for(SelectionKey key : selector.keys())
 		{
@@ -872,11 +854,11 @@ public class listen implements Runnable
 		}
 		catch(SQLException e)
 		{
-			System.out.println("no connection");
+
 		}
 		catch(ClassNotFoundException e)
 		{
-			System.out.println("not found class");
+
 		}
 
 		//
@@ -968,7 +950,7 @@ public class listen implements Runnable
 		}
 		catch(ClassNotFoundException e)
 		{
-			System.out.println("not found class");
+
 		}
 	}
 
@@ -980,13 +962,7 @@ public class listen implements Runnable
 		try
 		{
 			ArrayList<String> list = serverData.idToFriends.get(p_idOwner);
-			System.out.println("listsize : " + list.size());
 			list.add(p_idFriend);
-			for(int i = 0; i < list.size(); i++)
-			{
-				System.out.println("list : " + list.get(i));
-			}
-			System.out.println("new listsize : " + list.size());
 			int friendListSize = list.size();
 			//
 			//
@@ -994,7 +970,6 @@ public class listen implements Runnable
 			Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChatBoard?useSSL=false", "root", "313m3n7!");
 			Statement statement1 = conn1.createStatement();
 			String query = "UPDATE Friends " + "SET id" + friendListSize + " = " + p_idFriend + " WHERE idOwner='" + p_idOwner + "'";
-			System.out.println("query: " + query);
 			statement1.executeUpdate(query);
 			serverData.idToFriends.put(p_idOwner, list);
 			String sendFriend = serverData.idToUsername.get(p_idOwner);
@@ -1038,10 +1013,6 @@ public class listen implements Runnable
 			SocketChannel socket = serverData.getSocket.get(ip);
 			sendFriends(sendFriend, socket);
 
-			// System.out.println("Old List size: " + oldListSize);
-			// System.out.println("New List Size: " + newListSize);
-			// System.out.println("Position: " + position);
-
 			for(int i = position; i <= oldListSize; i++)
 			{
 				if(position==oldListSize)
@@ -1073,16 +1044,6 @@ public class listen implements Runnable
 		{
 			Thread.sleep(100);
 			ArrayList list = serverData.idToFriends.get(serverData.usernameToID.get(p_username));
-			//
-			//
-			//
-
-			for(String key : serverData.idToFriends.keySet())
-			{
-				System.out.println(key);
-				//System.out.println(serverData.userBase.get(key));
-			}
-
 
 			StringBuilder s = new StringBuilder();
 			s.append(serverData.responseCommand);
