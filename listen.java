@@ -57,15 +57,6 @@ public class listen implements Runnable
 					if(key.isReadable())
 					{
 						handleRead(key);
-						// for(int i = 0; i < serverData.Boards.size(); i++)
-						// {
-						// 	if(serverData.Boards.get(i).users.isEmpty())
-						// 	{
-						// 		sendBoardOfflineNotification(serverData.Boards.get(i).name);
-						// 		serverData.Boards.remove(i);
-						// 		serverData.boardTop--;
-						// 	}	
-						// }
 					}
 					else
 					{
@@ -231,95 +222,11 @@ public class listen implements Runnable
 				//
 				else if(type.startsWith("jbrd"))
 				{
-					msg = type.substring(4);
-					//System.out.println(msg);
-					if(serverData.Boards.isEmpty())
+					if(!msg.contains("=/")) // if joining public board
 					{
-						String reply = "Board Not Found";
-						StringBuilder s = new StringBuilder();
-						s.append(serverData.responseCommand);
-						s.append(reply);
-						String s1 = s.toString();
-						msg(s1, ch);
-					}
-					else
-					{
-						boolean boardFound = false;
-						for(int i = 0; i < serverData.Boards.size(); i++)
-						{
-							if(serverData.Boards.get(i).name.equals(msg))
-							{
-								boardFound = true;
-								for(int j = 0; j < serverData.onlineUsers.size(); j++)
-								{
-									if(serverData.onlineUsers.get(j).address.equals(key.attachment().toString()))
-									{	
-										// found board
-										// add user to board
-										//
-										StringBuilder s = new StringBuilder();
-										s.append(serverData.responseCommand);
-										s.append("Board Found");
-										String s0 = s.toString();
-										msg(s0, ch);
-										serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
-										//
-										// send board info
-										//
-										StringBuilder s1 = new StringBuilder();
-										StringBuilder s3 = new StringBuilder();
-										s3.append(serverData.responseCommand);
-										s3.append("$i");
-										s3.append(serverData.Boards.get(i).name);
-										s3.append("=/");
-										String s4 = serverData.Boards.get(i).ID;
-										s3.append(s4);
-										s4 = s3.toString();
-										try
-										{
-											Thread.sleep(100);
-											msg(s4, ch);
-										}
-										catch(InterruptedException f)
-										{
-
-										}
-										//
-										// refresh board members list
-										//
-										s1.append(serverData.responseCommand);
-										s1.append("$f");
-										for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-										{
-											s1.append("=/");
-											s1.append(serverData.Boards.get(i).users.get(x).username);
-
-										}
-										String s2 = s1.toString();
-										try
-										{
-											for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-											{
-												Thread.sleep(100);
-												msg(s2, serverData.Boards.get(i).users.get(x).socket);
-											}
-										}
-										catch(InterruptedException f)
-										{
-
-										}
-									}
-									else
-									{
-
-									}
-								}
-							}
-						}
-						//
-						// Board not found
-						// 
-						if(!boardFound)
+						msg = type.substring(4);
+						//System.out.println(msg);
+						if(serverData.Boards.isEmpty())
 						{
 							String reply = "Board Not Found";
 							StringBuilder s = new StringBuilder();
@@ -327,6 +234,284 @@ public class listen implements Runnable
 							s.append(reply);
 							String s1 = s.toString();
 							msg(s1, ch);
+						}
+						else
+						{
+							boolean boardFound = false;
+							for(int i = 0; i < serverData.Boards.size(); i++)
+							{
+								if(serverData.Boards.get(i).name.equals(msg))
+								{
+									boardFound = true;
+									for(int j = 0; j < serverData.onlineUsers.size(); j++)
+									{
+										if(serverData.onlineUsers.get(j).address.equals(key.attachment().toString()))
+										{	
+											// found board
+											// add user to board
+											//
+											if(serverData.Boards.get(i).pub)
+											{
+												StringBuilder s = new StringBuilder();
+												s.append(serverData.responseCommand);
+												s.append("Board Found");
+												String s0 = s.toString();
+												msg(s0, ch);
+												serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
+
+												//
+												// send board info
+												//
+												StringBuilder s1 = new StringBuilder();
+												StringBuilder s3 = new StringBuilder();
+												s3.append(serverData.responseCommand);
+												s3.append("$i");
+												s3.append(serverData.Boards.get(i).name);
+												s3.append("=/");
+												String s4 = serverData.Boards.get(i).ID;
+												s3.append(s4);
+												s4 = s3.toString();
+												try
+												{
+													Thread.sleep(100);
+													msg(s4, ch);
+												}
+												catch(InterruptedException f)
+												{
+
+												}
+												//
+												// refresh board members list
+												//
+												s1.append(serverData.responseCommand);
+												s1.append("$f");
+												for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+												{
+													s1.append("=/");
+													s1.append(serverData.Boards.get(i).users.get(x).username);
+
+												}
+												String s2 = s1.toString();
+												try
+												{
+													for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+													{
+														Thread.sleep(100);
+														msg(s2, serverData.Boards.get(i).users.get(x).socket);
+													}
+												}
+												catch(InterruptedException f)
+												{
+
+												}
+											}
+											else
+											{
+												String reply = "Board is Private";
+												StringBuilder s = new StringBuilder();
+												s.append(serverData.responseCommand);
+												s.append(reply);
+												String s1 = s.toString();
+												msg(s1, ch);
+											}
+
+										}
+										else
+										{
+
+										}
+									}
+								}
+							}
+							//
+							// Board not found
+							// 
+							if(!boardFound)
+							{
+								String reply = "Board Not Found";
+								StringBuilder s = new StringBuilder();
+								s.append(serverData.responseCommand);
+								s.append(reply);
+								String s1 = s.toString();
+								msg(s1, ch);
+							}
+						}
+					}
+					else // if joining private board
+					{
+						msg = type.substring(4);
+						String[] split1 = new String[2];
+						split1[0] = "";
+						split1[1] = "";
+						split1 = msg.split("=/", -1);
+						String boardName = split[0];
+						String boardPass = split[1];
+						if(serverData.Boards.isEmpty())
+						{
+							String reply = "Board Not Found";
+							StringBuilder s = new StringBuilder();
+							s.append(serverData.responseCommand);
+							s.append(reply);
+							String s1 = s.toString();
+							msg(s1, ch);
+						}
+						else
+						{
+							boolean boardFound = false;
+							for(int i = 0; i < serverData.Boards.size(); i++)
+							{
+								if(serverData.Boards.get(i).name.equals(boardName))
+								{
+									boardFound = true;
+									for(int j = 0; j < serverData.onlineUsers.size(); j++)
+									{
+										if(serverData.onlineUsers.get(j).address.equals(key.attachment().toString()))
+										{	
+											// found board
+											// add user to board
+											//
+											if(!serverData.Boards.get(i).pub && serverData.Boards.get(i).password.equals(boardPass))
+											{
+												StringBuilder s = new StringBuilder();
+												s.append(serverData.responseCommand);
+												s.append("Board Found");
+												String s0 = s.toString();
+												msg(s0, ch);
+												serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
+
+												//
+												// send board info
+												//
+												StringBuilder s1 = new StringBuilder();
+												StringBuilder s3 = new StringBuilder();
+												s3.append(serverData.responseCommand);
+												s3.append("$i");
+												s3.append(serverData.Boards.get(i).name);
+												s3.append("=/");
+												String s4 = serverData.Boards.get(i).ID;
+												s3.append(s4);
+												s4 = s3.toString();
+												try
+												{
+													Thread.sleep(100);
+													msg(s4, ch);
+												}
+												catch(InterruptedException f)
+												{
+
+												}
+												//
+												// refresh board members list
+												//
+												s1.append(serverData.responseCommand);
+												s1.append("$f");
+												for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+												{
+													s1.append("=/");
+													s1.append(serverData.Boards.get(i).users.get(x).username);
+
+												}
+												String s2 = s1.toString();
+												try
+												{
+													for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+													{
+														Thread.sleep(100);
+														msg(s2, serverData.Boards.get(i).users.get(x).socket);
+													}
+												}
+												catch(InterruptedException f)
+												{
+
+												}
+											}
+											else if(!serverData.Boards.get(i).pub && !serverData.Boards.get(i).password.equals(boardPass))
+											{
+												// password doesnt match
+												String reply = "Wrong Password";
+												StringBuilder s = new StringBuilder();
+												s.append(serverData.responseCommand);
+												s.append(reply);
+												String s1 = s.toString();
+												msg(s1, ch);
+
+											}
+											else if(serverData.Boards.get(i).pub)// board with this name is public
+											{
+												StringBuilder s = new StringBuilder();
+												s.append(serverData.responseCommand);
+												s.append("Board Found");
+												String s0 = s.toString();
+												msg(s0, ch);
+												serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
+
+												//
+												// send board info
+												//
+												StringBuilder s1 = new StringBuilder();
+												StringBuilder s3 = new StringBuilder();
+												s3.append(serverData.responseCommand);
+												s3.append("$i");
+												s3.append(serverData.Boards.get(i).name);
+												s3.append("=/");
+												String s4 = serverData.Boards.get(i).ID;
+												s3.append(s4);
+												s4 = s3.toString();
+												try
+												{
+													Thread.sleep(100);
+													msg(s4, ch);
+												}
+												catch(InterruptedException f)
+												{
+
+												}
+												//
+												// refresh board members list
+												//
+												s1.append(serverData.responseCommand);
+												s1.append("$f");
+												for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+												{
+													s1.append("=/");
+													s1.append(serverData.Boards.get(i).users.get(x).username);
+
+												}
+												String s2 = s1.toString();
+												try
+												{
+													for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+													{
+														Thread.sleep(100);
+														msg(s2, serverData.Boards.get(i).users.get(x).socket);
+													}
+												}
+												catch(InterruptedException f)
+												{
+
+												}
+											}
+
+										}
+										else
+										{
+
+										}
+									}
+								}
+							}
+							//
+							// Board not found
+							// 
+							if(!boardFound)
+							{
+								String reply = "Board Not Found";
+								StringBuilder s = new StringBuilder();
+								s.append(serverData.responseCommand);
+								s.append(reply);
+								String s1 = s.toString();
+								msg(s1, ch);
+							}
 						}
 					}
 				}
@@ -376,21 +561,46 @@ public class listen implements Runnable
 				//
 				else if(type.startsWith("cbrd"))
 				{
-					msg = type.substring(4);
-					if(serverData.Boards.isEmpty())
+					if(!type.contains("=/")) // if create board request is public
 					{
-						serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), msg));
-						serverData.boardTop++;
+						msg = type.substring(4);
+						if(serverData.Boards.isEmpty())
+						{
+							serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), msg, true, ""));
+							serverData.boardTop++;
+						}
+						else
+						{
+							serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), msg, true, ""));
+							serverData.boardTop++;
+						}
+						sendBoardOnlineNotification(msg);
 					}
-					else
+					else // if create board request is private
 					{
-						serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), msg));
-						serverData.boardTop++;
+						msg = type.substring(4);
+						String[] split1 = new String[2];
+						split1[0] = "";
+						split1[1] = "";
+						split1 = msg.split("=/", -1);
+						String boardName = split[0];
+						String boardPass = split[1];
+
+						if(serverData.Boards.isEmpty())
+						{
+							serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), boardName, false, boardPass));
+							serverData.boardTop++;
+						}
+						else 
+						{
+							serverData.Boards.add(new Board(String.valueOf(serverData.boardTop), boardName, false, boardPass));
+							serverData.boardTop++;
+						}
+						sendBoardOnlineNotification(msg);
 					}
-					sendBoardOnlineNotification(msg);
 				}
 				//
-				// login request
+				// login account request
 				//
 				else if(type.startsWith("login"))
 				{
@@ -455,7 +665,7 @@ public class listen implements Runnable
 					}
 				}
 				//
-				// create request
+				// create account request
 				//
 				else if(type.startsWith("create"))
 				{

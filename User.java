@@ -5,6 +5,7 @@ public class User
 	public String username;
 	public String id;
 
+
 	User(String p_address, String p_username, java.nio.channels.SocketChannel p_socket, String p_id)
 	{
 		address = p_address;

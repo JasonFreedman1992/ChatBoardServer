@@ -9,10 +9,12 @@ public class Board
 	String password;
 	String userAdmin;
 	String ID = "";
-	public Board(String p_id, String p_name)
+	public Board(String p_id, String p_name, boolean p_pub, String p_password)
 	{
 		ID = p_id;
 		name = p_name;
+		pub = p_pub;
+		password = p_password;
 	}
 
 	public void addUser(User p_user)
