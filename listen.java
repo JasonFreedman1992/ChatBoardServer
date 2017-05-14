@@ -1027,11 +1027,7 @@ public class listen implements Runnable
 				}
 			}
 		}
-		catch(InterruptedException e)
-		{
-
-		}
-		catch(IOException f)
+		catch(Exception f)
 		{
 			
 		}
@@ -1042,33 +1038,23 @@ public class listen implements Runnable
 	//
 	void sendBoards(SocketChannel p_ch)
 	{
+		StringBuilder s = new StringBuilder(serverData.responseCommand + "$b");
 		try
 		{
-			Thread.sleep(125);
-			StringBuilder s = new StringBuilder();
-			s.append(serverData.responseCommand);
-			s.append("$b");
 			for(int i = 0; i < serverData.Boards.size(); i++)
 			{
 				s.append("=/");
 				s.append(serverData.Boards.get(i).name);
 			}
 			String boardsList = s.toString();
+			Thread.sleep(125);
 			msg(boardsList, p_ch);
 
 		}
-		catch(InterruptedException e)
+		catch(Exception f)
 		{
 
 		}
-		catch(IOException f)
-		{
-
-		}
-		// catch(IOException f)
-		// {
-
-		// }
 	}
 
 	//
@@ -1076,24 +1062,16 @@ public class listen implements Runnable
 	//
 	void sendBoardOnlineNotification(String p_boardName)
 	{
+		String boardOnline = serverData.responseCommand + "$n" + p_boardName;
 		try
 		{
-			StringBuilder s = new StringBuilder();
-			s.append(serverData.responseCommand);
-			s.append("$n");
-			s.append(p_boardName);
-			String boardOnline = s.toString();
 			for(int i = 0; i < serverData.onlineUsers.size(); i++)
 			{
 				Thread.sleep(100);
 				msg(boardOnline, serverData.onlineUsers.get(i).socket);
 			}
 		}
-		catch(InterruptedException f)
-		{
-
-		}
-		catch(IOException e)
+		catch(Exception f)
 		{
 
 		}
@@ -1104,24 +1082,16 @@ public class listen implements Runnable
 	//
 	void sendBoardOfflineNotification(String p_boardName)
 	{
+		String boardOffline = serverData.responseCommand + "$x" + p_boardName;
 		try
 		{
-			StringBuilder s = new StringBuilder();
-			s.append(serverData.responseCommand);
-			s.append("$x");
-			s.append(p_boardName);
-			String boardOffline = s.toString();
 			for(int i = 0; i < serverData.onlineUsers.size(); i++)
 			{
 				Thread.sleep(100);
 				msg(boardOffline, serverData.onlineUsers.get(i).socket);
 			}
 		}
-		catch(InterruptedException f)
-		{
-
-		}
-		catch(IOException e)
+		catch(Exception f)
 		{
 
 		}
