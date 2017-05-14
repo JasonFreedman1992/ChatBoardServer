@@ -1130,8 +1130,6 @@ public class listen implements Runnable
 	void sendBoardUserListRefresh(LinkedList<User> p_userList, SocketChannel p_ch)
 	{
 		StringBuilder s = new StringBuilder(serverData.responseCommand + "$f");
-	    //s.append(serverData.responseCommand);
-	    //s.append("$f");
 	    for(int x = 0; x < p_userList.size(); x++)
 	    {
 	        s.append("=/");
@@ -1154,13 +1152,7 @@ public class listen implements Runnable
 
 	void sendBoardInfo(String p_BoardName, String p_BoardID, SocketChannel p_ch)
 	{
-		StringBuilder s = new StringBuilder(serverData.responseCommand + "$i");
-		//s.append(serverData.responseCommand);
-		//s.append("$i");
-		s.append(p_BoardName);
-		s.append("=/");
-		s.append(p_BoardID);
-		String response = s.toString();
+		String response = serverData.responseCommand + "$i" + p_BoardName + "=/" + p_BoardID;
 		try
 		{
 		    Thread.sleep(100);
