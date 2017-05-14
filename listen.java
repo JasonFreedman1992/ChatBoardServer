@@ -16,7 +16,6 @@ public class listen implements Runnable
 	public ByteBuffer buffer = ByteBuffer.allocate(51200);
 	String type = "";
 	final ByteBuffer welcomeBuf = ByteBuffer.wrap("Welcome to the Server".getBytes());
-	StringBuilder imgbytes;
 	byte[] bytes;
 
 	public listen() throws IOException
@@ -257,27 +256,11 @@ public class listen implements Runnable
 												//
 												// send board info
 												//
-												StringBuilder s1 = new StringBuilder();
-												StringBuilder s3 = new StringBuilder();
-												s3.append(serverData.responseCommand);
-												s3.append("$i");
-												s3.append(serverData.Boards.get(i).name);
-												s3.append("=/");
-												String s4 = serverData.Boards.get(i).ID;
-												s3.append(s4);
-												s4 = s3.toString();
-												try
-												{
-													Thread.sleep(100);
-													msg(s4, ch);
-												}
-												catch(InterruptedException f)
-												{
-
-												}
+												sendBoardInfo(serverData.Boards.get(i).name, serverData.Boards.get(i).ID, ch);
 												//
 												// refresh board members list
 												//
+												StringBuilder s1 = new StringBuilder();
 												s1.append(serverData.responseCommand);
 												s1.append("$f");
 												for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
@@ -377,27 +360,11 @@ public class listen implements Runnable
 												//
 												// send board info
 												//
-												StringBuilder s1 = new StringBuilder();
-												StringBuilder s3 = new StringBuilder();
-												s3.append(serverData.responseCommand);
-												s3.append("$i");
-												s3.append(serverData.Boards.get(i).name);
-												s3.append("=/");
-												String s4 = serverData.Boards.get(i).ID;
-												s3.append(s4);
-												s4 = s3.toString();
-												try
-												{
-													Thread.sleep(100);
-													msg(s4, ch);
-												}
-												catch(InterruptedException f)
-												{
-
-												}
+												sendBoardInfo(serverData.Boards.get(i).name, serverData.Boards.get(i).ID, ch);
 												//
 												// refresh board members list
 												//
+												StringBuilder s1 = new StringBuilder();
 												s1.append(serverData.responseCommand);
 												s1.append("$f");
 												for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
@@ -443,27 +410,11 @@ public class listen implements Runnable
 												//
 												// send board info
 												//
-												StringBuilder s1 = new StringBuilder();
-												StringBuilder s3 = new StringBuilder();
-												s3.append(serverData.responseCommand);
-												s3.append("$i");
-												s3.append(serverData.Boards.get(i).name);
-												s3.append("=/");
-												String s4 = serverData.Boards.get(i).ID;
-												s3.append(s4);
-												s4 = s3.toString();
-												try
-												{
-													Thread.sleep(100);
-													msg(s4, ch);
-												}
-												catch(InterruptedException f)
-												{
-
-												}
+												sendBoardInfo(serverData.Boards.get(i).name, serverData.Boards.get(i).ID, ch);
 												//
 												// refresh board members list
 												//
+												StringBuilder s1 = new StringBuilder();
 												s1.append(serverData.responseCommand);
 												s1.append("$f");
 												for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
@@ -598,8 +549,7 @@ public class listen implements Runnable
 				//
 				else if(type.startsWith("login"))
 				{
-					msg = type.substring(5);
-					
+					msg = type.substring(5);	
 					split = msg.split("=", -1);
 					String username = split[0];
 					String password = split[1];
@@ -760,19 +710,19 @@ public class listen implements Runnable
 	//
 	// old broadcast method
 	//
-	void broadcast(String msg) throws IOException
-	{
-		ByteBuffer msgBuffer = ByteBuffer.wrap(msg.getBytes());
-		for(SelectionKey key : selector.keys())
-		{
-			if(key.isValid() && key.channel() instanceof SocketChannel)
-			{
-				SocketChannel sch = (SocketChannel) key.channel();
-				sch.write(msgBuffer);
-				msgBuffer.rewind();
-			}
-		}
-	}
+	// void broadcast(String msg) throws IOException
+	// {
+	// 	ByteBuffer msgBuffer = ByteBuffer.wrap(msg.getBytes());
+	// 	for(SelectionKey key : selector.keys())
+	// 	{
+	// 		if(key.isValid() && key.channel() instanceof SocketChannel)
+	// 		{
+	// 			SocketChannel sch = (SocketChannel) key.channel();
+	// 			sch.write(msgBuffer);
+	// 			msgBuffer.rewind();
+	// 		}
+	// 	}
+	// }
 
 	public void msg(String p_msg, SocketChannel p_ch) throws IOException
 	{
@@ -915,11 +865,11 @@ public class listen implements Runnable
 
 		}
 	}
+
 	//
 	// adding new account to database with password
 	// also adds blank list of 10 friends with each
 	// user who makes an account, signed with an x
-	//
 	//
 	void addAccountDatabase(String p_username, String p_password, String p_idOwner)
 	{
@@ -955,7 +905,7 @@ public class listen implements Runnable
 	}
 
 	//
-	//
+	// add friend to database
 	//
 	void addFriendDatabase(String p_idOwner, String p_idFriend)
 	{
@@ -984,7 +934,7 @@ public class listen implements Runnable
 	}
 
 	//
-	//
+	// subtract friend from database
 	//
 	void subFriendDatabase(String p_idOwner, String p_idFriend)
 	{
@@ -1262,6 +1212,31 @@ public class listen implements Runnable
 		catch(IOException e)
 		{
 
+		}
+	}
+
+	void sendBoardUserListRefresh()
+	{
+
+	}
+
+	void sendBoardInfo(String p_BoardName, String p_BoardID, SocketChannel p_ch)
+	{
+		StringBuilder s = new StringBuilder();
+		s.append(serverData.responseCommand);
+		s.append("$i");
+		s.append(p_BoardName);
+		s.append("=/");
+		s.append(p_BoardID);
+		String response = s.toString();
+		try
+		{
+		    Thread.sleep(100);
+		    msg(response, p_ch);
+		}
+		catch(Exception f)
+		{
+		    
 		}
 	}
 }
