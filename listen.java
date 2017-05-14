@@ -249,8 +249,7 @@ public class listen implements Runnable
 												StringBuilder s = new StringBuilder();
 												s.append(serverData.responseCommand);
 												s.append("Board Found");
-												String s0 = s.toString();
-												msg(s0, ch);
+												msg(s.toString(), ch);
 												serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
 
 												//
@@ -260,28 +259,29 @@ public class listen implements Runnable
 												//
 												// refresh board members list
 												//
-												StringBuilder s1 = new StringBuilder();
-												s1.append(serverData.responseCommand);
-												s1.append("$f");
-												for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-												{
-													s1.append("=/");
-													s1.append(serverData.Boards.get(i).users.get(x).username);
+												sendBoardUserListRefresh(serverData.Boards.get(i).users, ch);
+												// StringBuilder s1 = new StringBuilder();
+												// s1.append(serverData.responseCommand);
+												// s1.append("$f");
+												// for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+												// {
+												// 	s1.append("=/");
+												// 	s1.append(serverData.Boards.get(i).users.get(x).username);
 
-												}
-												String s2 = s1.toString();
-												try
-												{
-													for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-													{
-														Thread.sleep(100);
-														msg(s2, serverData.Boards.get(i).users.get(x).socket);
-													}
-												}
-												catch(InterruptedException f)
-												{
+												// }
+												// String s2 = s1.toString();
+												// try
+												// {
+												// 	for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+												// 	{
+												// 		Thread.sleep(100);
+												// 		msg(s2, serverData.Boards.get(i).users.get(x).socket);
+												// 	}
+												// }
+												// catch(InterruptedException f)
+												// {
 
-												}
+												// }
 											}
 											else
 											{
@@ -353,8 +353,7 @@ public class listen implements Runnable
 												StringBuilder s = new StringBuilder();
 												s.append(serverData.responseCommand);
 												s.append("Board Found");
-												String s0 = s.toString();
-												msg(s0, ch);
+												msg(s.toString(), ch);
 												serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
 
 												//
@@ -364,28 +363,29 @@ public class listen implements Runnable
 												//
 												// refresh board members list
 												//
-												StringBuilder s1 = new StringBuilder();
-												s1.append(serverData.responseCommand);
-												s1.append("$f");
-												for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-												{
-													s1.append("=/");
-													s1.append(serverData.Boards.get(i).users.get(x).username);
+												sendBoardUserListRefresh(serverData.Boards.get(i).users, ch);
+												// StringBuilder s1 = new StringBuilder();
+												// s1.append(serverData.responseCommand);
+												// s1.append("$f");
+												// for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+												// {
+												// 	s1.append("=/");
+												// 	s1.append(serverData.Boards.get(i).users.get(x).username);
 
-												}
-												String s2 = s1.toString();
-												try
-												{
-													for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-													{
-														Thread.sleep(100);
-														msg(s2, serverData.Boards.get(i).users.get(x).socket);
-													}
-												}
-												catch(InterruptedException f)
-												{
+												// }
+												// String s2 = s1.toString();
+												// try
+												// {
+												// 	for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+												// 	{
+												// 		Thread.sleep(100);
+												// 		msg(s2, serverData.Boards.get(i).users.get(x).socket);
+												// 	}
+												// }
+												// catch(InterruptedException f)
+												// {
 
-												}
+												// }
 											}
 											else if(!serverData.Boards.get(i).pub && !serverData.Boards.get(i).password.equals(boardPass))
 											{
@@ -403,8 +403,7 @@ public class listen implements Runnable
 												StringBuilder s = new StringBuilder();
 												s.append(serverData.responseCommand);
 												s.append("Board Found");
-												String s0 = s.toString();
-												msg(s0, ch);
+												msg(s.toString(), ch);
 												serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
 
 												//
@@ -414,28 +413,29 @@ public class listen implements Runnable
 												//
 												// refresh board members list
 												//
-												StringBuilder s1 = new StringBuilder();
-												s1.append(serverData.responseCommand);
-												s1.append("$f");
-												for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-												{
-													s1.append("=/");
-													s1.append(serverData.Boards.get(i).users.get(x).username);
+												sendBoardUserListRefresh(serverData.Boards.get(i).users, ch);
+												// StringBuilder s1 = new StringBuilder();
+												// s1.append(serverData.responseCommand);
+												// s1.append("$f");
+												// for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+												// {
+												// 	s1.append("=/");
+												// 	s1.append(serverData.Boards.get(i).users.get(x).username);
 
-												}
-												String s2 = s1.toString();
-												try
-												{
-													for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-													{
-														Thread.sleep(100);
-														msg(s2, serverData.Boards.get(i).users.get(x).socket);
-													}
-												}
-												catch(InterruptedException f)
-												{
+												// }
+												// String s2 = s1.toString();
+												// try
+												// {
+												// 	for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+												// 	{
+												// 		Thread.sleep(100);
+												// 		msg(s2, serverData.Boards.get(i).users.get(x).socket);
+												// 	}
+												// }
+												// catch(InterruptedException f)
+												// {
 
-												}
+												// }
 											}
 
 										}
@@ -479,28 +479,29 @@ public class listen implements Runnable
 					//
 					// make this change to only one piece of data sent
 					//
-					StringBuilder s1 = new StringBuilder();
-					s1.append(serverData.responseCommand);
-					s1.append("$f");
-					for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-					{
-						s1.append("=/");
-						s1.append(serverData.Boards.get(i).users.get(x).username);
+					sendBoardUserListRefresh(serverData.Boards.get(i).users, ch);
+					// StringBuilder s1 = new StringBuilder();
+					// s1.append(serverData.responseCommand);
+					// s1.append("$f");
+					// for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+					// {
+					// 	s1.append("=/");
+					// 	s1.append(serverData.Boards.get(i).users.get(x).username);
 
-					}
-					String s2 = s1.toString();
-					try
-					{
-						for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
-						{
-							Thread.sleep(100);
-							msg(s2, serverData.Boards.get(i).users.get(x).socket);
-						}
-					}
-					catch(InterruptedException f)
-					{
+					// }
+					// String s2 = s1.toString();
+					// try
+					// {
+					// 	for(int x = 0; x < serverData.Boards.get(i).users.size(); x++)
+					// 	{
+					// 		Thread.sleep(100);
+					// 		msg(s2, serverData.Boards.get(i).users.get(x).socket);
+					// 	}
+					// }
+					// catch(InterruptedException f)
+					// {
 
-					}				
+					// }				
 				}
 				//
 				// create board request
@@ -1215,9 +1216,29 @@ public class listen implements Runnable
 		}
 	}
 
-	void sendBoardUserListRefresh()
+	void sendBoardUserListRefresh(LinkedList<User> p_userList, SocketChannel p_ch)
 	{
-
+		StringBuilder s = new StringBuilder();
+	    s.append(serverData.responseCommand);
+	    s.append("$f");
+	    for(int x = 0; x < p_userList.size(); x++)
+	    {
+	        s.append("=/");
+	        s.append(p_userList.get(x).username);
+	    }	
+	    String response = s.toString();
+	    try
+	    {
+	        for(int x = 0; x < p_userList.size(); x++)
+	        {
+	            Thread.sleep(100);
+	            msg(response, p_userList.get(x).socket);
+	        }
+	    }
+	    catch(Exception f)
+	    {
+	        
+	    }
 	}
 
 	void sendBoardInfo(String p_BoardName, String p_BoardID, SocketChannel p_ch)
