@@ -257,17 +257,8 @@ public class listen implements Runnable
 											}
 											else
 											{
-												String reply = "Board is Private";
-												StringBuilder s = new StringBuilder();
-												s.append(serverData.responseCommand);
-												s.append(reply);
-												String s1 = s.toString();
-												msg(s1, ch);
+												respond("Board is Private", ch);
 											}
-
-										}
-										else
-										{
 
 										}
 									}
@@ -449,6 +440,7 @@ public class listen implements Runnable
 								// successfull login
 								respond("Password matches the Username.", ch);
 								// add user to online users and socket to channel mapping
+								// map to hashmap converters
 								User user = new User(key.attachment().toString(), username, ch, serverData.usernameToID.get(username));
 								serverData.onlineUsers.add(user);
 								serverData.getSocket.put(key.attachment().toString(), ch);
@@ -461,31 +453,19 @@ public class listen implements Runnable
 							else 
 							{
 								// error response: Password doesnt match
-								StringBuilder s = new StringBuilder();
-								s.append(serverData.responseCommand);
-								s.append("Password doesnt match the Username.");
-								String s0 = s.toString();
-								msg(s0, ch);
+								respond("Password doesnt match the Username.", ch);
 							}
 						}
 						else
 						{
 							// error response: User Online
-							StringBuilder s = new StringBuilder();
-							s.append(serverData.responseCommand);
-							s.append("User Online");
-							String s0 = s.toString();
-							msg(s0, ch);
+							respond("User Online", ch);
 						}
 					}
 					else
 					{
 						// error response: Username not Found
-						StringBuilder s = new StringBuilder();
-						s.append(serverData.responseCommand);
-						s.append("Username not found.");
-						String s0 = s.toString();
-						msg(s0, ch);
+						respond("Username not found.", ch);
 					}
 				}
 				//
@@ -499,11 +479,7 @@ public class listen implements Runnable
 					String password = split[1];
 					if(serverData.userBase.containsKey(username))
 					{
-						StringBuilder s = new StringBuilder();
-						s.append(serverData.responseCommand);
-						s.append("Username already exists.");
-						String s0 = s.toString();
-						msg(s0, ch);
+						respond("Username already exists.", ch);
 					}
 					else
 					{
@@ -520,7 +496,6 @@ public class listen implements Runnable
 					{
 						String username = serverData.ipToUsername.get(key.attachment());
 						String idOwner = serverData.usernameToID.get(username);
-
 						String idFriend = serverData.usernameToID.get(msg);
 						addFriendDatabase(idOwner, idFriend);
 					}
@@ -684,8 +659,8 @@ public class listen implements Runnable
 			}
 			for(String key : serverData.userBase.keySet())
 			{
-				System.out.println(key);
-				System.out.println(serverData.userBase.get(key));
+				//System.out.println(key);
+				//System.out.println(serverData.userBase.get(key));
 			}
 		}
 		catch(SQLException e)
