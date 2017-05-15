@@ -222,12 +222,7 @@ public class listen implements Runnable
 						msg = type.substring(4);
 						if(serverData.Boards.isEmpty())
 						{
-							String reply = "Board Not Found";
-							StringBuilder s = new StringBuilder();
-							s.append(serverData.responseCommand);
-							s.append(reply);
-							String s1 = s.toString();
-							msg(s1, ch);
+							respond("Board Not Found", ch);
 						}
 						else
 						{
@@ -246,10 +241,10 @@ public class listen implements Runnable
 											//
 											if(serverData.Boards.get(i).pub)
 											{
-												StringBuilder s = new StringBuilder();
-												s.append(serverData.responseCommand);
-												s.append("Board Found");
-												msg(s.toString(), ch);
+												//
+												// respond to request
+												//
+												respond("Board Found", ch);
 												serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
 												//
 												// send board info
@@ -283,12 +278,7 @@ public class listen implements Runnable
 							// 
 							if(!boardFound)
 							{
-								String reply = "Board Not Found";
-								StringBuilder s = new StringBuilder();
-								s.append(serverData.responseCommand);
-								s.append(reply);
-								String s1 = s.toString();
-								msg(s1, ch);
+								respond("Board Not Found", ch);
 							}
 						}
 					}
@@ -303,12 +293,7 @@ public class listen implements Runnable
 						String boardPass = split1[1];
 						if(serverData.Boards.isEmpty())
 						{
-							String reply = "Board Not Found";
-							StringBuilder s = new StringBuilder();
-							s.append(serverData.responseCommand);
-							s.append(reply);
-							String s1 = s.toString();
-							msg(s1, ch);
+							respond("Board Not Found", ch);
 						}
 						else
 						{
@@ -327,12 +312,11 @@ public class listen implements Runnable
 											//
 											if(!serverData.Boards.get(i).pub && serverData.Boards.get(i).password.equals(boardPass))
 											{
-												StringBuilder s = new StringBuilder();
-												s.append(serverData.responseCommand);
-												s.append("Board Found");
-												msg(s.toString(), ch);
+												//
+												// respond to request
+												//
+												respond("Board Found", ch);
 												serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
-
 												//
 												// send board info
 												//
@@ -345,22 +329,16 @@ public class listen implements Runnable
 											else if(!serverData.Boards.get(i).pub && !serverData.Boards.get(i).password.equals(boardPass))
 											{
 												// password doesnt match
-												String reply = "Wrong Password";
-												StringBuilder s = new StringBuilder();
-												s.append(serverData.responseCommand);
-												s.append(reply);
-												String s1 = s.toString();
-												msg(s1, ch);
+												respond("Wrong Password", ch);
 
 											}
 											else if(serverData.Boards.get(i).pub)// board with this name is public
 											{
-												StringBuilder s = new StringBuilder();
-												s.append(serverData.responseCommand);
-												s.append("Board Found");
-												msg(s.toString(), ch);
+												//
+												// respond to request
+												//
+												respond("Board Found", ch);
 												serverData.Boards.get(i).addUser(serverData.onlineUsers.get(j));
-
 												//
 												// send board info
 												//
@@ -384,12 +362,7 @@ public class listen implements Runnable
 							// 
 							if(!boardFound)
 							{
-								String reply = "Board Not Found";
-								StringBuilder s = new StringBuilder();
-								s.append(serverData.responseCommand);
-								s.append(reply);
-								String s1 = s.toString();
-								msg(s1, ch);
+								respond("Board Not Found", ch);
 							}
 						}
 					}
@@ -474,11 +447,7 @@ public class listen implements Runnable
 							if(compPassword.equals(password))
 							{
 								// successfull login
-								StringBuilder s = new StringBuilder();
-								s.append(serverData.responseCommand);
-								s.append("Password matches the Username.");
-								String s0 = s.toString();
-								msg(s0, ch);
+								respond("Password matches the Username.", ch);
 								// add user to online users and socket to channel mapping
 								User user = new User(key.attachment().toString(), username, ch, serverData.usernameToID.get(username));
 								serverData.onlineUsers.add(user);
@@ -635,6 +604,11 @@ public class listen implements Runnable
 	// 		}
 	// 	}
 	// }
+	public void respond(String p_msg, SocketChannel p_ch) throws IOException
+	{
+		String response = serverData.responseCommand + p_msg;
+		msg(response, p_ch);
+	}
 
 	public void msg(String p_msg, SocketChannel p_ch) throws IOException
 	{
@@ -904,12 +878,9 @@ public class listen implements Runnable
 	{
 		try
 		{
-			Thread.sleep(100);
 			ArrayList list = serverData.idToFriends.get(serverData.usernameToID.get(p_username));
 
-			StringBuilder s = new StringBuilder();
-			s.append(serverData.responseCommand);
-			s.append("$o");
+			StringBuilder s = new StringBuilder(serverData.responseCommand + "$o");
 			for(int i = 0; i < list.size(); i++)
 			{
 				boolean foundOnline = false;
@@ -931,15 +902,13 @@ public class listen implements Runnable
 				}
 			}
 			String friendsList = s.toString();
+
+			Thread.sleep(100);
 			msg(friendsList,p_ch);
 		}
-		catch(InterruptedException e)
+		catch(Exception f)
 		{
-
-		}
-		catch(IOException f)
-		{
-
+			f.printStackTrace();
 		}
 	}
 
@@ -950,28 +919,23 @@ public class listen implements Runnable
 	{
 		try
 		{
-			Thread.sleep(100);
-			StringBuilder s = new StringBuilder();
-			s.append(serverData.responseCommand);
-			s.append("$l");
-			s.append(p_username);
+			StringBuilder s = new StringBuilder(serverData.responseCommand + "$l" + p_username);
 			String friendOnline = s.toString();
-			String id = serverData.usernameToID.get(p_username);
 			for(String key : serverData.userBase.keySet())
 			{
 				if(!key.equals(p_username))
 				{
 					String idCheck = serverData.usernameToID.get(key);
-					ArrayList<String> list = new ArrayList<String>();
-					list = serverData.idToFriends.get(idCheck);
+					ArrayList<String> list = serverData.idToFriends.get(idCheck);
 					for(int j = 0; j < list.size(); j++)
 					{
-						if(list.get(j).equals(id))
+						if(list.get(j).equals(serverData.usernameToID.get(p_username)))
 						{
 							for(int x = 0; x < serverData.onlineUsers.size(); x++)
 							{
 								if(key.equals(serverData.onlineUsers.get(x).username))
 								{
+									Thread.sleep(100);
 									msg(friendOnline, serverData.onlineUsers.get(x).socket);
 								}
 							}
@@ -980,13 +944,9 @@ public class listen implements Runnable
 				}
 			}
 		}
-		catch(InterruptedException e)
+		catch(Exception f)
 		{
-
-		}
-		catch(IOException f)
-		{
-
+			f.printStackTrace();
 		}
 	}
 
@@ -997,28 +957,23 @@ public class listen implements Runnable
 	{
 		try
 		{
-			Thread.sleep(100);
-			StringBuilder s = new StringBuilder();
-			s.append(serverData.responseCommand);
-			s.append("$e");
-			s.append(p_username);
+			StringBuilder s = new StringBuilder(serverData.responseCommand + "$e" + p_username);
 			String friendOffline = s.toString();
-			String id = serverData.usernameToID.get(p_username);
 			for(String key : serverData.userBase.keySet())
 			{
 				if(!key.equals(p_username))
 				{
 					String idCheck = serverData.usernameToID.get(key);
-					ArrayList<String> list = new ArrayList<String>();
-					list = serverData.idToFriends.get(idCheck);
+					ArrayList<String> list = serverData.idToFriends.get(idCheck);
 					for(int j = 0; j < list.size(); j++)
 					{
-						if(list.get(j).equals(id))
+						if(list.get(j).equals(serverData.usernameToID.get(p_username)))
 						{
 							for(int x = 0; x < serverData.onlineUsers.size(); x++)
 							{
 								if(key.equals(serverData.onlineUsers.get(x).username))
 								{
+									Thread.sleep(100);
 									msg(friendOffline, serverData.onlineUsers.get(x).socket);
 								}
 							}
@@ -1029,7 +984,7 @@ public class listen implements Runnable
 		}
 		catch(Exception f)
 		{
-			
+			f.printStackTrace();
 		}
 	}
 
@@ -1053,7 +1008,7 @@ public class listen implements Runnable
 		}
 		catch(Exception f)
 		{
-
+			f.printStackTrace();
 		}
 	}
 
@@ -1073,7 +1028,7 @@ public class listen implements Runnable
 		}
 		catch(Exception f)
 		{
-
+			f.printStackTrace();
 		}
 	}
 
@@ -1093,7 +1048,7 @@ public class listen implements Runnable
 		}
 		catch(Exception f)
 		{
-
+			f.printStackTrace();
 		}
 	}
 
@@ -1116,7 +1071,7 @@ public class listen implements Runnable
 	    }
 	    catch(Exception f)
 	    {
-	        
+	        f.printStackTrace();
 	    }
 	}
 
@@ -1130,7 +1085,7 @@ public class listen implements Runnable
 		}
 		catch(Exception f)
 		{
-		    
+		    f.printStackTrace();
 		}
 	}
 }
