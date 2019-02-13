@@ -86,7 +86,7 @@ public class Console implements Runnable
 				{
 					if(serverData.idToFriends.isEmpty())
 					{
-
+						
 					}
 					else
 					{

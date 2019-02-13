@@ -33,7 +33,20 @@ public class listen implements Runnable
 	SelectionKey key;
 	public void run()
 	{
-		mapDatabase();
+		//mapDatabase();
+		serverData.userBase.put("caspian", "jason231");
+		serverData.userBase.put("freezy", "jason231");
+		serverData.idToUsername.put("0", "caspian");
+		serverData.idToUsername.put("1", "freezy");
+		serverData.usernameToID.put("caspian", "0");
+		serverData.usernameToID.put("freezy", "1");
+		ArrayList<String> list1 = new ArrayList<String>();
+		list1.add("1");
+		ArrayList<String> list2 = new ArrayList<String>();
+		list2.add("0");
+		serverData.idToFriends.put("0", list1);
+		serverData.idToFriends.put("1", list2);
+
 		while(initChannellisten.isOpen())
 		{
 			try
@@ -485,7 +498,7 @@ public class listen implements Runnable
 					{
 						serverData.userBase.put(username, password);
 						String id = Integer.toString(serverData.clientTotal);
-						addAccountDatabase(username, password, id);
+						//addAccountDatabase(username, password, id);
 						serverData.clientTotal++;
 					}
 				}
@@ -497,7 +510,7 @@ public class listen implements Runnable
 						String username = serverData.ipToUsername.get(key.attachment());
 						String idOwner = serverData.usernameToID.get(username);
 						String idFriend = serverData.usernameToID.get(msg);
-						addFriendDatabase(idOwner, idFriend);
+						//addFriendDatabase(idOwner, idFriend);
 					}
 				}
 				else if(type.startsWith("addb"))
@@ -537,7 +550,7 @@ public class listen implements Runnable
 					String username = serverData.ipToUsername.get(key.attachment().toString());
 					String idOwner = serverData.usernameToID.get(username);
 					String idFriend = serverData.usernameToID.get(msg);
-					subFriendDatabase(idOwner, idFriend);
+					//subFriendDatabase(idOwner, idFriend);
 				}
 				else
 				{
